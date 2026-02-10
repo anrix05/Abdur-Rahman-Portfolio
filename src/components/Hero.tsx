@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import profilePic from '../assets/profile.png';
 
 const Typewriter = ({ words }: { words: string[] }) => {
     const [index, setIndex] = useState(0);
@@ -116,7 +117,7 @@ const Hero = () => {
                         </div>
                         {/* Try to load real image if available */}
                         <img
-                            src="/src/assets/profile.png"
+                            src={profilePic}
                             alt="Abdur Rahman"
                             className="w-full h-full object-cover absolute inset-0 opacity-100"
                             onError={(e) => { e.currentTarget.style.opacity = '0'; }}
