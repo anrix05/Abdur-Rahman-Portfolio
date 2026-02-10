@@ -99,17 +99,36 @@ const Skills = () => {
             content: (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-40 group-hover:opacity-60 transition-opacity">
                     {/* Connecting Nodes */}
-                    <svg className="absolute inset-0 w-full h-full">
-                        <motion.circle cx="20%" cy="30%" r="4" fill="#f472b6" animate={{ r: [4, 6, 4] }} transition={{ duration: 3, repeat: Infinity }} />
-                        <motion.circle cx="80%" cy="20%" r="4" fill="#818cf8" animate={{ r: [4, 6, 4] }} transition={{ duration: 2.5, repeat: Infinity, delay: 1 }} />
-                        <motion.circle cx="50%" cy="80%" r="4" fill="#34d399" animate={{ r: [4, 6, 4] }} transition={{ duration: 3.5, repeat: Infinity, delay: 0.5 }} />
+                    <div className="absolute inset-0 w-full h-full">
+                        {/* Connecting Lines */}
+                        <svg className="absolute inset-0 w-full h-full">
+                            <motion.line x1="20%" y1="30%" x2="80%" y2="20%" stroke="#f472b6" strokeWidth="2" strokeOpacity="0.4"
+                                animate={{ strokeDasharray: ["0, 100", "100, 0"] }} transition={{ duration: 5, repeat: Infinity }}
+                            />
+                            <line x1="80%" y1="20%" x2="50%" y2="80%" stroke="#818cf8" strokeWidth="2" strokeOpacity="0.4" />
+                            <line x1="50%" y1="80%" x2="20%" y2="30%" stroke="#34d399" strokeWidth="2" strokeOpacity="0.4" />
+                        </svg>
 
-                        <motion.line x1="20%" y1="30%" x2="80%" y2="20%" stroke="#f472b6" strokeWidth="2" strokeOpacity="0.4"
-                            animate={{ strokeDasharray: ["0 100", "100 0"] }} transition={{ duration: 5, repeat: Infinity }}
+                        {/* Nodes (Divs instead of SVG circles to prevent 'r' attribute errors) */}
+                        <motion.div
+                            className="absolute w-3 h-3 bg-pink-400 rounded-full -translate-x-1/2 -translate-y-1/2"
+                            style={{ left: '20%', top: '30%' }}
+                            animate={{ scale: [1, 1.5, 1] }}
+                            transition={{ duration: 3, repeat: Infinity }}
                         />
-                        <motion.line x1="80%" y1="20%" x2="50%" y2="80%" stroke="#818cf8" strokeWidth="2" strokeOpacity="0.4" />
-                        <motion.line x1="50%" y1="80%" x2="20%" y2="30%" stroke="#34d399" strokeWidth="2" strokeOpacity="0.4" />
-                    </svg>
+                        <motion.div
+                            className="absolute w-3 h-3 bg-indigo-400 rounded-full -translate-x-1/2 -translate-y-1/2"
+                            style={{ left: '80%', top: '20%' }}
+                            animate={{ scale: [1, 1.5, 1] }}
+                            transition={{ duration: 2.5, repeat: Infinity, delay: 1 }}
+                        />
+                        <motion.div
+                            className="absolute w-3 h-3 bg-emerald-400 rounded-full -translate-x-1/2 -translate-y-1/2"
+                            style={{ left: '50%', top: '80%' }}
+                            animate={{ scale: [1, 1.5, 1] }}
+                            transition={{ duration: 3.5, repeat: Infinity, delay: 0.5 }}
+                        />
+                    </div>
                 </div>
             )
         }
