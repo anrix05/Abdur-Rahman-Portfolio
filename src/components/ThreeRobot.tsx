@@ -1,9 +1,9 @@
-import React, { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, type MutableRefObject } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Environment, Float, Html } from '@react-three/drei';
 import * as THREE from 'three';
 
-const Robot = ({ mouse }: { mouse: React.MutableRefObject<{ x: number; y: number }> }) => {
+const Robot = ({ mouse }: { mouse: MutableRefObject<{ x: number; y: number }> }) => {
     const group = useRef<THREE.Group>(null);
     const bodyGroup = useRef<THREE.Group>(null);
     const leftShoulder = useRef<THREE.Group>(null);
@@ -16,10 +16,10 @@ const Robot = ({ mouse }: { mouse: React.MutableRefObject<{ x: number; y: number
 
     // Helper function to reset arm positions (Must be defined before useFrame)
     const resetArms = (
-        lS: React.MutableRefObject<THREE.Group | null>,
-        lF: React.MutableRefObject<THREE.Group | null>,
-        rS: React.MutableRefObject<THREE.Group | null>,
-        rF: React.MutableRefObject<THREE.Group | null>
+        lS: MutableRefObject<THREE.Group | null>,
+        lF: MutableRefObject<THREE.Group | null>,
+        rS: MutableRefObject<THREE.Group | null>,
+        rF: MutableRefObject<THREE.Group | null>
     ) => {
         if (lS.current) {
             lS.current.rotation.z = THREE.MathUtils.lerp(lS.current.rotation.z, 0.3, 0.1);
@@ -56,7 +56,7 @@ const Robot = ({ mouse }: { mouse: React.MutableRefObject<{ x: number; y: number
     const scale = isMobile ? 0.6 : 1;
     const positionY = isMobile ? -1.5 : -0.2; // Move down on mobile
 
-    useFrame((state, delta) => {
+    useFrame((state) => {
         const t = state.clock.elapsedTime;
 
         // --- HEAD TRACKING (Follows Cursor) ---

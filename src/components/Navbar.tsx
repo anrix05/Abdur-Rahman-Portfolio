@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { FaGithub, FaLinkedin, FaBars, FaTimes, FaSkull } from 'react-icons/fa';
 
 const Navbar = () => {
@@ -17,7 +17,7 @@ const Navbar = () => {
         }
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (typeof window !== 'undefined') {
             window.addEventListener('scroll', controlNavbar);
 
