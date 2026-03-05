@@ -169,25 +169,25 @@ const About = () => {
                 >
                     <div className="p-6 bg-white/5 border border-white/10 rounded-xl backdrop-blur-md hover:bg-white/10 transition-colors">
                         <p>
-                            I am a **Frontend Developer** with a unique background in content editing. Currently, I specialize in building complex mobile applications using **React Native** and **JavaScript**.
+                            I build mobile apps that feel like they were made for the person holding the phone. I am a <strong>Frontend Developer</strong> based in Mumbai, focused on <strong>React Native</strong> and <strong>Next.js</strong>.
                         </p>
                     </div>
 
                     <div className="p-6 bg-white/5 border border-white/10 rounded-xl backdrop-blur-md hover:bg-white/10 transition-colors">
                         <p>
-                            My latest venture, **The Graveyard**, is a unique marketplace for unfinished code. It demonstrates my full-stack expertise with **Next.js 15**, **Supabase**, and bank-grade security implementations like RLS and edge-verified payments.
+                            That's not marketing speak. When I built <strong>Love Connect</strong> — a relationship management app — the whole brief was 'make it feel personal and keep it private.' So I implemented biometric authentication, a hybrid Firebase + SQLite architecture for real-time sync with offline reliability, and a custom privacy mode baked into the core UX.
                         </p>
                     </div>
 
                     <div className="p-6 bg-white/5 border border-white/10 rounded-xl backdrop-blur-md hover:bg-white/10 transition-colors">
                         <p>
-                            I also created **Love Connect**, a relationship management app that proves my mobile development skills with **React Native**, focusing on biometric security and offline-first architectures.
+                            I care about three things in the apps I build: they load fast, they don't lose data, and the person using them never feels confused. That last one is harder than it sounds.
                         </p>
                     </div>
 
                     <div className="p-6 bg-white/5 border border-white/10 rounded-xl backdrop-blur-md hover:bg-white/10 transition-colors">
                         <p>
-                            Beyond code, my 7 years as an **Editor** have honed my attention to detail—an essential skill for pixel-perfect UI implementation. I hold a degree from **Vidyalankar Institute of Technology** and am always learning.
+                            I studied at <strong>Vidyalankar Institute of Technology</strong> and hold certifications from NPTEL (Java) and TCS iON. Beyond code, my 7 years as an <strong>Editor</strong> have honed my attention to detail. I'm currently open to frontend and mobile development roles where I can work on products that actually matter.
                         </p>
                     </div>
                 </motion.div>

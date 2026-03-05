@@ -69,7 +69,7 @@ const Hero = () => {
                         </h1>
                         <h2 className="text-xl md:text-4xl text-gray-300 font-light flex flex-col md:flex-row gap-2 items-center md:items-start justify-center md:justify-start">
                             <span>I am a</span>
-                            <Typewriter words={['Frontend Developer', 'Video Editor', 'Tech Enthusiast']} />
+                            <Typewriter words={['Frontend Developer', 'React Native Dev', 'Next.js Dev']} />
                         </h2>
                     </motion.div>
 
@@ -79,8 +79,7 @@ const Hero = () => {
                         transition={{ delay: 0.5, duration: 0.8 }}
                         className="text-lg text-gray-400 max-w-lg mx-auto md:mx-0 leading-relaxed"
                     >
-                        Specializing in JavaScript, Mobile Applications (React Native), and Node.js.
-                        Creator of <strong>The Graveyard</strong> and <strong>Love Connect</strong>.
+                        Building secure mobile apps that users actually love. Focused on <strong>React Native</strong> and <strong>Next.js</strong>. Creator of <strong>Love Connect</strong>.
                     </motion.p>
 
                     <motion.div

@@ -32,7 +32,7 @@ const Contact = () => {
                             <FaEnvelope className="text-xl" />
                             <span>abdur.rahman@vit.edu.in</span>
                         </a>
-                        <a href="https://www.linkedin.com/in/abdur-rahman-513a5b351" className="flex items-center gap-4 text-gray-300 hover:text-cyan-400 transition-colors p-4 bg-white/5 rounded-xl border border-white/5 hover:border-cyan-500/30">
+                        <a href="https://www.linkedin.com/in/abdur-rahman-vit/" className="flex items-center gap-4 text-gray-300 hover:text-cyan-400 transition-colors p-4 bg-white/5 rounded-xl border border-white/5 hover:border-cyan-500/30">
                             <FaLinkedin className="text-xl" />
                             <span>LinkedIn Profile</span>
                         </a>

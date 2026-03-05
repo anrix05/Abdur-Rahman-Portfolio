@@ -5,7 +5,7 @@ const Skills = () => {
         {
             id: 'frontend',
             title: 'Frontend',
-            skills: ['Next.js 15', 'React Native', 'React 19', 'Tailwind CSS', 'TypeScript', 'Framer Motion', 'GSAP'],
+            skills: ['React Native', 'Next.js', 'JavaScript', 'Tailwind CSS', 'TypeScript', 'Framer Motion'],
             color: 'group-hover:border-cyan-500/50',
             content: (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -34,7 +34,7 @@ const Skills = () => {
         {
             id: 'backend',
             title: 'Backend & Data',
-            skills: ['Supabase', 'Node.js', 'PostgreSQL', 'Edge Functions', 'Razorpay', 'SQLite', 'Firebase'],
+            skills: ['Node.js', 'Firebase', 'SQLite', 'Java', 'Biometric Auth', 'Cloud Functions'],
             color: 'group-hover:border-green-500/50',
             content: (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">

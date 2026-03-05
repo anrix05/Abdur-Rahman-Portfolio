@@ -3,32 +3,32 @@ import { motion } from 'framer-motion';
 const Experience = () => {
     const experiences = [
         {
-            role: 'Founder & Lead Developer',
-            company: 'The Graveyard',
-            period: 'Feb 2026 - Present',
-            description: 'Founded and engineered a marketplace for "dead" code. Built a secure, high-performance platform using Next.js 15, Supabase, and Razorpay. Implemented advanced features like time-limited signed URLs for asset delivery and automated GitHub repository access.',
-            tech: ['Next.js 15', 'Supabase', 'React 19', 'Edge Functions']
+            role: 'Back End Developer',
+            company: 'Self-employed',
+            period: 'Jan 2025 - Present',
+            description: 'Designed server-side architecture for Love Connect. Engineered a dual-database backend strategy combining Firebase Realtime Database for live sync and SQLite for on-device persistence. Built a layered authentication backend integrating Firebase Auth with biometric triggers. Architected Firestore data models and deployed Cloud Functions.',
+            tech: ['Firebase', 'SQLite', 'Cloud Functions', 'NoSQL']
         },
         {
             role: 'Frontend Developer',
-            company: 'Self-Employed',
-            period: 'Jan 2026 - Present',
-            description: 'Lead developer for "Love Connect", a cross-platform mobile application. Architected the entire frontend using React Native, integrated biometric security features, and designed a custom offline-first database using SQLite.',
-            tech: ['React Native', 'SQLite', 'Biometrics', 'Redux']
+            company: 'Self-employed',
+            period: 'Jan 2026 - Feb 2026',
+            description: 'Sole developer of Love Connect, a full-stack React Native mobile app covering 8+ feature modules. Architected a hybrid data layer that keeps real-time sync active when online and falls back to local persistence offline, delivering zero data loss. Built a biometric authentication system with a custom privacy mode ("Spicy Mode").',
+            tech: ['React Native', 'TypeScript', 'Redux', 'Biometrics']
         },
         {
-            role: 'Freelance Editor',
-            company: 'Various Clients',
+            role: 'Editor',
+            company: 'Self-employed',
             period: 'Mar 2019 - Feb 2026',
-            description: 'Managed post-production workflows for 50+ projects. Specialized in narrative storytelling, color grading, and sound design. Translated creative vision into polished final cuts.',
-            tech: ['Premiere Pro', 'After Effects', 'Storytelling']
+            description: 'Edited technical and creative content for independent projects, maintaining consistency in tone, structure, and clarity across written and digital deliverables. Applied feedback-driven revision cycles to improve draft quality.',
+            tech: ['Content Editing', 'Creative Writing', 'Revision Cycles']
         },
         {
             role: 'Student',
             company: 'Vidyalankar Institute of Technology',
             period: 'Graduated 2024',
-            description: 'Bachelor of Technology. Focused on Computer Science fundamentals, software engineering principles, and mobile application development.',
-            tech: ['Computer Science', 'Java', 'Data Structures']
+            description: 'Focused on Computer Science fundamentals, software engineering principles, and mobile application development.',
+            tech: ['Java', 'React', 'Data Structures']
         },
     ];
 
