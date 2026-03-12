@@ -24,11 +24,11 @@ const Experience = () => {
             tech: ['Content Editing', 'Creative Writing', 'Revision Cycles']
         },
         {
-            role: 'Student',
+            role: 'Bachelor of Technology (B.Tech)',
             company: 'Vidyalankar Institute of Technology',
-            period: 'Graduated 2024',
-            description: 'Focused on Computer Science fundamentals, software engineering principles, and mobile application development.',
-            tech: ['Java', 'React', 'Data Structures']
+            period: '2nd Year, 4th Sem',
+            description: 'Focusing on Computer Science fundamentals, software engineering principles, and data-driven applications. Maintaining excellence in core engineering subjects.',
+            tech: ['Java', 'React', 'Data Structures', 'DBMS']
         },
     ];
 
@@ -38,12 +38,12 @@ const Experience = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-4xl font-bold mb-16 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-cyan-400"
+                className="text-4xl font-bold mb-16 text-center bg-clip-text text-transparent bg-gradient-to-r from-neon-lime to-emerald"
             >
                 Experience & Education
             </motion.h2>
 
-            <div className="relative border-l-2 border-purple-500/30 ml-4 md:ml-0 md:pl-0 space-y-16 max-w-4xl w-full">
+            <div className="relative border-l-2 border-neon-lime/30 ml-4 md:ml-0 md:pl-0 space-y-16 max-w-4xl w-full">
                 {experiences.map((exp, index) => (
                     <motion.div
                         key={index}
@@ -53,15 +53,15 @@ const Experience = () => {
                         className="relative pl-8 md:pl-12 group"
                     >
                         {/* Timeline Dot with Pulse */}
-                        <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-purple-500 shadow-[0_0_10px_rgba(139,92,246,0.8)] group-hover:scale-125 transition-transform duration-300" />
+                        <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-neon-lime shadow-[0_0_10px_rgba(204,255,0,0.8)] group-hover:scale-125 transition-transform duration-300" />
 
-                        <div className="bg-[#0b0b1e]/80 border border-white/10 p-8 rounded-2xl hover:border-purple-500/50 hover:bg-[#131129] transition-all duration-300 shadow-xl backdrop-blur-sm">
+                        <div className="bg-obsidian/80 border border-white/10 p-8 rounded-2xl hover:border-neon-lime/50 hover:bg-obsidian transition-all duration-300 shadow-xl backdrop-blur-sm">
                             <div className="flex flex-col md:flex-row justify-between mb-4 items-start md:items-center">
                                 <div>
                                     <h3 className="text-2xl font-bold text-white">{exp.role}</h3>
-                                    <h4 className="text-lg text-purple-300">{exp.company}</h4>
+                                    <h4 className="text-lg text-neon-lime/80">{exp.company}</h4>
                                 </div>
-                                <span className="text-cyan-400 font-mono text-sm bg-cyan-900/20 px-3 py-1 rounded-full mt-2 md:mt-0 border border-cyan-500/30">
+                                <span className="text-emerald font-mono text-sm bg-emerald/10 px-3 py-1 rounded-full mt-2 md:mt-0 border border-emerald/30">
                                     {exp.period}
                                 </span>
                             </div>
@@ -72,7 +72,7 @@ const Experience = () => {
 
                             <div className="flex flex-wrap gap-2">
                                 {exp.tech.map((t, i) => (
-                                    <span key={i} className="text-xs text-gray-500 px-2 py-1 bg-white/5 rounded border border-white/5">
+                                    <span key={i} className="text-xs text-neon-lime/60 px-2 py-1 bg-white/5 rounded border border-white/5">
                                         {t}
                                     </span>
                                 ))}

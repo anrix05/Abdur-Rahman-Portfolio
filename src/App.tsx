@@ -9,7 +9,7 @@ import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Navbar from './components/Navbar';
-import ThreeRobot from './components/ThreeRobot';
+import Hyperspeed, { hyperspeedPresets } from './components/Hyperspeed';
 import Footer from './components/Footer';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -36,18 +36,24 @@ function App() {
   }, []);
 
   return (
-    <div className="bg-[#030014] min-h-screen text-white selection:bg-[#8b5cf6] selection:text-white relative overflow-x-hidden">
-      <ThreeRobot />
-      <Navbar />
-      <div id="hero"><Hero /></div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-32 pb-40">
-        <div id="about"><About /></div>
-        <div id="skills"><Skills /></div>
-        <div id="experience"><Experience /></div>
-        <div id="projects"><Projects /></div>
-        <div id="contact"><Contact /></div>
+    <div className="bg-obsidian min-h-screen text-white selection:bg-neon-lime selection:text-obsidian relative overflow-x-hidden font-sans">
+      {/* Global Background */}
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-25">
+        <Hyperspeed effectOptions={hyperspeedPresets.one} />
       </div>
-      <Footer />
+
+      <div className="relative z-10">
+        <Navbar />
+        <div id="hero"><Hero /></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-32 pb-40">
+          <div id="about"><About /></div>
+          <div id="skills"><Skills /></div>
+          <div id="experience"><Experience /></div>
+          <div id="projects"><Projects /></div>
+          <div id="contact"><Contact /></div>
+        </div>
+        <Footer />
+      </div>
     </div>
   );
 }

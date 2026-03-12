@@ -40,7 +40,7 @@ const Typewriter = ({ words }: { words: string[] }) => {
     }, [subIndex, index, reverse, words]);
 
     return (
-        <span className="font-mono text-purple-400">
+        <span className="font-mono text-neon-lime">
             {words[index].substring(0, subIndex)}
             <span className={`inline-block w-[3px] h-[1em] bg-white ml-1 align-middle ${blink ? 'opacity-100' : 'opacity-0'}`}></span>
         </span>
@@ -51,8 +51,8 @@ const Hero = () => {
     return (
         <div className="relative flex flex-col h-screen w-full items-center justify-center z-20 overflow-hidden pt-20 md:pt-0">
             {/* Background Glows */}
-            <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-purple-600/30 rounded-full blur-[120px] mix-blend-screen animate-pulse" />
-            <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-cyan-500/20 rounded-full blur-[120px] mix-blend-screen animate-pulse delay-1000" />
+            <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-neon-lime/20 rounded-full blur-[120px] mix-blend-screen animate-pulse" />
+            <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-emerald/15 rounded-full blur-[120px] mix-blend-screen animate-pulse delay-1000" />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-7xl mx-auto px-6 items-center w-full">
 
@@ -64,11 +64,11 @@ const Hero = () => {
                         transition={{ duration: 0.8 }}
                         className="flex flex-col gap-2 relative"
                     >
-                        <h1 className="text-4xl md:text-7xl font-bold text-white tracking-tight">
-                            I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">Abdur Rahman</span>
+                        <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold text-white tracking-tight leading-tight">
+                            I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-lime to-emerald">Abdur Rahman</span>
                         </h1>
-                        <h2 className="text-xl md:text-4xl text-gray-300 font-light flex flex-col md:flex-row gap-2 items-center md:items-start justify-center md:justify-start">
-                            <span>I am a</span>
+                        <h2 className="text-lg sm:text-xl md:text-4xl text-gray-300 font-light flex flex-col md:flex-row gap-2 items-center md:items-start justify-center md:justify-start min-h-[1.5em] md:min-h-0">
+                            <span className="font-sans">I am a</span>
                             <Typewriter words={['Frontend Developer', 'React Native Dev', 'Next.js Dev']} />
                         </h2>
                     </motion.div>
@@ -77,7 +77,7 @@ const Hero = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.5, duration: 0.8 }}
-                        className="text-lg text-gray-400 max-w-lg mx-auto md:mx-0 leading-relaxed"
+                        className="text-base sm:text-lg text-gray-400 max-w-lg mx-auto md:mx-0 leading-relaxed px-4 md:px-0"
                     >
                         Crafting high-impact marketplaces and secure digital experiences with a tactical edge. Specialized in <strong>React Native</strong> and <strong>Next.js</strong>. Creator of <strong>ZeroBlur</strong>, <strong>The Graveyard</strong>, and <strong>Love Connect</strong>.
                     </motion.p>
@@ -86,12 +86,12 @@ const Hero = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.8, duration: 0.5 }}
-                        className="flex gap-4 justify-center md:justify-start mt-4"
+                        className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mt-4 px-6 md:px-0"
                     >
-                        <a href="#projects" className="px-8 py-3 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold hover:scale-105 transition-transform shadow-[0_0_20px_rgba(139,92,246,0.5)]">
+                        <a href="#projects" className="px-8 py-3 rounded-full bg-gradient-to-r from-neon-lime to-emerald text-obsidian font-bold hover:scale-105 transition-all shadow-[0_0_20px_rgba(204,255,0,0.3)] text-center">
                             View Projects
                         </a>
-                        <a href="#contact" className="px-8 py-3 rounded-full border border-purple-500/50 text-purple-200 hover:bg-purple-900/20 transition-all font-semibold backdrop-blur-sm">
+                        <a href="#contact" className="px-8 py-3 rounded-full border border-neon-lime/30 text-neon-lime hover:bg-neon-lime/10 transition-all font-semibold backdrop-blur-sm text-center">
                             Contact Me
                         </a>
                     </motion.div>
@@ -105,13 +105,13 @@ const Hero = () => {
                     className="flex justify-center items-center relative"
                 >
                     {/* Rotating Rings */}
-                    <div className="absolute w-[350px] h-[350px] border border-purple-500/30 rounded-full animate-[spin_10s_linear_infinite]" />
-                    <div className="absolute w-[380px] h-[380px] border border-cyan-500/20 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
+                    <div className="absolute w-[350px] h-[350px] border border-neon-lime/20 rounded-full animate-[spin_10s_linear_infinite]" />
+                    <div className="absolute w-[380px] h-[380px] border border-emerald/10 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
 
                     {/* Image Container with Glow */}
-                    <div className="w-[300px] h-[300px] rounded-full overflow-hidden border-4 border-purple-500/50 shadow-[0_0_50px_rgba(139,92,246,0.3)] bg-black/50 relative z-10">
+                    <div className="w-[300px] h-[300px] rounded-full overflow-hidden border-4 border-neon-lime/30 shadow-[0_0_50px_rgba(204,255,0,0.15)] bg-obsidian/50 relative z-10">
                         {/* Placeholder until user uploads image */}
-                        <div className="w-full h-full bg-gradient-to-br from-gray-900 to-black flex items-center justify-center text-gray-500 italic">
+                        <div className="w-full h-full bg-gradient-to-br from-gray-900 to-obsidian flex items-center justify-center text-gray-500 italic">
                             Profile Photo
                         </div>
                         {/* Try to load real image if available */}

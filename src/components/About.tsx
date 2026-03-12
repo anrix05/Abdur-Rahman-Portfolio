@@ -11,10 +11,10 @@ const About = () => {
                 transition={{ duration: 0.8 }}
                 className="text-center mb-16"
             >
-                <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-cyan-400 mb-4">
+                <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-neon-lime to-emerald mb-4">
                     About Me
                 </h2>
-                <div className="h-1 w-20 bg-purple-500 mx-auto rounded-full shadow-[0_0_10px_rgba(139,92,246,0.5)]" />
+                <div className="h-1 w-20 bg-neon-lime mx-auto rounded-full shadow-[0_0_10px_rgba(204,255,0,0.5)]" />
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center w-full">
@@ -28,10 +28,10 @@ const About = () => {
                     className="relative flex justify-center w-full"
                 >
                     {/* Interactive Editor & Dev Card */}
-                    <div className="relative w-full max-w-md aspect-[4/5] rounded-2xl overflow-hidden group bg-[#0a051e] border border-white/10 shadow-2xl hover:shadow-[0_0_30px_rgba(139,92,246,0.3)] transition-all duration-500">
+                    <div className="relative w-full max-w-md aspect-[4/5] rounded-2xl overflow-hidden group bg-obsidian border border-white/10 shadow-2xl hover:shadow-[0_0_30px_rgba(204,255,0,0.15)] transition-all duration-500">
 
                         {/* Scrolling Code Background */}
-                        <div className="absolute inset-0 opacity-20 text-[10px] text-purple-500 font-mono p-4 overflow-hidden select-none pointer-events-none">
+                        <div className="absolute inset-0 opacity-20 text-[10px] text-neon-lime font-mono p-4 overflow-hidden select-none pointer-events-none">
                             <motion.div
                                 animate={{ y: ["0%", "-50%"] }}
                                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -40,21 +40,21 @@ const About = () => {
                                 {/* Duplicate content for seamless loop */}
                                 {[...Array(2)].map((_, sectionIndex) => (
                                     <div key={sectionIndex} className="space-y-1">
-                                        <div className="whitespace-nowrap"><span className="text-pink-500">const</span> <span className="text-yellow-300">Editor</span> = <span className="text-green-400">"Creative"</span>;</div>
-                                        <div className="whitespace-nowrap"><span className="text-pink-500">const</span> <span className="text-yellow-300">Dev</span> = <span className="text-green-400">"Logic"</span>;</div>
-                                        <div className="whitespace-nowrap"><span className="text-blue-400">function</span> <span className="text-yellow-300">createMagic</span>() &#123;</div>
-                                        <div className="whitespace-nowrap pl-4"><span className="text-purple-400">return</span> <span className="text-yellow-300">Editor</span> + <span className="text-yellow-300">Dev</span>;</div>
+                                        <div className="whitespace-nowrap"><span className="text-emerald">const</span> <span className="text-neon-lime">Editor</span> = <span className="text-white">"Creative"</span>;</div>
+                                        <div className="whitespace-nowrap"><span className="text-emerald">const</span> <span className="text-neon-lime">Dev</span> = <span className="text-white">"Logic"</span>;</div>
+                                        <div className="whitespace-nowrap"><span className="text-neon-lime">function</span> <span className="text-emerald">createMagic</span>() &#123;</div>
+                                        <div className="whitespace-nowrap pl-4"><span className="text-neon-lime/80">return</span> <span className="text-white">Editor</span> + <span className="text-white">Dev</span>;</div>
                                         <div className="whitespace-nowrap">&#125;</div>
                                         <div className="whitespace-nowrap text-gray-500">// Rendering seamless UI...</div>
                                         <div className="whitespace-nowrap text-gray-500">// Compiling assets...</div>
-                                        <div className="whitespace-nowrap"><span className="text-blue-400">import</span> <span className="text-yellow-300">React</span> <span className="text-blue-400">from</span> <span className="text-green-400">'react'</span>;</div>
-                                        <div className="whitespace-nowrap"><span className="text-pink-500">const</span> <span className="text-yellow-300">App</span> = () <span className="text-blue-400">=&gt;</span> <span className="text-green-400">"Build"</span>;</div>
+                                        <div className="whitespace-nowrap"><span className="text-emerald">import</span> <span className="text-neon-lime">React</span> <span className="text-emerald">from</span> <span className="text-white">'react'</span>;</div>
+                                        <div className="whitespace-nowrap"><span className="text-emerald">const</span> <span className="text-neon-lime">App</span> = () <span className="text-emerald">=&gt;</span> <span className="text-white">"Build"</span>;</div>
                                         <div className="h-10"></div> {/* Spacer */}
                                     </div>
                                 ))}
                             </motion.div>
                             {/* Gradient Mask for fading */}
-                            <div className="absolute inset-0 bg-gradient-to-b from-[#0a051e] via-transparent to-[#0a051e] pointer-events-none" />
+                            <div className="absolute inset-0 bg-gradient-to-b from-obsidian via-transparent to-obsidian pointer-events-none" />
                         </div>
 
                         {/* Video Timeline (Editor Aspect) - Realistic NLE */}
@@ -69,7 +69,7 @@ const About = () => {
                                 </div>
                                 <div className="text-[10px] text-gray-400 font-mono flex gap-4">
                                     <span>00:00:12:05</span>
-                                    <span className="text-purple-400">V1</span>
+                                    <span className="text-neon-lime">V1</span>
                                 </div>
                             </div>
 
@@ -88,30 +88,30 @@ const About = () => {
                                 {/* Video Track 1 */}
                                 <div className="h-8 bg-[#1a1a1a] rounded flex items-center relative overflow-hidden border border-white/5">
                                     <span className="absolute left-1 text-[8px] text-gray-600 font-mono z-10">V1</span>
-                                    <div className="absolute left-[10%] w-[40%] h-full bg-blue-900/40 border border-blue-500/30 rounded-sm flex items-center px-2">
-                                        <span className="text-[7px] text-blue-200/50 truncate">Main_Camera_01.mp4</span>
+                                    <div className="absolute left-[10%] w-[40%] h-full bg-emerald/20 border border-emerald/30 rounded-sm flex items-center px-2">
+                                        <span className="text-[7px] text-emerald/50 truncate">Main_Camera_01.mp4</span>
                                     </div>
-                                    <div className="absolute left-[55%] w-[30%] h-full bg-blue-800/40 border border-blue-500/30 rounded-sm flex items-center px-2">
-                                        <span className="text-[7px] text-blue-200/50 truncate">Wide_Shot.mov</span>
+                                    <div className="absolute left-[55%] w-[30%] h-full bg-emerald/15 border border-emerald/30 rounded-sm flex items-center px-2">
+                                        <span className="text-[7px] text-emerald/50 truncate">Wide_Shot.mov</span>
                                     </div>
                                 </div>
 
                                 {/* Video Track 2 (Overlay) */}
                                 <div className="h-8 bg-[#1a1a1a] rounded flex items-center relative overflow-hidden border border-white/5">
                                     <span className="absolute left-1 text-[8px] text-gray-600 font-mono z-10">V2</span>
-                                    <div className="absolute left-[30%] w-[20%] h-[80%] bg-purple-900/40 border border-purple-500/30 rounded-sm flex items-center px-2">
-                                        <span className="text-[7px] text-purple-200/50 truncate">Overlay_Glitch</span>
+                                    <div className="absolute left-[30%] w-[20%] h-[80%] bg-neon-lime/20 border border-neon-lime/30 rounded-sm flex items-center px-2">
+                                        <span className="text-[7px] text-neon-lime/50 truncate">Overlay_Glitch</span>
                                     </div>
                                 </div>
 
                                 {/* Audio Track */}
                                 <div className="h-8 bg-[#1a1a1a] rounded flex items-center relative overflow-hidden border border-white/5 mt-1">
                                     <span className="absolute left-1 text-[8px] text-gray-600 font-mono z-10">A1</span>
-                                    <div className="absolute left-[10%] w-[75%] h-[80%] bg-green-900/40 border border-green-500/30 rounded-sm flex items-center px-2 overflow-hidden">
+                                    <div className="absolute left-[10%] w-[75%] h-[80%] bg-emerald/10 border border-emerald/20 rounded-sm flex items-center px-2 overflow-hidden">
                                         {/* Fake Waveform */}
                                         <div className="flex items-center gap-[1px] h-full w-full opacity-50">
                                             {Array.from({ length: 40 }).map((_, i) => (
-                                                <div key={i} className="w-[2px] bg-green-400" style={{ height: `${Math.random() * 80 + 20}%` }} />
+                                                <div key={i} className="w-[2px] bg-emerald" style={{ height: `${Math.random() * 80 + 20}%` }} />
                                             ))}
                                         </div>
                                     </div>
@@ -121,14 +121,14 @@ const About = () => {
 
                         {/* Floating Elements (Dev Aspect) */}
                         <motion.div
-                            className="absolute top-12 right-8 text-5xl text-cyan-400/10 font-bold font-mono rotate-12 z-0"
+                            className="absolute top-12 right-8 text-5xl text-neon-lime/10 font-bold font-mono rotate-12 z-0"
                             animate={{ y: [0, -15, 0], rotate: [12, 18, 12] }}
                             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                         >
                             &lt;/&gt;
                         </motion.div>
                         <motion.div
-                            className="absolute top-24 left-8 text-6xl text-purple-400/10 font-bold -rotate-12 z-0"
+                            className="absolute top-24 left-8 text-6xl text-emerald/10 font-bold -rotate-12 z-0"
                             animate={{ scale: [1, 1.1, 1], rotate: [-12, -6, -12] }}
                             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
                         >
@@ -137,7 +137,7 @@ const About = () => {
 
                         {/* Central Glow Effect */}
                         <motion.div
-                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-purple-500/20 rounded-full blur-3xl z-0"
+                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-neon-lime/10 rounded-full blur-3xl z-0"
                             animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.2, 1] }}
                             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                         />
@@ -145,13 +145,13 @@ const About = () => {
                         {/* Center Text */}
                         <div className="absolute inset-0 flex flex-col items-center justify-center z-20">
                             <div className="relative group-hover:scale-105 transition-transform duration-500">
-                                <h3 className="relative text-5xl font-bold text-white mb-3 drop-shadow-[0_0_15px_rgba(139,92,246,0.5)] tracking-tight">
+                                <h3 className="relative text-5xl font-bold text-white mb-3 drop-shadow-[0_0_15px_rgba(204,255,0,0.3)] tracking-tight">
                                     Editor & Dev
                                 </h3>
                             </div>
                             <div className="relative bg-black/60 px-4 py-1.5 rounded-full border border-white/10 backdrop-blur-md flex items-center gap-2">
-                                <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                                <p className="text-cyan-300 font-mono text-sm tracking-wide">
+                                <div className="w-2 h-2 rounded-full bg-neon-lime animate-pulse" />
+                                <p className="text-neon-lime font-mono text-sm tracking-wide">
                                     Crafting Digital Stories
                                 </p>
                             </div>

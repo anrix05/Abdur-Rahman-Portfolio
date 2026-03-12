@@ -89,7 +89,7 @@ const Projects = () => {
             tags: ['Next.js 15', 'Supabase', 'React 19', 'Razorpay'],
             color: 'from-violet-600 to-indigo-600',
             type: 'software',
-            demo: 'https://the-graveyard-gules.vercel.app/',
+            demo: 'https://graveyard.anrix.me',
             github: 'https://github.com/anrix05/The-Graveyard',
             content: (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-50 group-hover:opacity-100 transition-opacity duration-500">
@@ -207,19 +207,19 @@ const Projects = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-4xl font-bold mb-16 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-cyan-400"
+                className="text-4xl font-bold mb-16 text-center bg-clip-text text-transparent bg-gradient-to-r from-neon-lime to-emerald"
             >
                 Featured Projects
             </motion.h2>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full max-w-7xl px-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl px-4">
                 {projects.map((project, index) => (
                     <motion.div
                         key={index}
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.2, duration: 0.6 }}
-                        className="group relative bg-[#0b0b1e] border border-white/5 rounded-2xl overflow-hidden hover:border-purple-500/50 transition-all duration-300"
+                        className="group relative bg-[#0c0c0c] border border-white/5 rounded-2xl overflow-hidden hover:border-neon-lime/50 transition-all duration-300"
                     >
                         {/* Custom Background Animation */}
                         {project.content}
@@ -235,7 +235,7 @@ const Projects = () => {
 
                             <div className="flex flex-wrap gap-2 mb-8">
                                 {project.tags.map((tag, i) => (
-                                    <span key={i} className="px-3 py-1 bg-white/5 rounded-full text-xs text-purple-200 border border-white/10">
+                                    <span key={i} className="px-3 py-1 bg-white/5 rounded-full text-xs text-neon-lime/80 border border-white/10 font-mono">
                                         {tag}
                                     </span>
                                 ))}
@@ -252,7 +252,7 @@ const Projects = () => {
                                         </a>
                                     </>
                                 ) : (
-                                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors text-sm w-full justify-center font-medium bg-white/5 py-2 rounded-lg hover:bg-white/10">
+                                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-400 hover:text-neon-lime transition-colors text-sm w-full justify-center font-medium bg-white/5 py-2 rounded-lg hover:bg-white/10 border border-white/5">
                                         <FaLinkedin className="text-lg" /> View Project on LinkedIn
                                     </a>
                                 )}

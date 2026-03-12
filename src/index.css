@@ -1,9 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@100..800&display=swap');
+
 @import "tailwindcss";
 
 @theme {
   --color-background: #0a0a0a;
   --color-foreground: #ededed;
-  --font-sans: Inter, sans-serif;
+  --color-obsidian: #0c0c0c;
+  --color-neon-lime: #ccff00;
+  --color-emerald: #10b981;
+  --font-sans: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 
   --animate-scroll-down: scroll-down 1.5s infinite;
 
@@ -26,22 +32,22 @@
 }
 
 ::-webkit-scrollbar-track {
-  background-color: theme('colors.slate.900');
+  background-color: var(--color-obsidian);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: theme('colors.cyan.500');
+  background-color: var(--color-neon-lime);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: theme('colors.cyan.400');
+  background-color: var(--color-emerald);
 }
 
-body {
-  background-color: var(--color-background);
+html, body {
+  background-color: var(--color-obsidian);
   color: var(--color-foreground);
-  @apply font-sans antialiased overflow-x-hidden;
+  @apply font-sans antialiased overflow-x-hidden relative;
 }
 
 /* Utilities for GSAP if needed, though Tailwind usu covers it */

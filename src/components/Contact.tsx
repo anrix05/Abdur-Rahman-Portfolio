@@ -8,7 +8,7 @@ const Contact = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-4xl font-bold mb-16 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-cyan-400"
+                className="text-4xl font-bold mb-16 text-center bg-clip-text text-transparent bg-gradient-to-r from-neon-lime to-emerald"
             >
                 Get In Touch
             </motion.h2>
@@ -28,11 +28,11 @@ const Contact = () => {
                     </p>
 
                     <div className="space-y-4">
-                        <a href="mailto:abdur.rahman@vit.edu.in" className="flex items-center gap-4 text-gray-300 hover:text-purple-400 transition-colors p-4 bg-white/5 rounded-xl border border-white/5 hover:border-purple-500/30">
+                        <a href="mailto:abdur.rahman@vit.edu.in" className="flex items-center gap-4 text-gray-300 hover:text-neon-lime transition-colors p-4 bg-white/5 rounded-xl border border-white/5 hover:border-neon-lime/30">
                             <FaEnvelope className="text-xl" />
                             <span>abdur.rahman@vit.edu.in</span>
                         </a>
-                        <a href="https://www.linkedin.com/in/abdur-rahman-vit/" className="flex items-center gap-4 text-gray-300 hover:text-cyan-400 transition-colors p-4 bg-white/5 rounded-xl border border-white/5 hover:border-cyan-500/30">
+                        <a href="https://www.linkedin.com/in/abdur-rahman-vit/" className="flex items-center gap-4 text-gray-300 hover:text-emerald transition-colors p-4 bg-white/5 rounded-xl border border-white/5 hover:border-emerald/30">
                             <FaLinkedin className="text-xl" />
                             <span>LinkedIn Profile</span>
                         </a>
@@ -58,17 +58,17 @@ const Contact = () => {
                     <form className="space-y-6">
                         <div>
                             <label className="block text-sm font-medium text-gray-400 mb-2">Name</label>
-                            <input type="text" className="w-full bg-[#0b0b1e] border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all" placeholder="Your Name" />
+                            <input type="text" className="w-full bg-obsidian border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-lime focus:ring-1 focus:ring-neon-lime transition-all" placeholder="Your Name" />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-400 mb-2">Email</label>
-                            <input type="email" className="w-full bg-[#0b0b1e] border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all" placeholder="your@email.com" />
+                            <input type="email" className="w-full bg-obsidian border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-lime focus:ring-1 focus:ring-neon-lime transition-all" placeholder="your@email.com" />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-400 mb-2">Message</label>
-                            <textarea rows={4} className="w-full bg-[#0b0b1e] border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all" placeholder="What's on your mind?"></textarea>
+                            <textarea rows={4} className="w-full bg-obsidian border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-lime focus:ring-1 focus:ring-neon-lime transition-all" placeholder="What's on your mind?"></textarea>
                         </div>
-                        <button type="button" className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 text-white font-bold py-3 rounded-lg hover:opacity-90 transition-opacity shadow-[0_0_20px_rgba(139,92,246,0.3)]">
+                        <button type="button" className="w-full bg-gradient-to-r from-neon-lime to-emerald text-obsidian font-bold py-3 rounded-lg hover:opacity-90 transition-opacity shadow-[0_0_20px_rgba(204,255,0,0.2)]">
                             Send Message
                         </button>
                     </form>

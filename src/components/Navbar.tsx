@@ -42,8 +42,8 @@ const Navbar = () => {
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
                     <div className="flex-shrink-0 cursor-pointer" onClick={() => window.scrollTo(0, 0)}>
-                        <h1 className="text-white font-bold text-xl tracking-wider">
-                            Abdur<span className="text-cyan-400">Rahman</span>
+                        <h1 className="text-white font-bold text-2xl tracking-tighter font-sans leading-none flex items-center">
+                            A<span className="text-neon-lime">R</span>
                         </h1>
                     </div>
 
@@ -54,7 +54,7 @@ const Navbar = () => {
                                 <a
                                     key={link.name}
                                     href={link.href}
-                                    className="text-gray-300 hover:text-white hover:shadow-[0_0_20px_rgba(139,92,246,0.5)] px-3 py-2 rounded-md text-sm font-medium transition-all duration-300"
+                                    className="text-gray-300 hover:text-neon-lime hover:shadow-[0_0_20px_rgba(204,255,0,0.3)] px-3 py-2 rounded-md text-sm font-medium transition-all duration-300"
                                 >
                                     {link.name}
                                 </a>
@@ -64,7 +64,7 @@ const Navbar = () => {
 
                     {/* Social Icons */}
                     <div className="hidden md:flex items-center gap-4">
-                        <a href="https://the-graveyard-gules.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
+                        <a href="https://graveyard.anrix.me" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-neon-lime transition-colors">
                             <FaSkull size={20} />
                         </a>
                         <a href="https://github.com/anrix05" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
@@ -89,15 +89,15 @@ const Navbar = () => {
 
             {/* Mobile Menu */}
             {isOpen && (
-                <div className="md:hidden glass-nav">
+                <div className="md:hidden glass-nav bg-obsidian/95 backdrop-blur-md border-b border-white/10">
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                         {navLinks.map((link) => (
-                            <a
-                                key={link.name}
-                                href={link.href}
-                                onClick={() => setIsOpen(false)}
-                                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                            >
+                                <a
+                                    key={link.name}
+                                    href={link.href}
+                                    onClick={() => setIsOpen(false)}
+                                    className="text-gray-300 hover:text-neon-lime block px-3 py-2 rounded-md text-base font-medium"
+                                >
                                 {link.name}
                             </a>
                         ))}
