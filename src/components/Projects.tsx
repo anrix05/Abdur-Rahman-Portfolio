@@ -16,6 +16,74 @@ interface Project {
 const Projects = () => {
     const projects: Project[] = [
         {
+            title: 'ZeroBlur',
+            description: 'A premium Neo-Brutalist digital assets marketplace for UI Kits, Code Snippets, and Templates. Built with high contrast, tactical interactions, and bold design.',
+            tags: ['React 18', 'Framer Motion', 'Lucide React', 'Vanilla CSS'],
+            color: 'from-[#ffe17c] to-[#ffb300]',
+            type: 'software',
+            demo: 'https://zeroblur.anrix.me/',
+            github: 'https://github.com/anrix05/ZeroBlur',
+            content: (
+                <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-50 group-hover:opacity-100 transition-opacity duration-500 bg-[#ffe17c]/5">
+                    {/* High-Contrast Dot Grid */}
+                    <div className="absolute inset-0" style={{ 
+                        backgroundImage: 'radial-gradient(rgba(0,0,0,0.8) 2px, transparent 2px)', 
+                        backgroundSize: '32px 32px',
+                        opacity: 0.15
+                    }} />
+
+                    {/* Iconic Stickers: Lightning Bolt */}
+                    <motion.div
+                        className="absolute top-8 right-8 text-7xl select-none"
+                        animate={{ 
+                            scale: [1, 1.2, 1],
+                            rotate: [-5, 5, -5]
+                        }}
+                        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                        style={{ filter: 'drop-shadow(4px 4px 0px #000)' }}
+                    >
+                        ⚡
+                    </motion.div>
+
+                    {/* Iconic Stickers: Package */}
+                    <motion.div
+                        className="absolute bottom-10 left-10 text-6xl select-none"
+                        animate={{ 
+                            y: [0, -15, 0],
+                            rotate: [0, 10, 0]
+                        }}
+                        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+                        style={{ filter: 'drop-shadow(4px 4px 0px #000)' }}
+                    >
+                        📦
+                    </motion.div>
+
+                    {/* "ZB" Tactical Indicator */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                        <motion.div
+                            className="px-6 py-2 bg-black text-[#ffe17c] font-black text-4xl border-2 border-black tracking-tighter"
+                            animate={{ 
+                                scale: [1, 1.05, 1],
+                                opacity: [0.3, 0.6, 0.3]
+                            }}
+                            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                        >
+                            ZB.V1
+                        </motion.div>
+                        {/* Crosshair lines */}
+                        <div className="absolute w-12 h-[2px] bg-black/20 -translate-x-16" />
+                        <div className="absolute w-12 h-[2px] bg-black/20 translate-x-16" />
+                        <div className="absolute w-[2px] h-12 bg-black/20 -translate-y-16" />
+                        <div className="absolute w-[2px] h-12 bg-black/20 translate-y-16" />
+                    </div>
+
+                    {/* Corner accents */}
+                    <div className="absolute top-4 left-4 w-8 h-8 border-t-4 border-l-4 border-black/40" />
+                    <div className="absolute bottom-4 right-4 w-8 h-8 border-b-4 border-r-4 border-black/40" />
+                </div>
+            )
+        },
+        {
             title: 'The Graveyard',
             description: 'A marketplace for developers to buy, sell, and "adopt" unfinished coding projects. Features secure asset delivery, real-time chat, and Razorpay payments.',
             tags: ['Next.js 15', 'Supabase', 'React 19', 'Razorpay'],

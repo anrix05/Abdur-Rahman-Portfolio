@@ -187,10 +187,11 @@ const Robot = ({ mouse }: { mouse: MutableRefObject<{ x: number; y: number }> })
                             <cylinderGeometry args={[0.5, 0.35, 0.9, 16]} />
                             <meshStandardMaterial color="#1a1a2e" roughness={0.3} metalness={0.8} />
                         </mesh>
-                        <mesh position={[0, 0.3, 0.45]} rotation={[0, 0, Math.PI]}>
-                            <circleGeometry args={[0.15, 3]} />
-                            <meshStandardMaterial color="#06b6d4" emissive="#06b6d4" emissiveIntensity={3} toneMapped={false} />
-                        </mesh>
+                        <Html position={[0, 0.3, 0.5]} center transform pointerEvents="none">
+                            <div className="font-black text-[10px] select-none text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500 tracking-tighter" style={{ whiteSpace: 'nowrap' }}>
+                                AR
+                            </div>
+                        </Html>
                         <mesh position={[0, -0.2, 0]}>
                             <sphereGeometry args={[0.3, 32, 32]} />
                             <meshStandardMaterial color="#111" />

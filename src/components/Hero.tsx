@@ -79,7 +79,7 @@ const Hero = () => {
                         transition={{ delay: 0.5, duration: 0.8 }}
                         className="text-lg text-gray-400 max-w-lg mx-auto md:mx-0 leading-relaxed"
                     >
-                        Building secure mobile apps that users actually love. Focused on <strong>React Native</strong> and <strong>Next.js</strong>. Creator of <strong>Love Connect</strong>.
+                        Crafting high-impact marketplaces and secure digital experiences with a tactical edge. Specialized in <strong>React Native</strong> and <strong>Next.js</strong>. Creator of <strong>ZeroBlur</strong>, <strong>The Graveyard</strong>, and <strong>Love Connect</strong>.
                     </motion.p>
 
                     <motion.div
