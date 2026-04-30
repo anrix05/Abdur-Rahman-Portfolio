@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 
+const WAVEFORM_HEIGHTS = Array.from({ length: 40 }, () => Math.random() * 80 + 20);
+
 const About = () => {
     return (
         <section className="relative w-full py-20 px-6 max-w-7xl mx-auto flex flex-col items-center">
@@ -110,8 +112,8 @@ const About = () => {
                                     <div className="absolute left-[10%] w-[75%] h-[80%] bg-emerald/10 border border-emerald/20 rounded-sm flex items-center px-2 overflow-hidden">
                                         {/* Fake Waveform */}
                                         <div className="flex items-center gap-[1px] h-full w-full opacity-50">
-                                            {Array.from({ length: 40 }).map((_, i) => (
-                                                <div key={i} className="w-[2px] bg-emerald" style={{ height: `${Math.random() * 80 + 20}%` }} />
+                                            {WAVEFORM_HEIGHTS.map((h, i) => (
+                                                <div key={i} className="w-[2px] bg-emerald" style={{ height: `${h}%` }} />
                                             ))}
                                         </div>
                                     </div>

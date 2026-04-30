@@ -9,7 +9,8 @@ import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Navbar from './components/Navbar';
-import Hyperspeed, { hyperspeedPresets } from './components/Hyperspeed';
+import Hyperspeed from './components/Hyperspeed';
+import { hyperspeedPresets } from './components/hyperspeedPresets';
 import Footer from './components/Footer';
 
 gsap.registerPlugin(ScrollTrigger);
