@@ -151,7 +151,7 @@ const Projects = () => {
             tags: ['IoT', 'Arduino', 'Sensors', 'Automation'],
             color: 'from-orange-500 to-red-600',
             type: 'hardware',
-            link: 'https://www.linkedin.com/in/abdur-rahman-vit/',
+            link: 'https://www.linkedin.com/in/abdur-rahman-513a5b351',
             content: (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-50 group-hover:opacity-100 transition-opacity duration-500">
                     {/* Rain Effect */}
@@ -179,7 +179,7 @@ const Projects = () => {
             tags: ['Embedded Systems', 'C++', 'Security', 'Hardware'],
             color: 'from-green-500 to-emerald-600',
             type: 'hardware',
-            link: 'https://www.linkedin.com/in/abdur-rahman-vit/',
+            link: 'https://www.linkedin.com/in/abdur-rahman-513a5b351',
             content: (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-50 group-hover:opacity-100 transition-opacity duration-500">
                     {/* Binary Rain */}

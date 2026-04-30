@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { FaGithub, FaLinkedin, FaBars, FaTimes, FaSkull } from 'react-icons/fa';
 
 const Navbar = () => {
@@ -6,7 +6,7 @@ const Navbar = () => {
     const [show, setShow] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
 
-    const controlNavbar = useCallback(() => {
+    const controlNavbar = () => {
         if (typeof window !== 'undefined') {
             if (window.scrollY > lastScrollY && window.scrollY > 100) { // if scroll down hide the navbar
                 setShow(false);
@@ -15,7 +15,7 @@ const Navbar = () => {
             }
             setLastScrollY(window.scrollY);
         }
-    }, [lastScrollY]);
+    };
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -26,7 +26,7 @@ const Navbar = () => {
                 window.removeEventListener('scroll', controlNavbar);
             };
         }
-    }, [controlNavbar]);
+    }, [lastScrollY]);
 
     const navLinks = [
         { name: 'About', href: '#about' },
@@ -70,7 +70,7 @@ const Navbar = () => {
                         <a href="https://github.com/anrix05" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
                             <FaGithub size={20} />
                         </a>
-                        <a href="https://www.linkedin.com/in/abdur-rahman-vit/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
+                        <a href="https://www.linkedin.com/in/abdur-rahman-513a5b351" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
                             <FaLinkedin size={20} />
                         </a>
                     </div>

@@ -14,24 +14,27 @@ const Typewriter = ({ words }: { words: string[] }) => {
         return () => clearTimeout(timeout);
     }, [blink]);
 
-    // Typing logic – all state transitions happen inside the setTimeout callback
+    // Typing logic
     useEffect(() => {
-        const delay = (!reverse && subIndex === words[index].length + 1)
-            ? 500
-            : (reverse && subIndex === 0)
-                ? 300
-                : reverse ? 75 : 150;
+        if (index >= words.length) {
+            setIndex(0); // Loop back
+            return;
+        }
+
+        if (subIndex === words[index].length + 1 && !reverse) {
+            setReverse(true);
+            return;
+        }
+
+        if (subIndex === 0 && reverse) {
+            setReverse(false);
+            setIndex((prev) => (prev + 1) % words.length);
+            return;
+        }
 
         const timeout = setTimeout(() => {
-            if (!reverse && subIndex === words[index].length + 1) {
-                setReverse(true);
-            } else if (reverse && subIndex === 0) {
-                setReverse(false);
-                setIndex((prev) => (prev + 1) % words.length);
-            } else {
-                setSubIndex((prev) => prev + (reverse ? -1 : 1));
-            }
-        }, delay);
+            setSubIndex((prev) => prev + (reverse ? -1 : 1));
+        }, reverse ? 75 : 150);
 
         return () => clearTimeout(timeout);
     }, [subIndex, index, reverse, words]);

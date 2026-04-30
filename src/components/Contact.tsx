@@ -1,25 +1,7 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
-
-const CONTACT_EMAIL = 'abdur.rahman@vit.edu.in';
+import { FaLinkedin, FaGithub, FaEnvelope, FaPhone } from 'react-icons/fa';
 
 const Contact = () => {
-    const [form, setForm] = useState({ name: '', email: '', message: '' });
-    const [submitted, setSubmitted] = useState(false);
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        const subject = encodeURIComponent(`Portfolio Contact from ${form.name}`);
-        const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`);
-        window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-        setSubmitted(true);
-    };
-
     return (
         <section className="py-20 flex flex-col items-center">
             <motion.h2
@@ -46,9 +28,9 @@ const Contact = () => {
                     </p>
 
                     <div className="space-y-4">
-                        <a href={`mailto:${CONTACT_EMAIL}`} className="flex items-center gap-4 text-gray-300 hover:text-neon-lime transition-colors p-4 bg-white/5 rounded-xl border border-white/5 hover:border-neon-lime/30">
+                        <a href="mailto:abdur.rahman@vit.edu.in" className="flex items-center gap-4 text-gray-300 hover:text-neon-lime transition-colors p-4 bg-white/5 rounded-xl border border-white/5 hover:border-neon-lime/30">
                             <FaEnvelope className="text-xl" />
-                            <span>{CONTACT_EMAIL}</span>
+                            <span>abdur.rahman@vit.edu.in</span>
                         </a>
                         <a href="https://www.linkedin.com/in/abdur-rahman-vit/" className="flex items-center gap-4 text-gray-300 hover:text-emerald transition-colors p-4 bg-white/5 rounded-xl border border-white/5 hover:border-emerald/30">
                             <FaLinkedin className="text-xl" />
@@ -58,6 +40,11 @@ const Contact = () => {
                             <FaGithub className="text-xl" />
                             <span>GitHub Profile</span>
                         </a>
+                        {/* Phone number blocked for privacy in demo, can be added back */}
+                        <div className="flex items-center gap-4 text-gray-300 p-4 bg-white/5 rounded-xl border border-white/5">
+                            <FaPhone className="text-xl" />
+                            <span>+91 8303870726</span>
+                        </div>
                     </div>
                 </motion.div>
 
@@ -68,61 +55,23 @@ const Contact = () => {
                     transition={{ duration: 0.6 }}
                     className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10"
                 >
-                    {submitted ? (
-                        <div className="flex flex-col items-center justify-center h-full gap-4 text-center py-12">
-                            <div className="text-5xl">✅</div>
-                            <h4 className="text-xl font-bold text-white">Message Ready!</h4>
-                            <p className="text-gray-400">Your email client should have opened. If not, reach me directly at {CONTACT_EMAIL}</p>
-                            <button
-                                onClick={() => { setSubmitted(false); setForm({ name: '', email: '', message: '' }); }}
-                                className="mt-4 text-neon-lime underline text-sm"
-                            >
-                                Send another message
-                            </button>
+                    <form className="space-y-6">
+                        <div>
+                            <label className="block text-sm font-medium text-gray-400 mb-2">Name</label>
+                            <input type="text" className="w-full bg-obsidian border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-lime focus:ring-1 focus:ring-neon-lime transition-all" placeholder="Your Name" />
                         </div>
-                    ) : (
-                        <form className="space-y-6" onSubmit={handleSubmit}>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-400 mb-2">Name</label>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    required
-                                    value={form.name}
-                                    onChange={handleChange}
-                                    className="w-full bg-obsidian border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-lime focus:ring-1 focus:ring-neon-lime transition-all"
-                                    placeholder="Your Name"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-400 mb-2">Email</label>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    required
-                                    value={form.email}
-                                    onChange={handleChange}
-                                    className="w-full bg-obsidian border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-lime focus:ring-1 focus:ring-neon-lime transition-all"
-                                    placeholder="your@email.com"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-400 mb-2">Message</label>
-                                <textarea
-                                    rows={4}
-                                    name="message"
-                                    required
-                                    value={form.message}
-                                    onChange={handleChange}
-                                    className="w-full bg-obsidian border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-lime focus:ring-1 focus:ring-neon-lime transition-all"
-                                    placeholder="What's on your mind?"
-                                ></textarea>
-                            </div>
-                            <button type="submit" className="w-full bg-gradient-to-r from-neon-lime to-emerald text-obsidian font-bold py-3 rounded-lg hover:opacity-90 transition-opacity shadow-[0_0_20px_rgba(204,255,0,0.2)]">
-                                Send Message
-                            </button>
-                        </form>
-                    )}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-400 mb-2">Email</label>
+                            <input type="email" className="w-full bg-obsidian border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-lime focus:ring-1 focus:ring-neon-lime transition-all" placeholder="your@email.com" />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-400 mb-2">Message</label>
+                            <textarea rows={4} className="w-full bg-obsidian border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-lime focus:ring-1 focus:ring-neon-lime transition-all" placeholder="What's on your mind?"></textarea>
+                        </div>
+                        <button type="button" className="w-full bg-gradient-to-r from-neon-lime to-emerald text-obsidian font-bold py-3 rounded-lg hover:opacity-90 transition-opacity shadow-[0_0_20px_rgba(204,255,0,0.2)]">
+                            Send Message
+                        </button>
+                    </form>
                 </motion.div>
 
             </div>
