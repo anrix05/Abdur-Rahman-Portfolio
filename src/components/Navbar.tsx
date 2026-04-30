@@ -1,10 +1,11 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { FaGithub, FaLinkedin, FaBars, FaTimes, FaSkull } from 'react-icons/fa';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [show, setShow] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
+    const menuRef = useRef<HTMLDivElement>(null);
 
     const controlNavbar = useCallback(() => {
         if (typeof window !== 'undefined') {
@@ -28,6 +29,18 @@ const Navbar = () => {
         }
     }, [controlNavbar]);
 
+    // Close mobile menu when clicking outside
+    useEffect(() => {
+        if (!isOpen) return;
+        const handleClickOutside = (e: MouseEvent) => {
+            if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+                setIsOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [isOpen]);
+
     const navLinks = [
         { name: 'About', href: '#about' },
         { name: 'Skills', href: '#skills' },
@@ -37,7 +50,7 @@ const Navbar = () => {
     ];
 
     return (
-        <nav className={`fixed top-0 w-full z-50 glass-nav shadow-lg transition-transform duration-300 ${show ? 'translate-y-0' : '-translate-y-full'}`}>
+        <nav ref={menuRef} className={`fixed top-0 w-full z-50 glass-nav shadow-lg transition-transform duration-300 ${show ? 'translate-y-0' : '-translate-y-full'}`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}

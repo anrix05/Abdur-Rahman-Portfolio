@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 const chapters = [
     { id: 'hero', label: 'Start' },
     { id: 'about', label: 'The Story' },
-    { id: 'experience', label: 'The Journey' },
     { id: 'skills', label: 'The Arsenal' },
+    { id: 'experience', label: 'The Journey' },
     { id: 'projects', label: 'The Works' },
     { id: 'contact', label: 'The Future' },
 ];

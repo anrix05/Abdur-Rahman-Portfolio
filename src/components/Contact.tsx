@@ -16,7 +16,8 @@ const Contact = () => {
         e.preventDefault();
         const subject = encodeURIComponent(`Portfolio Contact from ${form.name}`);
         const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`);
-        window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+        const mailtoLink = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+        window.open(mailtoLink, '_blank');
         setSubmitted(true);
     };
 
@@ -70,9 +71,9 @@ const Contact = () => {
                 >
                     {submitted ? (
                         <div className="flex flex-col items-center justify-center h-full gap-4 text-center py-12">
-                            <div className="text-5xl">✅</div>
-                            <h4 className="text-xl font-bold text-white">Message Ready!</h4>
-                            <p className="text-gray-400">Your email client should have opened. If not, reach me directly at {CONTACT_EMAIL}</p>
+                            <div className="text-5xl">📬</div>
+                            <h4 className="text-xl font-bold text-white">Email Client Opened!</h4>
+                            <p className="text-gray-400">Your email client should have opened with the message pre-filled. If nothing opened, reach me directly at {CONTACT_EMAIL}</p>
                             <button
                                 onClick={() => { setSubmitted(false); setForm({ name: '', email: '', message: '' }); }}
                                 className="mt-4 text-neon-lime underline text-sm"

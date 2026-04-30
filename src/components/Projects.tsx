@@ -244,12 +244,16 @@ const Projects = () => {
                             <div className="flex gap-4 pt-4 border-t border-white/5">
                                 {project.type === 'software' ? (
                                     <>
-                                        <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
-                                            <FaGithub /> Code
-                                        </a>
-                                        <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
-                                            <FaExternalLinkAlt /> Live Demo
-                                        </a>
+                                        {project.github && (
+                                            <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
+                                                <FaGithub /> Code
+                                            </a>
+                                        )}
+                                        {project.demo && (
+                                            <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
+                                                <FaExternalLinkAlt /> Live Demo
+                                            </a>
+                                        )}
                                     </>
                                 ) : (
                                     <a href={project.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-400 hover:text-neon-lime transition-colors text-sm w-full justify-center font-medium bg-white/5 py-2 rounded-lg hover:bg-white/10 border border-white/5">
