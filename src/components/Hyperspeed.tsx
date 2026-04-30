@@ -243,7 +243,7 @@ export const Hyperspeed = forwardRef<HTMLDivElement, HyperspeedProps>(({ effectO
 
     animate(0);
 
-    // Interaction handlers
+    // Interaction handlers — scoped to container to avoid triggering on unrelated taps
     const handleMouseDown = () => {
       state.targetSpeed = options.speedUp!;
       state.targetFov = options.fovSpeedUp!;
@@ -256,18 +256,20 @@ export const Hyperspeed = forwardRef<HTMLDivElement, HyperspeedProps>(({ effectO
       options.onSlowDown?.();
     };
 
+    const container = containerRef.current;
+
     window.addEventListener('mousedown', handleMouseDown);
     window.addEventListener('mouseup', handleMouseUp);
-    window.addEventListener('touchstart', handleMouseDown);
-    window.addEventListener('touchend', handleMouseUp);
+    container.addEventListener('touchstart', handleMouseDown);
+    container.addEventListener('touchend', handleMouseUp);
 
     // Cleanup
     return () => {
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousedown', handleMouseDown);
       window.removeEventListener('mouseup', handleMouseUp);
-      window.removeEventListener('touchstart', handleMouseDown);
-      window.removeEventListener('touchend', handleMouseUp);
+      container.removeEventListener('touchstart', handleMouseDown);
+      container.removeEventListener('touchend', handleMouseUp);
       cancelAnimationFrame(animationId);
       geometry.dispose();
       material.dispose();

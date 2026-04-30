@@ -12,6 +12,8 @@ import Navbar from './components/Navbar';
 import Hyperspeed from './components/Hyperspeed';
 import { hyperspeedPresets } from './components/hyperspeedPresets';
 import Footer from './components/Footer';
+import Cursor from './components/Cursor';
+import StoryProgress from './components/StoryProgress';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,20 +26,24 @@ function App() {
 
     lenis.on('scroll', ScrollTrigger.update);
 
-    gsap.ticker.add((time) => {
+    const tickerCallback = (time: number) => {
       lenis.raf(time * 1000);
-    });
+    };
 
+    gsap.ticker.add(tickerCallback);
     gsap.ticker.lagSmoothing(0);
 
     return () => {
       lenis.destroy();
-      gsap.ticker.remove(lenis.raf);
+      gsap.ticker.remove(tickerCallback);
     };
   }, []);
 
   return (
     <div className="bg-obsidian min-h-screen text-white selection:bg-neon-lime selection:text-obsidian relative overflow-x-hidden font-sans">
+      <Cursor />
+      <StoryProgress />
+
       {/* Global Background */}
       <div className="fixed inset-0 z-0 pointer-events-none opacity-25">
         <Hyperspeed effectOptions={hyperspeedPresets.one} />
