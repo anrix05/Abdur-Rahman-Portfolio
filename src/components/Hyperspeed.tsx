@@ -116,7 +116,7 @@ export const Hyperspeed = forwardRef<HTMLDivElement, HyperspeedProps>(({ effectO
     // Three.js setup
     const renderer = new THREE.WebGLRenderer({ 
       canvas: canvasRef.current,
-      antialias: true,
+      antialias: false,
       alpha: true 
     });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
@@ -235,8 +235,17 @@ export const Hyperspeed = forwardRef<HTMLDivElement, HyperspeedProps>(({ effectO
 
     // Animation Loop
     let animationId: number;
+    let lastTime = 0;
+    const fps = 60;
+    const interval = 1000 / fps;
+
     const animate = (time: number) => {
       animationId = requestAnimationFrame(animate);
+
+      const delta = time - lastTime;
+      if (delta < interval) return;
+
+      lastTime = time - (delta % interval);
 
       // Speed interpolation
       state.speed += (state.targetSpeed - state.speed) * 0.05;

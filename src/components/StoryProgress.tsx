@@ -13,24 +13,32 @@ const StoryProgress = () => {
     const [activeChapter, setActiveChapter] = useState('hero');
 
     useEffect(() => {
-        const handleScroll = () => {
-            const scrollPosition = window.scrollY + window.innerHeight / 2;
-
-            for (const chapter of chapters) {
-                const element = document.getElementById(chapter.id);
-                if (element) {
-                    const { offsetTop, offsetHeight } = element;
-                    if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-                        setActiveChapter(chapter.id);
-                        break;
-                    }
-                }
-            }
+        const observerOptions = {
+            root: null,
+            rootMargin: '-45% 0px -45% 0px', // detects when section is in the middle 10% of the viewport
+            threshold: 0
         };
 
-        window.addEventListener('scroll', handleScroll);
-        handleScroll(); // Initial check
-        return () => window.removeEventListener('scroll', handleScroll);
+        const observerCallback = (entries: IntersectionObserverEntry[]) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setActiveChapter(entry.target.id);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+        chapters.forEach((chapter) => {
+            const element = document.getElementById(chapter.id);
+            if (element) {
+                observer.observe(element);
+            }
+        });
+
+        return () => {
+            observer.disconnect();
+        };
     }, []);
 
     return (
