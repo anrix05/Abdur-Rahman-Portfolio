@@ -187,6 +187,9 @@ export const Hyperspeed = forwardRef<HTMLDivElement, HyperspeedProps>(({ effectO
     const lines = new THREE.LineSegments(geometry, material);
     scene.add(lines);
 
+    // Keep a copy of base positions to prevent distortion drift accumulation
+    const basePositions = positions.slice();
+
     // Distortion logic
     const applyDistortion = (time: number) => {
       const pos = geometry.attributes.position.array as Float32Array;
@@ -198,6 +201,12 @@ export const Hyperspeed = forwardRef<HTMLDivElement, HyperspeedProps>(({ effectO
         const zIdx = idx + 2;
         const zIdxNext = idx + 5;
         
+        // Reset X and Y back to base positions before applying distortion
+        pos[idx] = basePositions[idx];
+        pos[idx + 1] = basePositions[idx + 1];
+        pos[idx + 3] = basePositions[idx + 3];
+        pos[idx + 4] = basePositions[idx + 4];
+
         // Moving lines
         pos[zIdx] += speed5;
         pos[zIdxNext] += speed5;
@@ -243,7 +252,9 @@ export const Hyperspeed = forwardRef<HTMLDivElement, HyperspeedProps>(({ effectO
 
     animate(0);
 
-    // Interaction handlers — scoped to container to avoid triggering on unrelated taps
+    // Interaction handlers - scoped to container for mousedown/touchstart
+    const container = containerRef.current;
+
     const handleMouseDown = () => {
       state.targetSpeed = options.speedUp!;
       state.targetFov = options.fovSpeedUp!;
@@ -256,20 +267,22 @@ export const Hyperspeed = forwardRef<HTMLDivElement, HyperspeedProps>(({ effectO
       options.onSlowDown?.();
     };
 
-    const container = containerRef.current;
-
-    window.addEventListener('mousedown', handleMouseDown);
+    if (container) {
+      container.addEventListener('mousedown', handleMouseDown);
+      container.addEventListener('touchstart', handleMouseDown);
+    }
     window.addEventListener('mouseup', handleMouseUp);
-    container.addEventListener('touchstart', handleMouseDown);
-    container.addEventListener('touchend', handleMouseUp);
+    window.addEventListener('touchend', handleMouseUp);
 
     // Cleanup
     return () => {
       window.removeEventListener('resize', resize);
-      window.removeEventListener('mousedown', handleMouseDown);
+      if (container) {
+        container.removeEventListener('mousedown', handleMouseDown);
+        container.removeEventListener('touchstart', handleMouseDown);
+      }
       window.removeEventListener('mouseup', handleMouseUp);
-      container.removeEventListener('touchstart', handleMouseDown);
-      container.removeEventListener('touchend', handleMouseUp);
+      window.removeEventListener('touchend', handleMouseUp);
       cancelAnimationFrame(animationId);
       geometry.dispose();
       material.dispose();

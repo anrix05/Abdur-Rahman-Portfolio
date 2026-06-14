@@ -7,18 +7,36 @@ const CONTACT_EMAIL = 'abdur.rahman@vit.edu.in';
 const Contact = () => {
     const [form, setForm] = useState({ name: '', email: '', message: '' });
     const [submitted, setSubmitted] = useState(false);
+    const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value });
+        setErrorMsg(null);
     };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        setErrorMsg(null);
+
+        if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+            setErrorMsg("Please fill in all fields.");
+            return;
+        }
+
         const subject = encodeURIComponent(`Portfolio Contact from ${form.name}`);
         const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`);
         const mailtoLink = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-        window.open(mailtoLink, '_blank');
-        setSubmitted(true);
+        
+        try {
+            const mailWindow = window.open(mailtoLink, '_blank');
+            if (mailWindow) {
+                setSubmitted(true);
+            } else {
+                setErrorMsg("Opening email client was blocked by your browser's popup blocker. Please click the email address link directly.");
+            }
+        } catch {
+            setErrorMsg("Failed to open email client. Please click the email address link directly.");
+        }
     };
 
     return (
@@ -122,6 +140,11 @@ const Contact = () => {
                             <button type="submit" className="w-full bg-gradient-to-r from-neon-lime to-emerald text-obsidian font-bold py-3 rounded-lg hover:opacity-90 transition-opacity shadow-[0_0_20px_rgba(204,255,0,0.2)]">
                                 Send Message
                             </button>
+                            {errorMsg && (
+                                <div className="text-center text-sm font-semibold p-3 rounded-lg border bg-rose-500/10 border-rose-500/20 text-rose-500 mt-4">
+                                    {errorMsg}
+                                </div>
+                            )}
                         </form>
                     )}
                 </motion.div>

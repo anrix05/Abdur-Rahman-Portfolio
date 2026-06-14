@@ -1,24 +1,25 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { FaGithub, FaLinkedin, FaBars, FaTimes, FaSkull } from 'react-icons/fa';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [show, setShow] = useState(true);
-    const [lastScrollY, setLastScrollY] = useState(0);
+    const lastScrollY = useRef(0);
     const menuRef = useRef<HTMLDivElement>(null);
 
-    const controlNavbar = useCallback(() => {
-        if (typeof window !== 'undefined') {
-            if (window.scrollY > lastScrollY && window.scrollY > 100) { // if scroll down hide the navbar
-                setShow(false);
-            } else { // if scroll up show the navbar
-                setShow(true);
-            }
-            setLastScrollY(window.scrollY);
-        }
-    }, [lastScrollY]);
-
     useEffect(() => {
+        const controlNavbar = () => {
+            if (typeof window !== 'undefined') {
+                const currentScrollY = window.scrollY;
+                if (currentScrollY > lastScrollY.current && currentScrollY > 100) { // if scroll down hide the navbar
+                    setShow(false);
+                } else { // if scroll up show the navbar
+                    setShow(true);
+                }
+                lastScrollY.current = currentScrollY;
+            }
+        };
+
         if (typeof window !== 'undefined') {
             window.addEventListener('scroll', controlNavbar);
 
@@ -27,7 +28,7 @@ const Navbar = () => {
                 window.removeEventListener('scroll', controlNavbar);
             };
         }
-    }, [controlNavbar]);
+    }, []);
 
     // Close mobile menu when clicking outside
     useEffect(() => {
