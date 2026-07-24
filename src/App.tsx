@@ -1,7 +1,9 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Lenis from 'lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
+import Preloader from './components/Preloader';
 import Hero from './components/Hero';
 import About from './components/About';
 import Experience from './components/Experience';
@@ -9,15 +11,17 @@ import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Navbar from './components/Navbar';
-import Hyperspeed from './components/Hyperspeed';
-import { hyperspeedPresets } from './components/hyperspeedPresets';
 import Footer from './components/Footer';
 import Cursor from './components/Cursor';
 import StoryProgress from './components/StoryProgress';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function App() {
+function MainContent() {
+  const [loading, setLoading] = useState(true);
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
+
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -40,19 +44,19 @@ function App() {
   }, []);
 
   return (
-    <div className="bg-obsidian min-h-screen text-white selection:bg-neon-lime selection:text-obsidian relative overflow-x-hidden font-sans">
+    <div className={`min-h-screen relative overflow-x-hidden font-sans transition-colors duration-500 ${
+      isLight ? 'bg-[#fafafa] text-zinc-900 selection:bg-zinc-900 selection:text-white' : 'bg-black text-white selection:bg-white selection:text-black'
+    }`}>
+      {/* Intro Preloader */}
+      <Preloader onComplete={() => setLoading(false)} />
+
       <Cursor />
       <StoryProgress />
 
-      {/* Global Background */}
-      <div className="fixed inset-0 z-0 pointer-events-none opacity-25">
-        <Hyperspeed effectOptions={hyperspeedPresets.one} />
-      </div>
-
-      <div className="relative z-10">
+      <div className={`relative z-10 transition-opacity duration-700 ${loading ? 'opacity-0 h-screen overflow-hidden' : 'opacity-100'}`}>
         <Navbar />
         <div id="hero"><Hero /></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-32 pb-40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-36 pb-32">
           <div id="about"><About /></div>
           <div id="skills"><Skills /></div>
           <div id="experience"><Experience /></div>
@@ -62,6 +66,14 @@ function App() {
         <Footer />
       </div>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <MainContent />
+    </ThemeProvider>
   );
 }
 

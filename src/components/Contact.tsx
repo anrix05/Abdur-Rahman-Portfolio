@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
+import { Mail, Linkedin, Github, Send, CheckCircle2 } from 'lucide-react';
 
 const CONTACT_EMAIL = 'abdur.rahman@vit.edu.in';
 
@@ -19,7 +19,7 @@ const Contact = () => {
         setErrorMsg(null);
 
         if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
-            setErrorMsg("Please fill in all fields.");
+            setErrorMsg("Please fill in all fields before sending.");
             return;
         }
 
@@ -32,118 +32,169 @@ const Contact = () => {
             if (mailWindow) {
                 setSubmitted(true);
             } else {
-                setErrorMsg("Opening email client was blocked by your browser's popup blocker. Please click the email address link directly.");
+                window.location.href = mailtoLink;
+                setSubmitted(true);
             }
         } catch {
-            setErrorMsg("Failed to open email client. Please click the email address link directly.");
+            setErrorMsg("Could not open email client automatically. Please send directly to abdur.rahman@vit.edu.in");
         }
     };
 
     return (
-        <section className="py-20 flex flex-col items-center">
-            <motion.h2
+        <section className="relative w-full py-12">
+            
+            {/* Header */}
+            <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="text-4xl font-bold mb-16 text-center bg-clip-text text-transparent bg-gradient-to-r from-neon-lime to-emerald"
+                className="mb-14 border-b border-zinc-800 pb-6"
             >
-                Get In Touch
-            </motion.h2>
+                <span className="text-xs font-mono text-zinc-500 tracking-[0.25em] uppercase">05 / CONTACT</span>
+                <h2 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl tracking-[0.1em] uppercase text-white mt-1">
+                    GET IN TOUCH
+                </h2>
+            </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full max-w-5xl px-4">
-
-                {/* Contact Info */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                
+                {/* Left Info Column */}
                 <motion.div
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="space-y-8"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    className="lg:col-span-5 space-y-6"
                 >
-                    <h3 className="text-2xl font-bold text-white">Let's Connect</h3>
-                    <p className="text-gray-400 text-lg leading-relaxed">
-                        I'm currently looking for new opportunities in Frontend Development and React Native. Whether you have a question or just want to say hi, I'll try my best to get back to you!
+                    <p className="text-zinc-400 text-base leading-relaxed font-normal">
+                        I am currently open to full-time roles, internships, and freelance engineering contracts in Frontend and Mobile Development. 
+                        Feel free to send a inquiry message below.
                     </p>
 
-                    <div className="space-y-4">
-                        <a href={`mailto:${CONTACT_EMAIL}`} className="flex items-center gap-4 text-gray-300 hover:text-neon-lime transition-colors p-4 bg-white/5 rounded-xl border border-white/5 hover:border-neon-lime/30">
-                            <FaEnvelope className="text-xl" />
-                            <span>{CONTACT_EMAIL}</span>
+                    <div className="space-y-3 pt-2">
+                        <a 
+                            href={`mailto:${CONTACT_EMAIL}`} 
+                            className="flex items-center gap-4 p-5 bg-zinc-950 border border-zinc-800 rounded-2xl hover:border-zinc-700 transition-colors group"
+                        >
+                            <div className="p-3 rounded-xl bg-zinc-900 border border-zinc-800 text-white group-hover:bg-white group-hover:text-black transition-colors">
+                                <Mail size={18} />
+                            </div>
+                            <div>
+                                <p className="text-xs text-zinc-500 font-mono tracking-widest uppercase">DIRECT EMAIL</p>
+                                <p className="text-sm font-mono font-medium text-white">{CONTACT_EMAIL}</p>
+                            </div>
                         </a>
-                        <a href="https://www.linkedin.com/in/abdur-rahman-vit/" className="flex items-center gap-4 text-gray-300 hover:text-emerald transition-colors p-4 bg-white/5 rounded-xl border border-white/5 hover:border-emerald/30">
-                            <FaLinkedin className="text-xl" />
-                            <span>LinkedIn Profile</span>
+
+                        <a 
+                            href="https://www.linkedin.com/in/abdur-rahman-vit/" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-4 p-5 bg-zinc-950 border border-zinc-800 rounded-2xl hover:border-zinc-700 transition-colors group"
+                        >
+                            <div className="p-3 rounded-xl bg-zinc-900 border border-zinc-800 text-white group-hover:bg-white group-hover:text-black transition-colors">
+                                <Linkedin size={18} />
+                            </div>
+                            <div>
+                                <p className="text-xs text-zinc-500 font-mono tracking-widest uppercase">LINKEDIN</p>
+                                <p className="text-sm font-mono font-medium text-white">abdur-rahman-vit</p>
+                            </div>
                         </a>
-                        <a href="https://github.com/anrix05" className="flex items-center gap-4 text-gray-300 hover:text-white transition-colors p-4 bg-white/5 rounded-xl border border-white/5 hover:border-white/30">
-                            <FaGithub className="text-xl" />
-                            <span>GitHub Profile</span>
+
+                        <a 
+                            href="https://github.com/anrix05" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-4 p-5 bg-zinc-950 border border-zinc-800 rounded-2xl hover:border-zinc-700 transition-colors group"
+                        >
+                            <div className="p-3 rounded-xl bg-zinc-900 border border-zinc-800 text-white group-hover:bg-white group-hover:text-black transition-colors">
+                                <Github size={18} />
+                            </div>
+                            <div>
+                                <p className="text-xs text-zinc-500 font-mono tracking-widest uppercase">GITHUB PROFILE</p>
+                                <p className="text-sm font-mono font-medium text-white">anrix05</p>
+                            </div>
                         </a>
                     </div>
                 </motion.div>
 
-                {/* Contact Form */}
+                {/* Right Form Column */}
                 <motion.div
-                    initial={{ opacity: 0, x: 30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="lg:col-span-7 bg-zinc-950 border border-zinc-800 p-8 sm:p-10 rounded-3xl"
                 >
                     {submitted ? (
-                        <div className="flex flex-col items-center justify-center h-full gap-4 text-center py-12">
-                            <div className="text-5xl">📬</div>
-                            <h4 className="text-xl font-bold text-white">Email Client Opened!</h4>
-                            <p className="text-gray-400">Your email client should have opened with the message pre-filled. If nothing opened, reach me directly at {CONTACT_EMAIL}</p>
+                        <div className="flex flex-col items-center justify-center text-center py-12 space-y-4">
+                            <div className="p-4 rounded-full bg-zinc-900 text-white border border-zinc-800">
+                                <CheckCircle2 size={36} />
+                            </div>
+                            <h3 className="font-display text-2xl font-bold uppercase text-white tracking-wider">MESSAGE DRAFT CREATED</h3>
+                            <p className="text-sm text-zinc-400 max-w-md">
+                                Your email client has been launched with your message pre-filled. If it didn't open, reach me directly at <span className="text-white font-mono">{CONTACT_EMAIL}</span>.
+                            </p>
                             <button
                                 onClick={() => { setSubmitted(false); setForm({ name: '', email: '', message: '' }); }}
-                                className="mt-4 text-neon-lime underline text-sm"
+                                className="mt-2 text-xs font-mono text-zinc-500 hover:text-white underline tracking-widest uppercase"
                             >
-                                Send another message
+                                SEND ANOTHER MESSAGE
                             </button>
                         </div>
                     ) : (
-                        <form className="space-y-6" onSubmit={handleSubmit}>
+                        <form onSubmit={handleSubmit} className="space-y-6">
                             <div>
-                                <label className="block text-sm font-medium text-gray-400 mb-2">Name</label>
+                                <label className="block text-xs font-mono text-zinc-400 mb-2 uppercase tracking-widest">YOUR NAME</label>
                                 <input
                                     type="text"
                                     name="name"
                                     required
                                     value={form.name}
                                     onChange={handleChange}
-                                    className="w-full bg-obsidian border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-lime focus:ring-1 focus:ring-neon-lime transition-all"
-                                    placeholder="Your Name"
+                                    placeholder="JANE DOE"
+                                    className="w-full bg-black border border-zinc-800 rounded-xl px-5 py-3.5 text-sm text-white placeholder:text-zinc-700 focus:outline-none focus:border-white transition-all font-mono"
                                 />
                             </div>
+
                             <div>
-                                <label className="block text-sm font-medium text-gray-400 mb-2">Email</label>
+                                <label className="block text-xs font-mono text-zinc-400 mb-2 uppercase tracking-widest">YOUR EMAIL</label>
                                 <input
                                     type="email"
                                     name="email"
                                     required
                                     value={form.email}
                                     onChange={handleChange}
-                                    className="w-full bg-obsidian border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-lime focus:ring-1 focus:ring-neon-lime transition-all"
-                                    placeholder="your@email.com"
+                                    placeholder="JANE@COMPANY.COM"
+                                    className="w-full bg-black border border-zinc-800 rounded-xl px-5 py-3.5 text-sm text-white placeholder:text-zinc-700 focus:outline-none focus:border-white transition-all font-mono"
                                 />
                             </div>
+
                             <div>
-                                <label className="block text-sm font-medium text-gray-400 mb-2">Message</label>
+                                <label className="block text-xs font-mono text-zinc-400 mb-2 uppercase tracking-widest">MESSAGE</label>
                                 <textarea
                                     rows={4}
                                     name="message"
                                     required
                                     value={form.message}
                                     onChange={handleChange}
-                                    className="w-full bg-obsidian border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-lime focus:ring-1 focus:ring-neon-lime transition-all"
-                                    placeholder="What's on your mind?"
+                                    placeholder="TELL ME ABOUT YOUR PROJECT OR ROLE..."
+                                    className="w-full bg-black border border-zinc-800 rounded-xl px-5 py-3.5 text-sm text-white placeholder:text-zinc-700 focus:outline-none focus:border-white transition-all font-mono"
                                 ></textarea>
                             </div>
-                            <button type="submit" className="w-full bg-gradient-to-r from-neon-lime to-emerald text-obsidian font-bold py-3 rounded-lg hover:opacity-90 transition-opacity shadow-[0_0_20px_rgba(204,255,0,0.2)]">
-                                Send Message
+
+                            <button
+                                type="submit"
+                                className="w-full inline-flex items-center justify-center gap-2 py-4 px-6 rounded-2xl bg-white text-black font-mono font-extrabold text-xs uppercase tracking-widest hover:bg-zinc-200 transition-all shadow-xl"
+                            >
+                                <span>SEND MESSAGE</span>
+                                <Send size={15} />
                             </button>
+
                             {errorMsg && (
-                                <div className="text-center text-sm font-semibold p-3 rounded-lg border bg-rose-500/10 border-rose-500/20 text-rose-500 mt-4">
+                                <p className="text-xs text-rose-400 text-center font-mono pt-2 tracking-wider">
                                     {errorMsg}
-                                </div>
+                                </p>
                             )}
                         </form>
                     )}

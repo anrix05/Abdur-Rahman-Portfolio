@@ -1,128 +1,174 @@
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
 import profilePic from '../assets/profile.png';
-
-const Typewriter = ({ words }: { words: string[] }) => {
-    const [index, setIndex] = useState(0);
-    const [subIndex, setSubIndex] = useState(0);
-    const [reverse, setReverse] = useState(false);
-    const [blink, setBlink] = useState(true);
-
-    // Blinking cursor
-    useEffect(() => {
-        const timeout = setTimeout(() => setBlink(!blink), 500);
-        return () => clearTimeout(timeout);
-    }, [blink]);
-
-    // Typing logic – all state transitions happen inside the setTimeout callback
-    useEffect(() => {
-        const delay = (!reverse && subIndex === words[index].length + 1)
-            ? 500
-            : (reverse && subIndex === 0)
-                ? 300
-                : reverse ? 75 : 150;
-
-        const timeout = setTimeout(() => {
-            if (!reverse && subIndex === words[index].length + 1) {
-                setReverse(true);
-            } else if (reverse && subIndex === 0) {
-                setReverse(false);
-                setIndex((prev) => (prev + 1) % words.length);
-            } else {
-                setSubIndex((prev) => prev + (reverse ? -1 : 1));
-            }
-        }, delay);
-
-        return () => clearTimeout(timeout);
-    }, [subIndex, index, reverse, words]);
-
-    return (
-        <span className="font-mono text-neon-lime">
-            {words[index].substring(0, subIndex)}
-            <span className={`inline-block w-[3px] h-[1em] bg-white ml-1 align-middle ${blink ? 'opacity-100' : 'opacity-0'}`}></span>
-        </span>
-    );
-};
+import { useTheme } from '../context/ThemeContext';
 
 const Hero = () => {
+    const { theme } = useTheme();
+    const isLight = theme === 'light';
+
     return (
-        <div className="relative flex flex-col h-screen w-full items-center justify-center z-20 overflow-hidden pt-20 md:pt-0">
-            {/* Background Glows */}
-            <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-neon-lime/20 rounded-full blur-[120px] mix-blend-screen animate-pulse" />
-            <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-emerald/15 rounded-full blur-[120px] mix-blend-screen animate-pulse delay-1000" />
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-7xl mx-auto px-6 items-center w-full">
-
-                {/* Text Content */}
-                <div className="flex flex-col gap-5 justify-center text-center md:text-left">
-                    <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="flex flex-col gap-2 relative"
-                    >
-                        <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold text-white tracking-tight leading-tight">
-                            I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-lime to-emerald">Abdur Rahman</span>
-                        </h1>
-                        <h2 className="text-lg sm:text-xl md:text-4xl text-gray-300 font-light flex flex-col md:flex-row gap-2 items-center md:items-start justify-center md:justify-start min-h-[1.5em] md:min-h-0">
-                            <span className="font-sans">I am a</span>
-                            <Typewriter words={['Frontend Developer', 'React Native Dev', 'Next.js Dev']} />
-                        </h2>
-                    </motion.div>
-
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.5, duration: 0.8 }}
-                        className="text-base sm:text-lg text-gray-400 max-w-lg mx-auto md:mx-0 leading-relaxed px-4 md:px-0"
-                    >
-                        Crafting high-impact marketplaces and secure digital experiences with a tactical edge. Specialized in <strong>React Native</strong> and <strong>Next.js</strong>. Creator of <strong>ZeroBlur</strong>, <strong>The Graveyard</strong>, and <strong>Love Connect</strong>.
-                    </motion.p>
-
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.8, duration: 0.5 }}
-                        className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mt-4 px-6 md:px-0"
-                    >
-                        <a href="#projects" className="px-8 py-3 rounded-full bg-gradient-to-r from-neon-lime to-emerald text-obsidian font-bold hover:scale-105 transition-all shadow-[0_0_20px_rgba(204,255,0,0.3)] text-center">
-                            View Projects
-                        </a>
-                        <a href="#contact" className="px-8 py-3 rounded-full border border-neon-lime/30 text-neon-lime hover:bg-neon-lime/10 transition-all font-semibold backdrop-blur-sm text-center">
-                            Contact Me
-                        </a>
-                    </motion.div>
-                </div>
-
-                {/* Profile Image / Graphic */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
+        <section className={`relative min-h-[90vh] lg:min-h-screen pt-20 sm:pt-24 pb-8 sm:pb-12 flex flex-col justify-between px-3 sm:px-6 lg:px-8 transition-colors duration-500 ${
+            isLight ? 'bg-[#fafafa]' : 'bg-black'
+        }`}>
+            
+            {/* Inner Framed Container */}
+            <div className={`w-full max-w-7xl mx-auto rounded-2xl sm:rounded-3xl p-4 sm:p-8 lg:p-14 relative overflow-hidden shadow-2xl min-h-[80vh] flex flex-col justify-between transition-colors duration-500 ${
+                isLight 
+                    ? 'bg-black text-white border border-zinc-800' 
+                    : 'bg-white text-black'
+            }`}>
+                
+                {/* Top Giant Expanded Headline (JUUN.J Style) */}
+                <motion.div 
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="flex justify-center items-center relative"
+                    className={`w-full text-center border-b pb-4 sm:pb-8 z-20 ${
+                        isLight ? 'border-zinc-800' : 'border-black/10'
+                    }`}
                 >
-                    {/* Rotating Rings */}
-                    <div className="absolute w-[350px] h-[350px] border border-neon-lime/20 rounded-full animate-[spin_10s_linear_infinite]" />
-                    <div className="absolute w-[380px] h-[380px] border border-emerald/10 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
-
-                    {/* Image Container with Glow */}
-                    <div className="w-[300px] h-[300px] rounded-full overflow-hidden border-4 border-neon-lime/30 shadow-[0_0_50px_rgba(204,255,0,0.15)] bg-obsidian/50 relative z-10">
-                        {/* Placeholder until user uploads image */}
-                        <div className="w-full h-full bg-gradient-to-br from-gray-900 to-obsidian flex items-center justify-center text-gray-500 italic">
-                            Profile Photo
-                        </div>
-                        {/* Try to load real image if available */}
-                        <img
-                            src={profilePic}
-                            alt="Abdur Rahman"
-                            className="w-full h-full object-cover absolute inset-0 opacity-100"
-                            onError={(e) => { e.currentTarget.style.opacity = '0'; }}
-                        />
-                    </div>
+                    <h1 className={`font-display font-extrabold text-2xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl tracking-[0.06em] sm:tracking-[0.12em] md:tracking-[0.18em] uppercase leading-tight break-words ${
+                        isLight ? 'text-white' : 'text-black'
+                    }`}>
+                        KNOW ABDUR.R
+                    </h1>
                 </motion.div>
 
+                {/* Middle Content Section */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center my-auto py-6 sm:py-8 z-20">
+                    
+                    {/* Left Column Text / Quote */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="lg:col-span-4 flex flex-col justify-center space-y-4 sm:space-y-6 text-left"
+                    >
+                        <div className={`inline-flex items-center gap-2 px-3 py-1 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest rounded-full w-fit ${
+                            isLight ? 'bg-white text-black' : 'bg-black text-white'
+                        }`}>
+                            <span>FRONTEND & MOBILE DEV</span>
+                        </div>
+
+                        <h2 className={`font-display font-bold text-xl sm:text-2xl lg:text-3xl tracking-tight uppercase leading-tight ${
+                            isLight ? 'text-white' : 'text-black'
+                        }`}>
+                            CRAFT BEYOND BORDERS
+                        </h2>
+
+                        <p className={`text-xs sm:text-sm lg:text-base leading-relaxed font-normal ${
+                            isLight ? 'text-zinc-300' : 'text-zinc-600'
+                        }`}>
+                            Fueled by deep-rooted passion, Abdur Rahman's journey from Mumbai to global tech reflects his ambition to engineer seamless digital products. Specialized in <strong className={isLight ? 'text-white font-semibold' : 'text-black font-semibold'}>React Native</strong> and <strong className={isLight ? 'text-white font-semibold' : 'text-black font-semibold'}>Next.js</strong>.
+                        </p>
+
+                        <div className="pt-2 flex flex-wrap items-center gap-3 sm:gap-4">
+                            <a 
+                                href="#projects" 
+                                className={`inline-flex items-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 font-semibold text-[11px] sm:text-xs font-mono uppercase tracking-wider rounded-full transition-all shadow-md group ${
+                                    isLight 
+                                        ? 'bg-white text-black hover:bg-zinc-200' 
+                                        : 'bg-black text-white hover:bg-zinc-800'
+                                }`}
+                            >
+                                <span>VIEW WORKS</span>
+                                <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                            </a>
+
+                            <a 
+                                href="#contact" 
+                                className={`inline-flex items-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 border font-semibold text-[11px] sm:text-xs font-mono uppercase tracking-wider rounded-full transition-all ${
+                                    isLight 
+                                        ? 'border-white text-white hover:bg-white hover:text-black' 
+                                        : 'border-black text-black hover:bg-black hover:text-white'
+                                }`}
+                            >
+                                <span>CONTACT</span>
+                            </a>
+                        </div>
+                    </motion.div>
+
+                    {/* Center Column: High Contrast Editorial Portrait */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.9, delay: 0.3 }}
+                        className="lg:col-span-5 flex justify-center items-center relative py-4 lg:py-0"
+                    >
+                        <div className={`relative w-56 sm:w-72 lg:w-80 xl:w-96 aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl border group ${
+                            isLight ? 'bg-zinc-900 border-zinc-800' : 'bg-zinc-100 border-black/10'
+                        }`}>
+                            <img
+                                src={profilePic}
+                                alt="Abdur Rahman"
+                                className="w-full h-full object-cover bw-image group-hover:scale-105 transition-transform duration-700"
+                                onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                            />
+                            
+                            {/* Inner Watermark Tag */}
+                            <div className={`absolute bottom-3 left-3 right-3 p-2.5 sm:p-3 backdrop-blur-md rounded-xl flex items-center justify-between text-[11px] sm:text-xs font-mono ${
+                                isLight ? 'bg-white/90 text-black' : 'bg-black/80 text-white'
+                            }`}>
+                                <span className="font-bold">ABDUR RAHMAN</span>
+                                <span className={isLight ? 'text-zinc-600' : 'text-zinc-400'}>VIT '28</span>
+                            </div>
+                        </div>
+                    </motion.div>
+
+                    {/* Right Column: Key Metrics & Stats */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, delay: 0.4 }}
+                        className={`lg:col-span-3 flex flex-col justify-center space-y-4 sm:space-y-6 border-t lg:border-t-0 lg:border-l pt-4 sm:pt-6 lg:pt-0 lg:pl-8 ${
+                            isLight ? 'border-zinc-800' : 'border-black/10'
+                        }`}
+                    >
+                        <div>
+                            <span className={`font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight ${
+                                isLight ? 'text-white' : 'text-black'
+                            }`}>07+</span>
+                            <p className={`text-[10px] sm:text-xs font-mono uppercase tracking-widest mt-1 ${
+                                isLight ? 'text-zinc-400' : 'text-zinc-500'
+                            }`}>Years Content & Editing</p>
+                        </div>
+
+                        <div>
+                            <span className={`font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight ${
+                                isLight ? 'text-white' : 'text-black'
+                            }`}>03</span>
+                            <p className={`text-[10px] sm:text-xs font-mono uppercase tracking-widest mt-1 ${
+                                isLight ? 'text-zinc-400' : 'text-zinc-500'
+                            }`}>Flagship Apps (ZeroBlur, Love Connect, Graveyard)</p>
+                        </div>
+
+                        <div>
+                            <span className={`font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight ${
+                                isLight ? 'text-white' : 'text-black'
+                            }`}>100%</span>
+                            <p className={`text-[10px] sm:text-xs font-mono uppercase tracking-widest mt-1 ${
+                                isLight ? 'text-zinc-400' : 'text-zinc-500'
+                            }`}>Data Security & Reliability</p>
+                        </div>
+                    </motion.div>
+
+                </div>
+
+                {/* Bottom Ticker / Descriptor */}
+                <div className={`border-t pt-3 sm:pt-4 flex flex-wrap items-center justify-between text-[10px] sm:text-xs font-mono uppercase tracking-widest z-20 gap-2 ${
+                    isLight ? 'border-zinc-800 text-zinc-400' : 'border-black/10 text-zinc-500'
+                }`}>
+                    <span>BASED IN MUMBAI, INDIA</span>
+                    <span className="hidden md:inline">•</span>
+                    <span>REACT NATIVE • NEXT.JS • TYPESCRIPT</span>
+                    <span className="hidden md:inline">•</span>
+                    <span>AVAILABLE FOR ROLES</span>
+                </div>
+
             </div>
-        </div>
+
+        </section>
     );
 };
 

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 
 const chapters = [
-    { id: 'hero', label: 'Start' },
-    { id: 'about', label: 'The Story' },
-    { id: 'skills', label: 'The Arsenal' },
-    { id: 'experience', label: 'The Journey' },
-    { id: 'projects', label: 'The Works' },
-    { id: 'contact', label: 'The Future' },
+    { id: 'hero', label: 'OVERVIEW' },
+    { id: 'about', label: 'ABOUT' },
+    { id: 'skills', label: 'SKILLS' },
+    { id: 'experience', label: 'EXPERIENCE' },
+    { id: 'projects', label: 'PROJECTS' },
+    { id: 'contact', label: 'CONTACT' },
 ];
 
 const StoryProgress = () => {
@@ -15,7 +15,7 @@ const StoryProgress = () => {
     useEffect(() => {
         const observerOptions = {
             root: null,
-            rootMargin: '-45% 0px -45% 0px', // detects when section is in the middle 10% of the viewport
+            rootMargin: '-45% 0px -45% 0px',
             threshold: 0
         };
 
@@ -42,41 +42,33 @@ const StoryProgress = () => {
     }, []);
 
     return (
-        <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col gap-6">
+        <div className="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col gap-5">
             {chapters.map((chapter) => (
                 <a
                     key={chapter.id}
                     href={`#${chapter.id}`}
-                    className="group flex items-center gap-4 flex-row-reverse"
+                    className="group flex items-center gap-3 flex-row-reverse"
                     onClick={(e) => {
                         e.preventDefault();
                         document.getElementById(chapter.id)?.scrollIntoView({ behavior: 'smooth' });
                     }}
                 >
                     <div
-                        className={`w-2 h-2 rounded-full transition-all duration-300 ${activeChapter === chapter.id
-                            ? 'bg-white scale-125'
-                            : 'bg-neutral-800 group-hover:bg-neutral-600'
-                            }`}
+                        className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                            activeChapter === chapter.id
+                                ? 'bg-white scale-150 ring-4 ring-white/20'
+                                : 'bg-zinc-800 group-hover:bg-zinc-500'
+                        }`}
                     />
                     <span
-                        className={`text-xs uppercase tracking-widest font-medium transition-all duration-300 opacity-0 group-hover:opacity-100 -mr-2 group-hover:mr-0 ${activeChapter === chapter.id ? 'text-white opacity-100 mr-0' : 'text-neutral-500'
-                            }`}
+                        className={`text-[10px] font-mono uppercase tracking-widest transition-all duration-300 opacity-0 group-hover:opacity-100 ${
+                            activeChapter === chapter.id ? 'text-white opacity-100 font-bold' : 'text-zinc-500'
+                        }`}
                     >
                         {chapter.label}
                     </span>
                 </a>
             ))}
-
-            {/* Connecting Line */}
-            <div className="absolute right-[5px] top-0 bottom-0 w-[2px] bg-neutral-900 -z-10 rounded-full">
-                <div
-                    className="w-full bg-white transition-all duration-300"
-                    style={{
-                        height: `${(chapters.findIndex(c => c.id === activeChapter) / (chapters.length - 1)) * 100}%`
-                    }}
-                ></div>
-            </div>
         </div>
     );
 };
