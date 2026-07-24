@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTheme } from '../context/ThemeContext';
 
 const chapters = [
     { id: 'hero', label: 'OVERVIEW' },
@@ -10,6 +11,8 @@ const chapters = [
 ];
 
 const StoryProgress = () => {
+    const { theme } = useTheme();
+    const isLight = theme === 'light';
     const [activeChapter, setActiveChapter] = useState('hero');
 
     useEffect(() => {
@@ -56,13 +59,15 @@ const StoryProgress = () => {
                     <div
                         className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
                             activeChapter === chapter.id
-                                ? 'bg-white scale-150 ring-4 ring-white/20'
-                                : 'bg-zinc-800 group-hover:bg-zinc-500'
+                                ? isLight ? 'bg-zinc-950 scale-150 ring-4 ring-zinc-950/10' : 'bg-white scale-150 ring-4 ring-white/20'
+                                : isLight ? 'bg-zinc-300 group-hover:bg-zinc-500' : 'bg-zinc-800 group-hover:bg-zinc-500'
                         }`}
                     />
                     <span
                         className={`text-[10px] font-mono uppercase tracking-widest transition-all duration-300 opacity-0 group-hover:opacity-100 ${
-                            activeChapter === chapter.id ? 'text-white opacity-100 font-bold' : 'text-zinc-500'
+                            activeChapter === chapter.id 
+                                ? isLight ? 'text-zinc-950 opacity-100 font-bold' : 'text-white opacity-100 font-bold' 
+                                : isLight ? 'text-zinc-500' : 'text-zinc-500'
                         }`}
                     >
                         {chapter.label}

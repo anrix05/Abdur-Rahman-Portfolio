@@ -1,7 +1,11 @@
 import { motion } from 'framer-motion';
 import { Briefcase, GraduationCap } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 const Experience = () => {
+    const { theme } = useTheme();
+    const isLight = theme === 'light';
+
     const experiences = [
         {
             role: 'Backend & Mobile Engineer',
@@ -46,18 +50,22 @@ const Experience = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="mb-14 border-b border-zinc-800 pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4"
+                className={`mb-12 border-b pb-6 w-full ${
+                    isLight ? 'border-zinc-200' : 'border-zinc-800'
+                }`}
             >
-                <div>
-                    <span className="text-xs font-mono text-zinc-500 tracking-[0.25em] uppercase">03 / BACKGROUND</span>
-                    <h2 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl tracking-[0.1em] uppercase text-white mt-1">
-                        EXPERIENCE
-                    </h2>
-                </div>
+                <span className="text-xs font-mono text-zinc-500 tracking-[0.2em] uppercase">03 / BACKGROUND</span>
+                <h2 className={`font-display font-extrabold text-2xl sm:text-4xl lg:text-5xl tracking-[0.05em] uppercase mt-1 leading-tight break-words ${
+                    isLight ? 'text-zinc-950' : 'text-white'
+                }`}>
+                    EXPERIENCE
+                </h2>
             </motion.div>
 
             {/* Timeline */}
-            <div className="relative border-l border-zinc-800 ml-4 md:ml-6 pl-6 md:pl-10 space-y-10">
+            <div className={`relative border-l ml-4 md:ml-6 pl-6 md:pl-10 space-y-10 w-full ${
+                isLight ? 'border-zinc-300' : 'border-zinc-800'
+            }`}>
                 {experiences.map((exp, index) => (
                     <motion.div
                         key={index}
@@ -65,38 +73,58 @@ const Experience = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: index * 0.15, duration: 0.5 }}
-                        className="relative group"
+                        className="relative group w-full"
                     >
                         {/* Timeline Node */}
-                        <div className="absolute -left-[31px] md:-left-[47px] top-1.5 w-3.5 h-3.5 rounded-full bg-black border-2 border-zinc-500 group-hover:border-white group-hover:scale-125 transition-all duration-300 flex items-center justify-center">
-                            <div className="w-1 h-1 rounded-full bg-zinc-400 group-hover:bg-white" />
+                        <div className={`absolute -left-[31px] md:-left-[47px] top-1.5 w-3.5 h-3.5 rounded-full border-2 transition-all duration-300 flex items-center justify-center ${
+                            isLight 
+                                ? 'bg-white border-zinc-400 group-hover:border-zinc-950 group-hover:scale-125' 
+                                : 'bg-black border-zinc-500 group-hover:border-white group-hover:scale-125'
+                        }`}>
+                            <div className={`w-1 h-1 rounded-full ${
+                                isLight ? 'bg-zinc-600 group-hover:bg-zinc-950' : 'bg-zinc-400 group-hover:bg-white'
+                            }`} />
                         </div>
 
                         {/* Content Card */}
-                        <div className="bg-zinc-950 border border-zinc-800 p-7 md:p-8 rounded-3xl hover:border-zinc-700 transition-all duration-300 shadow-xl">
+                        <div className={`border p-6 sm:p-7 md:p-8 rounded-3xl transition-all duration-300 shadow-xl w-full ${
+                            isLight 
+                                ? 'bg-white border-zinc-200 hover:border-zinc-400 shadow-zinc-200/50 text-zinc-900' 
+                                : 'bg-zinc-950 border-zinc-800 hover:border-zinc-700 text-white'
+                        }`}>
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                                 <div>
-                                    <div className="flex items-center gap-2">
+                                    <div className="flex items-center gap-2 flex-wrap">
                                         {exp.type === 'work' ? (
-                                            <Briefcase size={16} className="text-zinc-400" />
+                                            <Briefcase size={16} className={isLight ? 'text-zinc-700' : 'text-zinc-400'} />
                                         ) : (
-                                            <GraduationCap size={16} className="text-zinc-400" />
+                                            <GraduationCap size={16} className={isLight ? 'text-zinc-700' : 'text-zinc-400'} />
                                         )}
-                                        <h3 className="font-display font-bold text-xl text-white tracking-wider uppercase">
+                                        <h3 className={`font-display font-bold text-lg sm:text-xl tracking-wider uppercase ${
+                                            isLight ? 'text-zinc-950' : 'text-white'
+                                        }`}>
                                             {exp.role}
                                         </h3>
                                     </div>
-                                    <p className="text-sm font-mono text-zinc-400 mt-1">
+                                    <p className={`text-xs sm:text-sm font-mono mt-1 ${
+                                        isLight ? 'text-zinc-600 font-medium' : 'text-zinc-400'
+                                    }`}>
                                         {exp.company}
                                     </p>
                                 </div>
                                 
-                                <span className="inline-flex font-mono text-xs font-semibold text-zinc-300 bg-zinc-900 border border-zinc-800 px-3 py-1 rounded-full w-fit tracking-wider">
+                                <span className={`inline-flex font-mono text-[11px] sm:text-xs font-semibold px-3 py-1 rounded-full w-fit tracking-wider border shrink-0 ${
+                                    isLight 
+                                        ? 'bg-zinc-100 border-zinc-200 text-zinc-800' 
+                                        : 'bg-zinc-900 border-zinc-800 text-zinc-300'
+                                }`}>
                                     {exp.period}
                                 </span>
                             </div>
 
-                            <p className="text-sm text-zinc-400 leading-relaxed mb-6">
+                            <p className={`text-xs sm:text-sm leading-relaxed mb-6 ${
+                                isLight ? 'text-zinc-600 font-normal' : 'text-zinc-400'
+                            }`}>
                                 {exp.description}
                             </p>
 
@@ -104,7 +132,11 @@ const Experience = () => {
                                 {exp.tech.map((t, i) => (
                                     <span 
                                         key={i} 
-                                        className="text-[11px] font-mono text-zinc-400 bg-black border border-zinc-800 px-3 py-1 rounded-lg tracking-wider uppercase"
+                                        className={`text-[10px] sm:text-[11px] font-mono border px-2.5 sm:px-3 py-1 rounded-lg tracking-wider uppercase ${
+                                            isLight 
+                                                ? 'bg-zinc-100/90 border-zinc-200 text-zinc-800 font-medium' 
+                                                : 'bg-black border-zinc-800 text-zinc-400'
+                                        }`}
                                     >
                                         {t}
                                     </span>
