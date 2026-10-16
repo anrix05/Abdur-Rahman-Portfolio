@@ -21,6 +21,32 @@ const Projects = () => {
 
     const projects: Project[] = [
         {
+            title: 'NexaLink',
+            description: 'Centralized alumni data management and engagement platform built for Vidyalankar Institute of Technology (VIT) for SIH. Features role-governed mentorship matching, job boards, event ticketing, and real-time messaging.',
+            tags: ['React 19', 'TypeScript', 'Tailwind CSS', 'Supabase'],
+            type: 'software',
+            categoryLabel: 'ALUMNI PLATFORM • WEB',
+            demo: 'https://nexalink.anrix.me',
+            github: 'https://github.com/anrix05/NexaLink',
+        },
+        {
+            title: 'V Notice',
+            description: 'Offline-first smart digital notice board replacing paper bulletin boards across college departments with synchronized kiosk displays. Features rapid mobile publishing, urgent takeover mode, and resilient browser caching.',
+            tags: ['Python', 'Flask', 'Service Workers', 'Raspberry Pi'],
+            type: 'software',
+            categoryLabel: 'DIGITAL SIGNAGE • WEB',
+            demo: 'https://v-notice.onrender.com/display',
+            github: 'https://github.com/anrix05/V-Notice',
+        },
+        {
+            title: 'AttendAI',
+            description: 'AI-powered digitization system that converts photos of handwritten attendance sheets into cumulative digital registers. Uses Gemini Flash vision to detect signatures and absence marks with automated Excel recalculation.',
+            tags: ['Python', 'FastAPI', 'Gemini Flash', 'Streamlit'],
+            type: 'software',
+            categoryLabel: 'COMPUTER VISION • AI',
+            github: 'https://github.com/anrix05/AttendaAi',
+        },
+        {
             title: 'ZeroBlur',
             description: 'A premium digital assets marketplace built for UI Kits, Code Snippets, and design templates with high contrast interactions and tactical asset previews.',
             tags: ['React 18', 'Framer Motion', 'Lucide React', 'Vanilla CSS'],
@@ -122,7 +148,7 @@ const Projects = () => {
                         x: {
                             repeat: Infinity,
                             repeatType: 'loop',
-                            duration: 35,
+                            duration: 45,
                             ease: 'linear',
                         },
                     }}
@@ -199,11 +225,13 @@ const Projects = () => {
                                                     target="_blank" 
                                                     rel="noopener noreferrer"
                                                     className={`inline-flex items-center gap-1.5 transition-colors z-10 ${
-                                                        isLight ? 'text-zinc-600 hover:text-zinc-950 font-semibold' : 'text-zinc-400 hover:text-white'
+                                                        !project.demo
+                                                            ? (isLight ? 'text-zinc-950 hover:underline font-bold ml-auto' : 'text-white hover:underline font-bold ml-auto')
+                                                            : (isLight ? 'text-zinc-600 hover:text-zinc-950 font-semibold' : 'text-zinc-400 hover:text-white')
                                                     }`}
                                                     onClick={(e) => e.stopPropagation()}
                                                 >
-                                                    <Github size={14} /> CODE
+                                                    <Github size={14} /> {project.demo ? 'CODE' : 'GITHUB'} {!project.demo && <ArrowUpRight size={14} />}
                                                 </a>
                                             )}
                                             {project.demo && (
@@ -347,12 +375,14 @@ const Projects = () => {
                                                             href={project.github} 
                                                             target="_blank" 
                                                             rel="noopener noreferrer"
-                                                            className={`inline-flex items-center gap-1.5 transition-colors ${
-                                                                isLight ? 'text-zinc-600 hover:text-zinc-950 font-semibold' : 'text-zinc-400 hover:text-white'
+                                                            className={`inline-flex items-center gap-1.5 transition-colors z-10 ${
+                                                                !project.demo
+                                                                    ? (isLight ? 'text-zinc-950 hover:underline font-bold ml-auto' : 'text-white hover:underline font-bold ml-auto')
+                                                                    : (isLight ? 'text-zinc-600 hover:text-zinc-950 font-semibold' : 'text-zinc-400 hover:text-white')
                                                             }`}
                                                             onClick={(e) => e.stopPropagation()}
                                                         >
-                                                            <Github size={14} /> CODE
+                                                            <Github size={14} /> {project.demo ? 'CODE' : 'GITHUB'} {!project.demo && <ArrowUpRight size={14} />}
                                                         </a>
                                                     )}
                                                     {project.demo && (
@@ -360,7 +390,7 @@ const Projects = () => {
                                                             href={project.demo} 
                                                             target="_blank" 
                                                             rel="noopener noreferrer"
-                                                            className={`inline-flex items-center gap-1.5 font-bold hover:underline transition-all ml-auto ${
+                                                            className={`inline-flex items-center gap-1.5 font-bold hover:underline transition-all ml-auto z-10 ${
                                                                 isLight ? 'text-zinc-950' : 'text-white'
                                                             }`}
                                                             onClick={(e) => e.stopPropagation()}
