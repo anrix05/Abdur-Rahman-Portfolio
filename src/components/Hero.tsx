@@ -1,72 +1,105 @@
+import { lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
-import profilePic from '../assets/profile.png';
+import { ArrowUpRight, Download } from 'lucide-react';
+import profileWebp from '../assets/profile.webp';
+import profileSmWebp from '../assets/profile-sm.webp';
 import { useTheme } from '../context/ThemeContext';
+import { FEATURED_PROJECTS_COUNT, LIVE_DEPLOYMENTS_COUNT } from '../data/projects';
+import { SITE_CONFIG } from '../config/site';
+import { scrollToSection } from '../utils/scroll';
+
+// Lazy-load Three.js Hyperspeed background to split heavy 3D vendor bundle
+const Hyperspeed = lazy(() => import('./Hyperspeed'));
 
 const Hero = () => {
     const { theme } = useTheme();
     const isLight = theme === 'light';
 
+    // Format metrics derived directly from project data
+    const featuredFormatted = String(FEATURED_PROJECTS_COUNT).padStart(2, '0');
+    const deploymentsFormatted = String(LIVE_DEPLOYMENTS_COUNT).padStart(2, '0');
+
     return (
-        <section className={`relative min-h-[90vh] lg:min-h-screen pt-20 sm:pt-24 pb-8 sm:pb-12 flex flex-col justify-between px-3 sm:px-6 lg:px-8 transition-colors duration-500 ${
+        <section className={`relative pt-18 sm:pt-24 pb-8 sm:pb-12 px-3 sm:px-6 lg:px-8 transition-colors duration-500 ${
             isLight ? 'bg-[#fafafa]' : 'bg-black'
         }`}>
-            
             {/* Inner Framed Container */}
-            <div className={`w-full max-w-7xl mx-auto rounded-2xl sm:rounded-3xl p-4 sm:p-8 lg:p-14 relative overflow-hidden shadow-2xl min-h-[80vh] flex flex-col justify-between transition-colors duration-500 ${
+            <div className={`w-full max-w-7xl mx-auto rounded-2xl sm:rounded-3xl p-4 sm:p-7 lg:p-12 relative overflow-hidden shadow-2xl transition-colors duration-500 flex flex-col justify-between ${
                 isLight 
                     ? 'bg-black text-white border border-zinc-800' 
                     : 'bg-white text-black'
             }`}>
                 
-                {/* Top Giant Expanded Headline (JUUN.J Style) */}
-                <motion.div 
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className={`w-full text-center border-b pb-4 sm:pb-8 z-20 ${
-                        isLight ? 'border-zinc-800' : 'border-black/10'
-                    }`}
-                >
-                    <h1 className={`font-display font-extrabold text-2xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl tracking-[0.06em] sm:tracking-[0.12em] md:tracking-[0.18em] uppercase leading-tight break-words ${
-                        isLight ? 'text-white' : 'text-black'
-                    }`}>
-                        KNOW ABDUR.R
-                    </h1>
-                </motion.div>
+                {/* Ambient Hyperspeed Warp Background */}
+                <div className="absolute inset-0 pointer-events-none opacity-15 dark:opacity-20 z-0 overflow-hidden" aria-hidden="true">
+                    <Suspense fallback={null}>
+                        <Hyperspeed />
+                    </Suspense>
+                </div>
 
-                {/* Middle Content Section */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center my-auto py-6 sm:py-8 z-20">
+                {/* ========================================================
+                    1. FIRST VIEWPORT FOLD
+                    Fits headline, role, value prop, intro, & 3 CTAs above fold
+                   ======================================================== */}
+                <div className="flex flex-col justify-center min-h-[min(calc(100svh-5.5rem),800px)] py-3 sm:py-6 lg:py-8 z-10">
                     
-                    {/* Left Column Text / Quote */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="lg:col-span-4 flex flex-col justify-center space-y-4 sm:space-y-6 text-left"
+                    {/* Top Giant Expanded Headline with Fluid clamp() fitting on 320px */}
+                    <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.4 }}
+                        className={`w-full text-center border-b pb-3 sm:pb-5 z-20 ${
+                            isLight ? 'border-zinc-800' : 'border-black/10'
+                        }`}
                     >
-                        <div className={`inline-flex items-center gap-2 px-3 py-1 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest rounded-full w-fit ${
-                            isLight ? 'bg-white text-black' : 'bg-black text-white'
-                        }`}>
-                            <span>FRONTEND & MOBILE DEV</span>
-                        </div>
-
-                        <h2 className={`font-display font-bold text-xl sm:text-2xl lg:text-3xl tracking-tight uppercase leading-tight ${
+                        <h1 className={`font-display font-extrabold text-[clamp(1.85rem,min(6.2vw,7.5vh),6.5rem)] tracking-[0.03em] xs:tracking-[0.06em] sm:tracking-[0.14em] uppercase leading-[1.05] break-normal ${
                             isLight ? 'text-white' : 'text-black'
                         }`}>
-                            CRAFT BEYOND BORDERS
+                            KNOW ABDUR.R
+                        </h1>
+                    </motion.div>
+
+                    {/* First-Fold Core Pitch & Actions */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.4, delay: 0.05 }}
+                        className="flex flex-col items-center text-center max-w-3xl mx-auto my-auto py-3 sm:py-5 space-y-3 sm:space-y-4 lg:space-y-5 z-20 w-full"
+                    >
+                        {/* Role Pill */}
+                        <div className={`inline-flex items-center gap-2 px-3 py-1 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest rounded-full font-bold ${
+                            isLight ? 'bg-white text-black' : 'bg-black text-white'
+                        }`}>
+                            <span>{SITE_CONFIG.role}</span>
+                        </div>
+
+                        {/* One-Line Value Proposition */}
+                        <h2 className={`font-display font-extrabold text-lg sm:text-2xl md:text-3xl tracking-tight uppercase leading-tight flex flex-col md:flex-row items-center justify-center gap-1.5 md:gap-3.5 ${
+                            isLight ? 'text-white' : 'text-black'
+                        }`}>
+                            <span>CRAFT BEYOND BORDERS</span>
+                            <span 
+                                aria-hidden="true" 
+                                className={`hidden md:inline-block w-1.5 h-1.5 rounded-full ${
+                                    isLight ? 'bg-white' : 'bg-black'
+                                }`} 
+                            />
+                            <span>REACT NATIVE & NEXT.JS</span>
                         </h2>
 
-                        <p className={`text-xs sm:text-sm lg:text-base leading-relaxed font-normal ${
-                            isLight ? 'text-zinc-300' : 'text-zinc-600'
+                        {/* Concrete First-Person Intro Paragraph */}
+                        <p className={`text-xs sm:text-sm md:text-base leading-relaxed font-normal max-w-2xl ${
+                            isLight ? 'text-zinc-300' : 'text-zinc-700'
                         }`}>
-                            Fueled by deep-rooted passion, Abdur Rahman's journey from Mumbai to global tech reflects his ambition to engineer seamless digital products. Specialized in <strong className={isLight ? 'text-white font-semibold' : 'text-black font-semibold'}>React Native</strong> and <strong className={isLight ? 'text-white font-semibold' : 'text-black font-semibold'}>Next.js</strong>.
+                            I'm Abdur Rahman, a developer from Mumbai building mobile apps and full-stack web products. Recently I shipped <strong>NexaLink</strong> (an alumni platform for VIT, built for the Smart India Hackathon), <strong>The Graveyard</strong> (a marketplace for abandoned side projects), <strong>V Notice</strong> (digital notice boards for campus departments), and <strong>AttendAI</strong> (handwritten attendance sheets to Excel using vision AI).
                         </p>
 
-                        <div className="pt-2 flex flex-wrap items-center gap-3 sm:gap-4">
+                        {/* Primary CTAs: View Works, Resume, Contact */}
+                        <div className="pt-1 sm:pt-2 grid grid-cols-1 sm:flex sm:flex-wrap items-center justify-center gap-2.5 sm:gap-4 w-full sm:w-auto">
                             <a 
                                 href="#projects" 
-                                className={`inline-flex items-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 font-semibold text-[11px] sm:text-xs font-mono uppercase tracking-wider rounded-full transition-all shadow-md group ${
+                                onClick={(e) => { e.preventDefault(); scrollToSection('projects'); }}
+                                className={`inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 min-h-[48px] font-bold text-xs font-mono uppercase tracking-wider rounded-full transition-all shadow-md group cursor-pointer w-full sm:w-auto ${
                                     isLight 
                                         ? 'bg-white text-black hover:bg-zinc-200' 
                                         : 'bg-black text-white hover:bg-zinc-800'
@@ -77,8 +110,26 @@ const Hero = () => {
                             </a>
 
                             <a 
+                                href={SITE_CONFIG.resumeUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                download="Abdur_Rahman_Resume.pdf"
+                                className={`inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3.5 min-h-[48px] border font-bold text-xs font-mono uppercase tracking-wider rounded-full transition-all w-full sm:w-auto ${
+                                    isLight 
+                                        ? 'border-zinc-700 text-white hover:bg-zinc-900' 
+                                        : 'border-zinc-400 text-black hover:bg-zinc-100'
+                                }`}
+                                aria-label="Download Resume (PDF)"
+                                title="Download Resume"
+                            >
+                                <Download size={13} />
+                                <span>RESUME</span>
+                            </a>
+
+                            <a 
                                 href="#contact" 
-                                className={`inline-flex items-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 border font-semibold text-[11px] sm:text-xs font-mono uppercase tracking-wider rounded-full transition-all ${
+                                onClick={(e) => { e.preventDefault(); scrollToSection('contact'); }}
+                                className={`inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3.5 min-h-[48px] border font-bold text-xs font-mono uppercase tracking-wider rounded-full transition-all cursor-pointer w-full sm:w-auto ${
                                     isLight 
                                         ? 'border-white text-white hover:bg-white hover:text-black' 
                                         : 'border-black text-black hover:bg-black hover:text-white'
@@ -89,81 +140,104 @@ const Hero = () => {
                         </div>
                     </motion.div>
 
-                    {/* Center Column: High Contrast Editorial Portrait */}
+                </div>
+
+                {/* ========================================================
+                    2. LOWER HERO BLOCK: Portrait & Derived Metrics
+                    Single column on mobile, two columns from md: up
+                   ======================================================== */}
+                <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-0 items-center pt-8 sm:pt-12 border-t z-20 w-full ${
+                    isLight ? 'border-zinc-800' : 'border-black/10'
+                }`}>
+                    
+                    {/* Left Column: High Contrast Editorial Portrait */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.9, delay: 0.3 }}
-                        className="lg:col-span-5 flex justify-center items-center relative py-4 lg:py-0"
+                        initial={{ opacity: 0, y: 25 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        className="w-full flex justify-center md:justify-start md:pr-8 lg:pr-12"
                     >
-                        <div className={`relative w-56 sm:w-72 lg:w-80 xl:w-96 aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl border group ${
+                        <div className={`relative w-full max-w-[280px] sm:max-w-[320px] lg:max-w-sm aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl border group ${
                             isLight ? 'bg-zinc-900 border-zinc-800' : 'bg-zinc-100 border-black/10'
                         }`}>
-                            <img
-                                src={profilePic}
-                                alt="Abdur Rahman"
-                                className="w-full h-full object-cover bw-image group-hover:scale-105 transition-transform duration-700"
-                                onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                            />
+                            <picture className="w-full h-full block">
+                                <source
+                                    type="image/webp"
+                                    srcSet={`${profileSmWebp} 384w, ${profileWebp} 768w`}
+                                    sizes="(max-width: 640px) 280px, 384px"
+                                />
+                                <img
+                                    src={profileWebp}
+                                    alt="Abdur Rahman - Full-Stack & Mobile Developer"
+                                    width={384}
+                                    height={512}
+                                    loading="lazy"
+                                    decoding="async"
+                                    className="w-full h-full object-cover bw-image group-hover:scale-105 transition-transform duration-700"
+                                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                                />
+                            </picture>
                             
                             {/* Inner Watermark Tag */}
                             <div className={`absolute bottom-3 left-3 right-3 p-2.5 sm:p-3 backdrop-blur-md rounded-xl flex items-center justify-between text-[11px] sm:text-xs font-mono ${
                                 isLight ? 'bg-white/90 text-black' : 'bg-black/80 text-white'
                             }`}>
-                                <span className="font-bold">ABDUR RAHMAN</span>
-                                <span className={isLight ? 'text-zinc-600' : 'text-zinc-400'}>VIT '28</span>
+                                <span className="font-bold">{SITE_CONFIG.name}</span>
+                                <span className={isLight ? 'text-zinc-600' : 'text-zinc-400'}>{SITE_CONFIG.collegeYear}</span>
                             </div>
                         </div>
                     </motion.div>
 
-                    {/* Right Column: Key Metrics & Stats */}
+                    {/* Right Column: Values Derived Dynamically from Projects Data with Thin Divider */}
                     <motion.div
-                        initial={{ opacity: 0, x: 30 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 0.4 }}
-                        className={`lg:col-span-3 flex flex-col justify-center space-y-4 sm:space-y-6 border-t lg:border-t-0 lg:border-l pt-4 sm:pt-6 lg:pt-0 lg:pl-8 ${
-                            isLight ? 'border-zinc-800' : 'border-black/10'
+                        initial={{ opacity: 0, y: 25 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.15 }}
+                        className={`w-full flex flex-col justify-center space-y-6 sm:space-y-8 md:space-y-10 md:pl-8 lg:pl-12 md:border-l ${
+                            isLight ? 'md:border-zinc-800' : 'md:border-black/10'
                         }`}
                     >
                         <div>
-                            <span className={`font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight ${
+                            <span className={`font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight ${
                                 isLight ? 'text-white' : 'text-black'
                             }`}>07+</span>
-                            <p className={`text-[10px] sm:text-xs font-mono uppercase tracking-widest mt-1 ${
-                                isLight ? 'text-zinc-400' : 'text-zinc-500'
-                            }`}>Years Content & Editing</p>
+                            <p className={`text-[10px] sm:text-xs font-mono uppercase tracking-widest mt-1.5 font-semibold ${
+                                isLight ? 'text-zinc-400' : 'text-zinc-600'
+                            }`}>YEARS CONTENT & EDITING</p>
                         </div>
 
                         <div>
-                            <span className={`font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight ${
+                            <span className={`font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight ${
                                 isLight ? 'text-white' : 'text-black'
-                            }`}>03</span>
-                            <p className={`text-[10px] sm:text-xs font-mono uppercase tracking-widest mt-1 ${
-                                isLight ? 'text-zinc-400' : 'text-zinc-500'
-                            }`}>Flagship Apps (ZeroBlur, Love Connect, Graveyard)</p>
+                            }`}>{featuredFormatted}</span>
+                            <p className={`text-[10px] sm:text-xs font-mono uppercase tracking-widest mt-1.5 font-semibold ${
+                                isLight ? 'text-zinc-400' : 'text-zinc-600'
+                            }`}>FLAGSHIP PRODUCTS</p>
                         </div>
 
                         <div>
-                            <span className={`font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight ${
+                            <span className={`font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight ${
                                 isLight ? 'text-white' : 'text-black'
-                            }`}>100%</span>
-                            <p className={`text-[10px] sm:text-xs font-mono uppercase tracking-widest mt-1 ${
-                                isLight ? 'text-zinc-400' : 'text-zinc-500'
-                            }`}>Data Security & Reliability</p>
+                            }`}>{deploymentsFormatted}</span>
+                            <p className={`text-[10px] sm:text-xs font-mono uppercase tracking-widest mt-1.5 font-semibold ${
+                                isLight ? 'text-zinc-400' : 'text-zinc-600'
+                            }`}>LIVE DEPLOYMENTS</p>
                         </div>
                     </motion.div>
 
                 </div>
 
                 {/* Bottom Ticker / Descriptor */}
-                <div className={`border-t pt-3 sm:pt-4 flex flex-wrap items-center justify-between text-[10px] sm:text-xs font-mono uppercase tracking-widest z-20 gap-2 ${
-                    isLight ? 'border-zinc-800 text-zinc-400' : 'border-black/10 text-zinc-500'
+                <div className={`border-t pt-4 sm:pt-6 mt-8 sm:mt-10 flex flex-wrap items-center justify-between text-[10px] sm:text-xs font-mono uppercase tracking-widest z-20 gap-2 font-medium ${
+                    isLight ? 'border-zinc-800 text-zinc-400' : 'border-black/10 text-zinc-600'
                 }`}>
-                    <span>BASED IN MUMBAI, INDIA</span>
+                    <span>BASED IN {SITE_CONFIG.location}</span>
                     <span className="hidden md:inline">•</span>
                     <span>REACT NATIVE • NEXT.JS • TYPESCRIPT</span>
                     <span className="hidden md:inline">•</span>
-                    <span>AVAILABLE FOR ROLES</span>
+                    <span>AVAILABLE FOR HIGH-IMPACT ROLES</span>
                 </div>
 
             </div>

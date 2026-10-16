@@ -6,6 +6,28 @@
   --font-display: 'Syne', sans-serif;
   --font-sans: 'Plus Jakarta Sans', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+  --color-muted: var(--text-muted);
+  --color-secondary: var(--text-secondary);
+}
+
+:root {
+  --text-muted: #71717a; /* zinc-500 fallback */
+  --text-secondary: #52525b; /* zinc-600 fallback */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+}
+
+/* Theme Contrast Tokens (WCAG AA Compliance) */
+.light-theme {
+  --text-muted: #71717a; /* zinc-500: 4.6:1 contrast against #fafafa */
+  --text-secondary: #52525b; /* zinc-600: 6.8:1 contrast against #fafafa */
+}
+
+.dark-theme {
+  --text-muted: #a1a1aa; /* zinc-400: 5.8:1 contrast against #000000 */
+  --text-secondary: #d4d4d8; /* zinc-300: 9.9:1 contrast against #000000 */
 }
 
 /* Custom Scrollbar */
@@ -17,26 +39,57 @@
   background-color: #000000;
 }
 
+.light-theme ::-webkit-scrollbar-track {
+  background-color: #fafafa;
+}
+
 ::-webkit-scrollbar-thumb {
   background-color: #333333;
   border-radius: 9999px;
+}
+
+.light-theme ::-webkit-scrollbar-thumb {
+  background-color: #d4d4d8;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: #555555;
 }
 
-html, body {
+html {
+  overflow-x: clip;
+}
+
+body {
   background-color: #000000;
   color: #ffffff;
   font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
+  min-height: 100dvh;
 }
 
 .font-display {
   font-family: 'Syne', sans-serif;
+}
+
+/* Responsive anchor clearance matching navbar height at each breakpoint */
+#hero, #about, #skills, #experience, #projects, #contact {
+  scroll-margin-top: 68px;
+}
+
+@media (min-width: 640px) {
+  #hero, #about, #skills, #experience, #projects, #contact {
+    scroll-margin-top: 80px;
+  }
+}
+
+@media (min-width: 1024px) {
+  #hero, #about, #skills, #experience, #projects, #contact {
+    scroll-margin-top: 104px;
+  }
 }
 
 /* Permanent High-Contrast Grayscale Image Effect */
@@ -56,4 +109,39 @@ html, body {
 .scroll-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Continuous Marquee Animation with Hover/Focus Pause */
+@keyframes marquee-scroll {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-content {
+  display: flex;
+  align-items: stretch;
+  width: max-content;
+  animation: marquee-scroll 45s linear infinite;
+  will-change: transform;
+}
+
+.marquee-content:hover,
+.marquee-content:focus-within {
+  animation-play-state: paused;
+}
+
+/* Accessibility: Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-content {
+    animation: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

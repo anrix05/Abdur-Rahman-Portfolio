@@ -23,10 +23,26 @@ function MainContent() {
   const isLight = theme === 'light';
 
   useEffect(() => {
+    // Accessibility: Disable Lenis smooth scrolling if user prefers reduced motion or is on touch device
+    const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isTouchDevice = typeof window !== 'undefined' && (
+      window.matchMedia('(hover: none), (pointer: coarse)').matches ||
+      (typeof navigator !== 'undefined' && navigator.maxTouchPoints > 0)
+    );
+
+    if (prefersReducedMotion || isTouchDevice) {
+      (window as unknown as { __lenis?: unknown }).__lenis = undefined;
+      return;
+    }
+
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      syncTouch: false,
     });
+
+    // Expose lenis instance globally for offset-aware scrollTo calls
+    (window as unknown as { __lenis?: Lenis }).__lenis = lenis;
 
     lenis.on('scroll', ScrollTrigger.update);
 
@@ -38,13 +54,14 @@ function MainContent() {
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      (window as unknown as { __lenis?: unknown }).__lenis = undefined;
       lenis.destroy();
       gsap.ticker.remove(tickerCallback);
     };
   }, []);
 
   return (
-    <div className={`min-h-screen relative overflow-x-hidden font-sans transition-colors duration-500 ${
+    <div className={`min-h-[100dvh] relative overflow-x-clip font-sans transition-colors duration-500 ${
       isLight ? 'bg-[#fafafa] text-zinc-900 selection:bg-zinc-900 selection:text-white' : 'bg-black text-white selection:bg-white selection:text-black'
     }`}>
       {/* Intro Preloader */}
@@ -53,10 +70,10 @@ function MainContent() {
       <Cursor />
       <StoryProgress />
 
-      <div className={`relative z-10 transition-opacity duration-700 ${loading ? 'opacity-0 h-screen overflow-hidden' : 'opacity-100'}`}>
+      <div className={`relative z-10 transition-opacity duration-700 ${loading ? 'opacity-0 h-[100dvh] overflow-hidden' : 'opacity-100'}`}>
         <Navbar />
         <div id="hero"><Hero /></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-36 pb-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20 sm:space-y-28 lg:space-y-36 pb-20 sm:pb-28 lg:pb-32">
           <div id="about"><About /></div>
           <div id="skills"><Skills /></div>
           <div id="experience"><Experience /></div>

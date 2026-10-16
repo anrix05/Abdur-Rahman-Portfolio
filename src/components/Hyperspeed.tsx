@@ -4,12 +4,8 @@ import * as THREE from 'three';
 /**
  * Hyperspeed Background Component
  * 
- * A high-performance Three.js based warp speed effect.
- * Features:
- * - Customizable distortions (turbulent, mountain, xy, LongRace, deep)
- * - Interactive speed-up/slow-down
- * - Multiple presets for color and geometry
- * - Responsive container filling
+ * High-performance Three.js warp speed effect with mobile power-saving,
+ * DPR clamp, visibility pausing, and reduced-motion support.
  */
 
 export interface HyperspeedOptions {
@@ -59,37 +55,23 @@ const DEFAULT_OPTIONS: HyperspeedOptions = {
   onSpeedUp: () => { },
   onSlowDown: () => { },
   distortion: 'turbulentDistortion',
-  length: 400,
+  length: 350,
   roadWidth: 10,
   islandWidth: 2,
   lanesPerRoad: 4,
-  fov: 90,
-  fovSpeedUp: 150,
-  speedUp: 2,
+  fov: 85,
+  fovSpeedUp: 120,
+  speedUp: 1.8,
   carLightsFade: 0.4,
-  totalSideLightSticks: 20,
-  lightPairsPerRoadWay: 40,
-  shoulderLinesWidthPercentage: 0.05,
-  brokenLinesWidthPercentage: 0.1,
-  brokenLinesLengthPercentage: 0.5,
-  lightStickWidth: [0.12, 0.5],
-  lightStickHeight: [1.3, 1.7],
-  movingAwaySpeed: [60, 80],
-  movingCloserSpeed: [-120, -160],
-  carLightsLength: [400 * 0.03, 400 * 0.2],
-  carLightsRadius: [0.05, 0.14],
-  carWidthPercentage: [0.3, 0.5],
-  carShiftX: [-0.8, 0.8],
-  carFloorSeparation: [0, 5],
   colors: {
-    roadColor: 0x0c0c0c,
-    islandColor: 0x0c0c0c,
-    background: 0x0c0c0c,
+    roadColor: 0x000000,
+    islandColor: 0x000000,
+    background: 0x000000,
     shoulderLines: 0xffffff,
     brokenLines: 0xffffff,
-    leftCars: [0xccff00, 0xaaff00, 0xccff00], // Neon Lime variations
-    rightCars: [0x10b981, 0x059669, 0x34d399], // Emerald variations
-    sticks: 0xccff00,
+    leftCars: [0xffffff, 0xd4d4d8, 0xa1a1aa], // High contrast editorial mono
+    rightCars: [0xffffff, 0xe4e4e7, 0x71717a],
+    sticks: 0xffffff,
   }
 };
 
@@ -105,49 +87,55 @@ export const Hyperspeed = forwardRef<HTMLDivElement, HyperspeedProps>(({ effectO
     const options = { ...DEFAULT_OPTIONS, ...effectOptions };
     const colors = { ...DEFAULT_OPTIONS.colors, ...effectOptions?.colors };
     
-    // Internal state for animation
-    const state = {
-      speed: 1,
-      targetSpeed: 1,
-      fov: options.fov || 90,
-      targetFov: options.fov || 90,
-    };
+    const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = typeof window !== 'undefined' && (
+      window.innerWidth < 768 ||
+      window.matchMedia('(pointer: coarse)').matches ||
+      (typeof navigator !== 'undefined' && navigator.maxTouchPoints > 0)
+    );
+    const isLowPower = typeof navigator !== 'undefined' && (
+      (Boolean(navigator.hardwareConcurrency) && navigator.hardwareConcurrency <= 4) ||
+      (navigator as unknown as { connection?: { saveData?: boolean } }).connection?.saveData === true
+    );
 
-    // Three.js setup
+    // Three.js renderer setup
     const renderer = new THREE.WebGLRenderer({ 
       canvas: canvasRef.current,
       antialias: false,
-      alpha: true 
+      alpha: true,
+      powerPreference: 'low-power'
     });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+
+    // DPR clamped to 1 on mobile or low-power devices to avoid GPU thermal throttling
+    renderer.setPixelRatio(isMobile || isLowPower ? 1 : Math.min(window.devicePixelRatio, 1.5));
     
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(colors.background);
 
-    const camera = new THREE.PerspectiveCamera(state.fov, 1, 0.1, 10000);
+    const camera = new THREE.PerspectiveCamera(options.fov || 85, 1, 0.1, 1000);
     camera.position.z = 10;
-    camera.position.y = 7;
+    camera.position.y = 6;
 
     const resize = () => {
-      const width = containerRef.current!.clientWidth;
-      const height = containerRef.current!.clientHeight;
-      renderer.setSize(width, height);
-      camera.aspect = width / height;
+      if (!containerRef.current) return;
+      const width = containerRef.current.clientWidth || window.innerWidth;
+      const height = containerRef.current.clientHeight || window.innerHeight;
+      renderer.setSize(width, height, false);
+      camera.aspect = width / (height || 1);
       camera.updateProjectionMatrix();
     };
 
-    window.addEventListener('resize', resize);
+    window.addEventListener('resize', resize, { passive: true });
     resize();
 
-    // Create Geometry & Materials
-    const count = 800; // Reduced from 2000 for better performance
+    // Line particle count: strictly reduced on mobile / low-power devices
+    const count = isMobile || isLowPower ? 160 : 380;
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(count * 3 * 2);
     const lineColors = new Float32Array(count * 3 * 2);
 
     for (let i = 0; i < count; i++) {
       const z = Math.random() * options.length!;
-      const r = options.roadWidth! + Math.random() * 20;
+      const r = options.roadWidth! + Math.random() * 22;
       const theta = Math.random() * Math.PI * 2;
       
       const x = Math.cos(theta) * r;
@@ -160,7 +148,7 @@ export const Hyperspeed = forwardRef<HTMLDivElement, HyperspeedProps>(({ effectO
       
       positions[idx + 3] = x;
       positions[idx + 4] = y;
-      positions[idx + 5] = -(z + 10 + Math.random() * 50);
+      positions[idx + 5] = -(z + 10 + Math.random() * 40);
 
       const colorSet = (i % 2 === 0 ? colors.leftCars : colors.rightCars) || [0xffffff];
       const chosenColor = new THREE.Color(colorSet[Math.floor(Math.random() * colorSet.length)]);
@@ -180,20 +168,52 @@ export const Hyperspeed = forwardRef<HTMLDivElement, HyperspeedProps>(({ effectO
     const material = new THREE.LineBasicMaterial({ 
       vertexColors: true,
       transparent: true,
-      opacity: 0.8,
+      opacity: 0.65,
       blending: THREE.AdditiveBlending
     });
 
     const lines = new THREE.LineSegments(geometry, material);
     scene.add(lines);
 
-    // Keep a copy of base positions to prevent distortion drift accumulation
     const basePositions = positions.slice();
 
-    // Distortion logic
+    // If user prefers reduced motion, render a single static frame and do not start animation loop
+    if (prefersReducedMotion) {
+      renderer.render(scene, camera);
+      return () => {
+        window.removeEventListener('resize', resize);
+        geometry.dispose();
+        material.dispose();
+        renderer.dispose();
+      };
+    }
+
+    // Animation state
+    let isVisible = true;
+    let isTabActive = true;
+    let animationId: number;
+    let lastTime = 0;
+    const fps = isMobile ? 30 : 60;
+    const interval = 1000 / fps;
+
+    // Pause when hero is scrolled out of viewport
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+    }, { threshold: 0 });
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    // Pause when browser tab is hidden
+    const handleVisibilityChange = () => {
+      isTabActive = !document.hidden;
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
     const applyDistortion = (time: number) => {
       const pos = geometry.attributes.position.array as Float32Array;
-      const speed5 = state.speed * 5;
+      const speed = isMobile ? 2.5 : 4.0;
       const timeMs = time * 0.001;
       
       for (let i = 0; i < count; i++) {
@@ -201,97 +221,70 @@ export const Hyperspeed = forwardRef<HTMLDivElement, HyperspeedProps>(({ effectO
         const zIdx = idx + 2;
         const zIdxNext = idx + 5;
         
-        // Reset X and Y back to base positions before applying distortion
         pos[idx] = basePositions[idx];
         pos[idx + 1] = basePositions[idx + 1];
         pos[idx + 3] = basePositions[idx + 3];
         pos[idx + 4] = basePositions[idx + 4];
 
-        // Moving lines
-        pos[zIdx] += speed5;
-        pos[zIdxNext] += speed5;
+        pos[zIdx] += speed;
+        pos[zIdxNext] += speed;
 
-        // Reset if passed
-        if (pos[zIdx] > 50) {
+        if (pos[zIdx] > 40) {
           const newZ = options.length!;
-          const length = 10 + Math.random() * 50;
+          const length = 10 + Math.random() * 40;
           pos[zIdx] = -newZ;
           pos[zIdxNext] = -(newZ + length);
         }
 
-        // Apply distortion
-        if (options.distortion === 'turbulentDistortion') {
-          const offset = Math.sin(timeMs + pos[zIdx] * 0.01) * 0.02;
-          pos[idx] += offset;
-          pos[idx + 3] += offset;
-        } else if (options.distortion === 'mountainDistortion') {
-            const offset = Math.cos(pos[zIdx] * 0.005) * 0.05;
-            pos[idx + 1] += offset;
-            pos[idx + 4] += offset;
-        }
+        const offset = Math.sin(timeMs + pos[zIdx] * 0.01) * 0.015;
+        pos[idx] += offset;
+        pos[idx + 3] += offset;
       }
       geometry.attributes.position.needsUpdate = true;
     };
 
-    // Animation Loop
-    let animationId: number;
-    let lastTime = 0;
-    const fps = 60;
-    const interval = 1000 / fps;
-
     const animate = (time: number) => {
       animationId = requestAnimationFrame(animate);
 
+      if (!isVisible || !isTabActive) return;
+
       const delta = time - lastTime;
       if (delta < interval) return;
-
       lastTime = time - (delta % interval);
 
-      // Speed interpolation
-      state.speed += (state.targetSpeed - state.speed) * 0.05;
-      state.fov += (state.targetFov - state.fov) * 0.05;
-      
-      camera.fov = state.fov;
-      camera.updateProjectionMatrix();
-
       applyDistortion(time);
-      
       renderer.render(scene, camera);
     };
 
     animate(0);
 
-    // Interaction handlers - scoped to container for mousedown/touchstart
+    // Mouse speedup ONLY on non-mobile desktop devices with a fine pointer
     const container = containerRef.current;
-
     const handleMouseDown = () => {
-      state.targetSpeed = options.speedUp!;
-      state.targetFov = options.fovSpeedUp!;
-      options.onSpeedUp?.();
+      if (isMobile) return;
+      camera.fov = options.fovSpeedUp || 110;
+      camera.updateProjectionMatrix();
     };
 
     const handleMouseUp = () => {
-      state.targetSpeed = 1;
-      state.targetFov = options.fov!;
-      options.onSlowDown?.();
+      if (isMobile) return;
+      camera.fov = options.fov || 85;
+      camera.updateProjectionMatrix();
     };
 
-    if (container) {
+    if (!isMobile && container) {
       container.addEventListener('mousedown', handleMouseDown);
-      container.addEventListener('touchstart', handleMouseDown);
+      window.addEventListener('mouseup', handleMouseUp);
     }
-    window.addEventListener('mouseup', handleMouseUp);
-    window.addEventListener('touchend', handleMouseUp);
 
-    // Cleanup
     return () => {
       window.removeEventListener('resize', resize);
-      if (container) {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      observer.disconnect();
+      if (!isMobile && container) {
         container.removeEventListener('mousedown', handleMouseDown);
-        container.removeEventListener('touchstart', handleMouseDown);
+        window.removeEventListener('mouseup', handleMouseUp);
       }
-      window.removeEventListener('mouseup', handleMouseUp);
-      window.removeEventListener('touchend', handleMouseUp);
       cancelAnimationFrame(animationId);
       geometry.dispose();
       material.dispose();
@@ -303,10 +296,11 @@ export const Hyperspeed = forwardRef<HTMLDivElement, HyperspeedProps>(({ effectO
     <div 
       ref={containerRef} 
       className={`relative w-full h-full overflow-hidden ${className || ''}`}
+      aria-hidden="true"
     >
       <canvas 
         ref={canvasRef} 
-        className="block w-full h-full"
+        className="block w-full h-full pointer-events-none"
       />
     </div>
   );

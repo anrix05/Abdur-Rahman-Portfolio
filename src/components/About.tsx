@@ -8,38 +8,38 @@ const About = () => {
     const isLight = theme === 'light';
 
     return (
-        <section className="relative w-full py-12">
+        <section className="relative w-full pt-0 pb-8 sm:pb-12">
 
             {/* Section Header */}
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className={`mb-14 border-b pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4 ${
+                className={`mb-10 sm:mb-14 border-b pb-5 sm:pb-6 flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-4 ${
                     isLight ? 'border-zinc-200' : 'border-zinc-800'
                 }`}
             >
                 <div>
-                    <span className={`text-xs font-mono tracking-[0.25em] uppercase ${
-                        isLight ? 'text-zinc-500' : 'text-zinc-500'
+                    <span className={`text-xs font-mono tracking-[0.25em] uppercase font-semibold ${
+                        isLight ? 'text-zinc-600' : 'text-zinc-400'
                     }`}>01 / PROFILE</span>
-                    <h2 className={`font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl tracking-[0.1em] uppercase mt-1 ${
+                    <h2 className={`font-display font-extrabold text-2xl sm:text-4xl lg:text-5xl tracking-[0.06em] sm:tracking-[0.1em] uppercase mt-1 ${
                         isLight ? 'text-zinc-950' : 'text-white'
                     }`}>
                         ABOUT ABDUR
                     </h2>
                 </div>
-                <p className={`text-xs font-mono tracking-wider uppercase max-w-xs ${
+                <p className={`text-xs font-mono tracking-wider uppercase max-w-xs font-medium ${
                     isLight ? 'text-zinc-600' : 'text-zinc-400'
                 }`}>
-                    DEVELOPER & EDITORIAL CREATIVE BASED IN MUMBAI
+                    FULL-STACK & MOBILE DEVELOPER · 7-YEAR VIDEO EDITOR · MUMBAI
                 </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
 
-                {/* Left IDE & Timeline Preview Box */}
+                {/* Left IDE & Timeline Preview Box - Stacks above cards on mobile */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -47,14 +47,14 @@ const About = () => {
                     transition={{ duration: 0.6 }}
                     className="lg:col-span-5 flex justify-center w-full"
                 >
-                    <div className={`w-full rounded-3xl overflow-hidden shadow-2xl border ${
+                    <div className={`w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border ${
                         isLight 
                             ? 'bg-white border-zinc-200 text-zinc-900 shadow-zinc-200/50' 
                             : 'bg-zinc-950 border-zinc-800 text-white'
                     }`}>
                         
                         {/* Editor Header Bar */}
-                        <div className={`h-10 border-b px-5 flex items-center justify-between ${
+                        <div className={`h-10 border-b px-4 sm:px-5 flex items-center justify-between ${
                             isLight ? 'bg-zinc-100 border-zinc-200' : 'bg-zinc-900 border-zinc-800'
                         }`}>
                             <div className="flex items-center gap-2">
@@ -68,20 +68,28 @@ const About = () => {
                             <span className="text-[10px] font-mono text-zinc-400">UTF-8</span>
                         </div>
 
-                        {/* Code Workspace Preview */}
-                        <div className={`p-6 font-mono text-xs space-y-2 ${
-                            isLight ? 'bg-zinc-50 text-zinc-800' : 'bg-black text-zinc-300'
-                        }`}>
-                            <div><span className="text-zinc-400">1</span>  <span className={isLight ? 'text-blue-600 font-bold' : 'text-white font-bold'}>interface</span> <span className={isLight ? 'text-zinc-950 font-bold' : 'text-zinc-200'}>AbdurCraft</span> &#123;</div>
-                            <div><span className="text-zinc-400">2</span>    role: <span className={isLight ? 'text-emerald-700 font-semibold' : 'text-zinc-400'}>'Frontend & Mobile Dev'</span>;</div>
-                            <div><span className="text-zinc-400">3</span>    background: <span className={isLight ? 'text-emerald-700 font-semibold' : 'text-zinc-400'}>'7 Years Video & Content Editing'</span>;</div>
-                            <div><span className="text-zinc-400">4</span>    location: <span className={isLight ? 'text-emerald-700 font-semibold' : 'text-zinc-400'}>'Mumbai, India'</span>;</div>
-                            <div><span className="text-zinc-400">5</span>    stack: [<span className={isLight ? 'text-purple-700 font-semibold' : 'text-zinc-400'}>'React Native'</span>, <span className={isLight ? 'text-purple-700 font-semibold' : 'text-zinc-400'}>'Next.js'</span>, <span className={isLight ? 'text-purple-700 font-semibold' : 'text-zinc-400'}>'TypeScript'</span>];</div>
-                            <div><span className="text-zinc-400">6</span>  &#125;</div>
+                        {/* Code Workspace Preview with Horizontal Scroll Container */}
+                        <div 
+                            tabIndex={0}
+                            aria-label="Code editor snippet"
+                            className={`p-4 sm:p-6 font-mono text-xs space-y-1.5 overflow-x-auto scroll-hide overscroll-contain ${
+                                isLight ? 'bg-zinc-50 text-zinc-800' : 'bg-black text-zinc-300'
+                            }`}
+                        >
+                            <div className="min-w-fit">
+                                <div><span className="text-zinc-400 mr-2">1</span><span className={isLight ? 'text-blue-600 font-bold' : 'text-white font-bold'}>interface</span> <span className={isLight ? 'text-zinc-950 font-bold' : 'text-zinc-200'}>AbdurCraft</span> &#123;</div>
+                                <div><span className="text-zinc-400 mr-2">2</span>  role: <span className={isLight ? 'text-emerald-700 font-semibold' : 'text-zinc-400'}>'Full-Stack & Mobile Dev'</span>;</div>
+                                <div><span className="text-zinc-400 mr-2">3</span>  background: <span className={isLight ? 'text-emerald-700 font-semibold' : 'text-zinc-400'}>'7 Years Video & Content Editing'</span>;</div>
+                                <div><span className="text-zinc-400 mr-2">4</span>  location: <span className={isLight ? 'text-emerald-700 font-semibold' : 'text-zinc-400'}>'Mumbai, India'</span>;</div>
+                                <div><span className="text-zinc-400 mr-2">5</span>  stack: [<span className={isLight ? 'text-purple-700 font-semibold' : 'text-zinc-400'}>'React Native'</span>, <span className={isLight ? 'text-purple-700 font-semibold' : 'text-zinc-400'}>'Next.js'</span>, <span className={isLight ? 'text-purple-700 font-semibold' : 'text-zinc-400'}>'TypeScript'</span>, <span className={isLight ? 'text-purple-700 font-semibold' : 'text-zinc-400'}>'Supabase'</span>];</div>
+                                <div><span className="text-zinc-400 mr-2">6</span>  shipped: [<span className={isLight ? 'text-purple-700 font-semibold' : 'text-zinc-400'}>'NexaLink'</span>, <span className={isLight ? 'text-purple-700 font-semibold' : 'text-zinc-400'}>'The Graveyard'</span>,</div>
+                                <div><span className="text-zinc-400 mr-2">7</span>            <span className={isLight ? 'text-purple-700 font-semibold' : 'text-zinc-400'}>'V Notice'</span>, <span className={isLight ? 'text-purple-700 font-semibold' : 'text-zinc-400'}>'AttendAI'</span>];</div>
+                                <div><span className="text-zinc-400 mr-2">8</span>&#125;</div>
+                            </div>
                         </div>
 
                         {/* Interactive Timeline Mockup */}
-                        <div className={`border-t p-5 space-y-3 ${
+                        <div className={`border-t p-3.5 sm:p-5 space-y-2.5 ${
                             isLight ? 'bg-white border-zinc-200' : 'bg-zinc-950 border-zinc-800'
                         }`}>
                             <div className={`flex items-center justify-between text-[11px] font-mono tracking-wider ${
@@ -98,8 +106,8 @@ const About = () => {
                             <div className={`h-8 rounded-lg border relative overflow-hidden flex items-center px-3 ${
                                 isLight ? 'bg-zinc-100 border-zinc-200' : 'bg-zinc-900 border-zinc-800'
                             }`}>
-                                <span className="text-[10px] font-mono text-zinc-400 mr-3">V1</span>
-                                <div className={`h-5 rounded px-2.5 text-[10px] flex items-center font-mono uppercase tracking-wider font-bold ${
+                                <span className="text-[10px] font-mono text-zinc-400 mr-3 shrink-0">V1</span>
+                                <div className={`h-5 rounded px-2.5 text-[10px] flex items-center font-mono uppercase tracking-wider font-bold truncate ${
                                     isLight ? 'bg-zinc-950 text-white' : 'bg-white text-black'
                                 }`}>
                                     COMPOSITION_V1.MP4
@@ -110,8 +118,8 @@ const About = () => {
                             <div className={`h-8 rounded-lg border relative overflow-hidden flex items-center px-3 ${
                                 isLight ? 'bg-zinc-100 border-zinc-200' : 'bg-zinc-900 border-zinc-800'
                             }`}>
-                                <span className="text-[10px] font-mono text-zinc-400 mr-3">V2</span>
-                                <div className={`h-5 rounded px-2.5 text-[10px] flex items-center font-mono uppercase tracking-wider font-medium ${
+                                <span className="text-[10px] font-mono text-zinc-400 mr-3 shrink-0">V2</span>
+                                <div className={`h-5 rounded px-2.5 text-[10px] flex items-center font-mono uppercase tracking-wider font-medium truncate ${
                                     isLight ? 'bg-zinc-200 text-zinc-900 border border-zinc-300' : 'bg-zinc-800 text-zinc-200 border border-zinc-700'
                                 }`}>
                                     REACT_NATIVE_STATE.TS
@@ -122,20 +130,20 @@ const About = () => {
                             <div className={`h-8 rounded-lg border relative overflow-hidden flex items-center px-3 gap-1 ${
                                 isLight ? 'bg-zinc-100 border-zinc-200' : 'bg-zinc-900 border-zinc-800'
                             }`}>
-                                <span className="text-[10px] font-mono text-zinc-400 mr-2">A1</span>
-                                <div className="flex items-center gap-1 h-3 opacity-60">
+                                <span className="text-[10px] font-mono text-zinc-400 mr-2 shrink-0">A1</span>
+                                <div className="flex items-center gap-1 h-3 opacity-60 overflow-hidden">
                                     {WAVEFORM_HEIGHTS.map((h, i) => (
-                                        <div key={i} className={`w-[3px] rounded-full ${isLight ? 'bg-zinc-600' : 'bg-zinc-400'}`} style={{ height: `${h}%` }} />
+                                        <div key={i} className={`w-[3px] rounded-full shrink-0 ${isLight ? 'bg-zinc-600' : 'bg-zinc-400'}`} style={{ height: `${h}%` }} />
                                     ))}
                                 </div>
                             </div>
                         </div>
 
-                        <div className={`p-4 border-t text-xs font-mono flex items-center justify-between ${
+                        <div className={`p-3.5 sm:p-4 border-t text-xs font-mono flex items-center justify-between gap-2 ${
                             isLight ? 'bg-zinc-50 border-zinc-200 text-zinc-600' : 'bg-zinc-900 border-zinc-800 text-zinc-400'
                         }`}>
-                            <span>VIDYALANKAR INST. OF TECH</span>
-                            <span>B.TECH ECS ('28)</span>
+                            <span className="truncate">VIDYALANKAR INST. OF TECH</span>
+                            <span className="shrink-0">B.TECH ECS ('28)</span>
                         </div>
 
                     </div>
@@ -146,45 +154,48 @@ const About = () => {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    className="lg:col-span-7 space-y-5"
+                    transition={{ duration: 0.6, delay: 0.15 }}
+                    className="lg:col-span-7 space-y-4 sm:space-y-5 w-full"
                 >
-                    <div className={`p-7 rounded-3xl border transition-all duration-300 shadow-lg ${
+                    {/* Card 1 */}
+                    <div className={`p-5 sm:p-7 rounded-2xl sm:rounded-3xl border transition-all duration-300 shadow-lg ${
                         isLight 
                             ? 'bg-white border-zinc-200 hover:border-zinc-400 shadow-zinc-200/50' 
                             : 'bg-zinc-950 border-zinc-800 hover:border-zinc-700'
                     }`}>
-                        <h3 className={`font-display font-bold text-xl uppercase tracking-wider mb-2 ${
+                        <h3 className={`font-display font-bold text-lg sm:text-xl uppercase tracking-wider mb-2.5 break-words ${
                             isLight ? 'text-zinc-950' : 'text-white'
-                        }`}>FULL-STACK MOBILE & FRONTEND FOCUS</h3>
+                        }`}>BUILDING PRODUCTS END TO END</h3>
                         <p className={`text-sm leading-relaxed ${isLight ? 'text-zinc-600' : 'text-zinc-400'}`}>
-                            Frontend and Mobile Engineer based in Mumbai, specializing in <strong className={isLight ? 'text-zinc-950 font-bold' : 'text-white font-semibold'}>React Native</strong> and <strong className={isLight ? 'text-zinc-950 font-bold' : 'text-white font-semibold'}>Next.js</strong>. I craft applications focused on speed, intuitive UX, and zero compromise on performance.
+                            I'm a full-stack and mobile developer in Mumbai, working mainly with <strong className={isLight ? 'text-zinc-950 font-bold' : 'text-white font-semibold'}>React Native</strong>, <strong className={isLight ? 'text-zinc-950 font-bold' : 'text-white font-semibold'}>Next.js</strong>, and <strong className={isLight ? 'text-zinc-950 font-bold' : 'text-white font-semibold'}>Supabase</strong>. I take a product from the database to the interface, and I care about three things: it loads fast, it doesn't lose data, and the person using it never feels confused.
                         </p>
                     </div>
 
-                    <div className={`p-7 rounded-3xl border transition-all duration-300 shadow-lg ${
+                    {/* Card 2 */}
+                    <div className={`p-5 sm:p-7 rounded-2xl sm:rounded-3xl border transition-all duration-300 shadow-lg ${
                         isLight 
                             ? 'bg-white border-zinc-200 hover:border-zinc-400 shadow-zinc-200/50' 
                             : 'bg-zinc-950 border-zinc-800 hover:border-zinc-700'
                     }`}>
-                        <h3 className={`font-display font-bold text-xl uppercase tracking-wider mb-2 ${
+                        <h3 className={`font-display font-bold text-lg sm:text-xl uppercase tracking-wider mb-2.5 leading-snug break-words ${
                             isLight ? 'text-zinc-950' : 'text-white'
-                        }`}>ARCHITECTURE & DATA PERSISTENCE</h3>
+                        }`}>SECURITY & DATA, NOT AN AFTERTHOUGHT</h3>
                         <p className={`text-sm leading-relaxed ${isLight ? 'text-zinc-600' : 'text-zinc-400'}`}>
-                            Creator of <strong className={isLight ? 'text-zinc-950 font-bold' : 'text-white font-semibold'}>Love Connect</strong> & <strong className={isLight ? 'text-zinc-950 font-bold' : 'text-white font-semibold'}>The Graveyard</strong>. Designed hybrid database architectures combining Firebase for instant real-time sync with SQLite for on-device offline persistence and biometric authentication.
+                            <strong className={isLight ? 'text-zinc-950 font-bold' : 'text-white font-semibold'}>Love Connect</strong> uses biometric login and a hybrid Firebase + SQLite layer that keeps working offline. For <strong className={isLight ? 'text-zinc-950 font-bold' : 'text-white font-semibold'}>NexaLink</strong>, I locked down a Supabase backend with Row Level Security on 17 tables and tamper-evident audit logs. <strong className={isLight ? 'text-zinc-950 font-bold' : 'text-white font-semibold'}>The Graveyard</strong> adds payments and GitHub-verified project listings.
                         </p>
                     </div>
 
-                    <div className={`p-7 rounded-3xl border transition-all duration-300 shadow-lg ${
+                    {/* Card 3 */}
+                    <div className={`p-5 sm:p-7 rounded-2xl sm:rounded-3xl border transition-all duration-300 shadow-lg ${
                         isLight 
                             ? 'bg-white border-zinc-200 hover:border-zinc-400 shadow-zinc-200/50' 
                             : 'bg-zinc-950 border-zinc-800 hover:border-zinc-700'
                     }`}>
-                        <h3 className={`font-display font-bold text-xl uppercase tracking-wider mb-2 ${
+                        <h3 className={`font-display font-bold text-lg sm:text-xl uppercase tracking-wider mb-2.5 break-words ${
                             isLight ? 'text-zinc-950' : 'text-white'
-                        }`}>7 YEARS EDITORIAL & UI PRECISION</h3>
+                        }`}>THE EDITOR'S EYE</h3>
                         <p className={`text-sm leading-relaxed ${isLight ? 'text-zinc-600' : 'text-zinc-400'}`}>
-                            Pursuing B.Tech in Electronic & Computer Science at <strong className={isLight ? 'text-zinc-950 font-bold' : 'text-white font-semibold'}>Vidyalankar Institute of Technology</strong> (2024–2028). Combining 7 years of video and technical content editing with software engineering to bring meticulous visual polish to every digital product.
+                            Seven years of video and content editing taught me pacing, hierarchy, and cutting whatever doesn't earn its place. I bring that to interfaces: tight copy, clear layouts, and motion with a purpose.
                         </p>
                     </div>
                 </motion.div>
