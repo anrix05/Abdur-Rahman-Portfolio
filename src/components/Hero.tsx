@@ -115,7 +115,7 @@ const Hero = () => {
                             isLight ? 'border-zinc-800' : 'border-black/10'
                         }`}
                     >
-                        <h1 className={`font-display font-extrabold text-[clamp(1.85rem,min(6.2vw,7.5vh),6.5rem)] tracking-[0.03em] xs:tracking-[0.06em] sm:tracking-[0.14em] uppercase leading-[1.05] break-normal ${
+                        <h1 className={`font-display font-extrabold text-[clamp(1.6rem,7.2vw,6.5rem)] tracking-[0.02em] sm:tracking-[0.1em] uppercase leading-[1.05] break-normal ${
                             isLight ? 'text-white' : 'text-black'
                         }`}>
                             KNOW ABDUR.R
@@ -132,7 +132,7 @@ const Hero = () => {
                         {/* Role Pill */}
                         <motion.div 
                             style={{ x: roleX, y: roleY, transform: 'translateZ(30px)' }}
-                            className={`inline-flex items-center gap-2 px-3 py-1 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest rounded-full font-bold shadow-sm ${
+                            className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 text-[clamp(9px,2.5vw,11px)] font-mono uppercase tracking-widest rounded-full font-bold shadow-sm ${
                                 isLight ? 'bg-white text-black' : 'bg-black text-white'
                             }`}
                         >
@@ -142,7 +142,7 @@ const Hero = () => {
                         {/* One-Line Value Proposition */}
                         <motion.h2 
                             style={{ x: valueX, y: valueY, transform: 'translateZ(24px)' }}
-                            className={`font-display font-extrabold text-lg sm:text-2xl md:text-3xl tracking-tight uppercase leading-tight flex flex-col md:flex-row items-center justify-center gap-1.5 md:gap-3.5 ${
+                            className={`font-display font-extrabold text-[clamp(1rem,4.5vw,1.75rem)] tracking-tight uppercase leading-tight flex flex-col md:flex-row items-center justify-center gap-1.5 md:gap-3.5 ${
                                 isLight ? 'text-white' : 'text-black'
                             }`}
                         >
@@ -159,7 +159,7 @@ const Hero = () => {
                         {/* Concrete First-Person Intro Paragraph */}
                         <motion.p 
                             style={{ x: bodyX, y: bodyY, transform: 'translateZ(14px)' }}
-                            className={`text-xs sm:text-sm md:text-base leading-relaxed font-normal max-w-2xl ${
+                            className={`text-[clamp(0.8rem,3vw,0.95rem)] leading-relaxed font-normal max-w-2xl ${
                                 isLight ? 'text-zinc-300' : 'text-zinc-700'
                             }`}
                         >
@@ -174,7 +174,7 @@ const Hero = () => {
                             <a 
                                 href="#projects" 
                                 onClick={(e) => { e.preventDefault(); scrollToSection('projects'); }}
-                                className={`inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3.5 min-h-[48px] font-bold text-xs font-mono uppercase tracking-wider rounded-full transition-transform duration-150 cursor-pointer shadow-lg active:scale-95 active:translate-y-0.5 w-full sm:w-auto ${
+                                className={`inline-flex items-center justify-center gap-2 px-[clamp(1rem,4vw,1.75rem)] py-3 sm:py-3.5 min-h-[44px] sm:min-h-[48px] font-bold text-[clamp(10px,2.6vw,12px)] font-mono uppercase tracking-wider rounded-full transition-transform duration-150 cursor-pointer shadow-lg active:scale-95 active:translate-y-0.5 w-full sm:w-auto ${
                                     isLight 
                                         ? 'bg-white text-black hover:bg-zinc-200' 
                                         : 'bg-black text-white hover:bg-zinc-800'
@@ -188,7 +188,7 @@ const Hero = () => {
                                 href="/resume.pdf" 
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className={`inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3.5 min-h-[48px] border font-bold text-xs font-mono uppercase tracking-wider rounded-full transition-transform duration-150 cursor-pointer active:scale-95 active:translate-y-0.5 w-full sm:w-auto ${
+                                className={`inline-flex items-center justify-center gap-2 px-[clamp(1rem,4vw,1.75rem)] py-3 sm:py-3.5 min-h-[44px] sm:min-h-[48px] border font-bold text-[clamp(10px,2.6vw,12px)] font-mono uppercase tracking-wider rounded-full transition-transform duration-150 cursor-pointer active:scale-95 active:translate-y-0.5 w-full sm:w-auto ${
                                     isLight 
                                         ? 'border-white text-white hover:bg-white hover:text-black' 
                                         : 'border-black text-black hover:bg-black hover:text-white'
@@ -203,7 +203,7 @@ const Hero = () => {
                             <a 
                                 href="#contact" 
                                 onClick={(e) => { e.preventDefault(); scrollToSection('contact'); }}
-                                className={`inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3.5 min-h-[48px] border font-bold text-xs font-mono uppercase tracking-wider rounded-full transition-transform duration-150 cursor-pointer active:scale-95 active:translate-y-0.5 w-full sm:w-auto ${
+                                className={`inline-flex items-center justify-center gap-2 px-[clamp(1rem,4vw,1.75rem)] py-3 sm:py-3.5 min-h-[44px] sm:min-h-[48px] border font-bold text-[clamp(10px,2.6vw,12px)] font-mono uppercase tracking-wider rounded-full transition-transform duration-150 cursor-pointer active:scale-95 active:translate-y-0.5 w-full sm:w-auto ${
                                     isLight 
                                         ? 'border-white text-white hover:bg-white hover:text-black' 
                                         : 'border-black text-black hover:bg-black hover:text-white'
@@ -279,28 +279,28 @@ const Hero = () => {
                         }`}
                     >
                         <div>
-                            <span className={`font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight ${
+                            <span className={`font-display text-[clamp(1.75rem,6.5vw,3.75rem)] font-extrabold tracking-tight ${
                                 isLight ? 'text-white' : 'text-black'
                             }`}>07+</span>
-                            <p className={`text-[10px] sm:text-xs font-mono uppercase tracking-widest mt-1.5 font-semibold ${
+                            <p className={`text-[clamp(9px,2.2vw,11px)] font-mono uppercase tracking-widest mt-1.5 font-semibold ${
                                 isLight ? 'text-zinc-400' : 'text-zinc-600'
                             }`}>YEARS CONTENT & EDITING</p>
                         </div>
 
                         <div>
-                            <span className={`font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight ${
+                            <span className={`font-display text-[clamp(1.75rem,6.5vw,3.75rem)] font-extrabold tracking-tight ${
                                 isLight ? 'text-white' : 'text-black'
                             }`}>{featuredFormatted}</span>
-                            <p className={`text-[10px] sm:text-xs font-mono uppercase tracking-widest mt-1.5 font-semibold ${
+                            <p className={`text-[clamp(9px,2.2vw,11px)] font-mono uppercase tracking-widest mt-1.5 font-semibold ${
                                 isLight ? 'text-zinc-400' : 'text-zinc-600'
                             }`}>FLAGSHIP PRODUCTS</p>
                         </div>
 
                         <div>
-                            <span className={`font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight ${
+                            <span className={`font-display text-[clamp(1.75rem,6.5vw,3.75rem)] font-extrabold tracking-tight ${
                                 isLight ? 'text-white' : 'text-black'
                             }`}>{deploymentsFormatted}</span>
-                            <p className={`text-[10px] sm:text-xs font-mono uppercase tracking-widest mt-1.5 font-semibold ${
+                            <p className={`text-[clamp(9px,2.2vw,11px)] font-mono uppercase tracking-widest mt-1.5 font-semibold ${
                                 isLight ? 'text-zinc-400' : 'text-zinc-600'
                             }`}>LIVE DEPLOYMENTS</p>
                         </div>

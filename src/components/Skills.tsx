@@ -75,16 +75,16 @@ const Skills = () => {
                 }`}
             >
                 <div>
-                    <span className={`text-xs font-mono tracking-[0.25em] uppercase font-semibold ${
+                    <span className={`text-[clamp(10px,2.5vw,12px)] font-mono tracking-[0.25em] uppercase font-semibold ${
                         isLight ? 'text-zinc-600' : 'text-zinc-400'
                     }`}>02 / CAPABILITIES</span>
-                    <h2 className={`font-display font-extrabold text-2xl sm:text-4xl lg:text-5xl tracking-[0.06em] sm:tracking-[0.1em] uppercase mt-1 ${
+                    <h2 className={`font-display font-extrabold text-[clamp(1.5rem,6vw,3rem)] tracking-[0.04em] sm:tracking-[0.08em] uppercase mt-1 leading-tight break-words ${
                         isLight ? 'text-zinc-950' : 'text-white'
                     }`}>
                         TECHNICAL STACK
                     </h2>
                 </div>
-                <p className={`text-xs font-mono tracking-wider uppercase max-w-xs font-medium ${
+                <p className={`text-[clamp(10px,2.5vw,12px)] font-mono tracking-wider uppercase max-w-xs font-medium ${
                     isLight ? 'text-zinc-600' : 'text-zinc-400'
                 }`}>
                     PRACTICAL EXPERIENCE ACROSS FULL-STACK, MOBILE, AI VISION & EMBEDDED SYSTEMS
@@ -126,7 +126,7 @@ const Skills = () => {
                                         </div>
                                         <h3 
                                             style={{ transform: 'translateZ(25px)' }}
-                                            className={`font-display font-bold text-base sm:text-xl tracking-wider uppercase break-words transition-transform ${
+                                            className={`font-display font-bold text-[clamp(0.95rem,3.8vw,1.25rem)] tracking-wider uppercase break-words transition-transform ${
                                                 isLight ? 'text-zinc-950' : 'text-white'
                                             }`}
                                         >
@@ -141,7 +141,7 @@ const Skills = () => {
                                         {category.skills.map((skill, idx) => (
                                             <span 
                                                 key={idx} 
-                                                className={`px-3 sm:px-3.5 py-1.5 sm:py-2 border rounded-xl text-[11px] sm:text-xs font-mono tracking-wider transition-all font-medium max-w-full break-words ${
+                                                className={`px-[clamp(0.5rem,2.2vw,0.875rem)] py-1.5 sm:py-2 border rounded-xl text-[clamp(10px,2.5vw,12px)] font-mono tracking-wider transition-all font-medium max-w-full break-words ${
                                                     isLight 
                                                         ? 'bg-zinc-100/90 text-zinc-900 border-zinc-300 hover:bg-zinc-200 hover:text-black' 
                                                         : 'bg-zinc-900 text-zinc-200 border-zinc-800 hover:border-zinc-600 hover:text-white'

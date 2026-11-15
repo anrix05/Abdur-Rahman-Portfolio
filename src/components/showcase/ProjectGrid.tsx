@@ -104,11 +104,11 @@ export function ProjectGrid({ projects, isLight, onOpenModal }: ProjectGridProps
                 {/* Title */}
                 <h3
                   onClick={() => onOpenModal(project)}
-                  className={`font-display font-extrabold text-xl sm:text-2xl mb-2 tracking-wide uppercase transition-colors flex items-center justify-between cursor-pointer leading-tight ${
+                  className={`font-display font-extrabold text-[clamp(1.1rem,4.5vw,1.4rem)] mb-2 tracking-wide uppercase transition-colors flex items-center justify-between cursor-pointer leading-tight break-words ${
                     isLight ? 'text-zinc-950 group-hover:text-black' : 'text-white group-hover:text-zinc-100'
                   }`}
                 >
-                  <span>{project.title}</span>
+                  <span className="break-words">{project.title}</span>
                   <ArrowUpRight
                     size={17}
                     className={`opacity-0 group-hover:opacity-100 transition-opacity shrink-0 ml-1.5 ${
@@ -119,7 +119,7 @@ export function ProjectGrid({ projects, isLight, onOpenModal }: ProjectGridProps
 
                 {/* Description */}
                 <p
-                  className={`text-xs sm:text-sm leading-relaxed mb-4 line-clamp-3 ${
+                  className={`text-[clamp(0.75rem,2.8vw,0.875rem)] leading-relaxed mb-4 line-clamp-3 ${
                     isLight ? 'text-zinc-700' : 'text-zinc-400'
                   }`}
                 >

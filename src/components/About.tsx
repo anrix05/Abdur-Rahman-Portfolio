@@ -22,16 +22,16 @@ const About = () => {
                 }`}
             >
                 <div>
-                    <span className={`text-xs font-mono tracking-[0.25em] uppercase font-semibold ${
+                    <span className={`text-[clamp(10px,2.5vw,12px)] font-mono tracking-[0.25em] uppercase font-semibold ${
                         isLight ? 'text-zinc-600' : 'text-zinc-400'
                     }`}>01 / PROFILE</span>
-                    <h2 className={`font-display font-extrabold text-2xl sm:text-4xl lg:text-5xl tracking-[0.06em] sm:tracking-[0.1em] uppercase mt-1 ${
+                    <h2 className={`font-display font-extrabold text-[clamp(1.5rem,6vw,3rem)] tracking-[0.04em] sm:tracking-[0.08em] uppercase mt-1 leading-tight break-words ${
                         isLight ? 'text-zinc-950' : 'text-white'
                     }`}>
                         ABOUT ABDUR
                     </h2>
                 </div>
-                <p className={`text-xs font-mono tracking-wider uppercase max-w-xs font-medium ${
+                <p className={`text-[clamp(10px,2.5vw,12px)] font-mono tracking-wider uppercase max-w-xs font-medium ${
                     isLight ? 'text-zinc-600' : 'text-zinc-400'
                 }`}>
                     FULL-STACK & MOBILE DEVELOPER · 7-YEAR VIDEO EDITOR · MUMBAI
@@ -149,7 +149,7 @@ const About = () => {
                             }`}>
                                 <h3 
                                     style={{ transform: 'translateZ(24px)' }}
-                                    className={`font-display font-bold text-lg sm:text-xl uppercase tracking-wider mb-2.5 break-words transition-transform ${
+                                    className={`font-display font-bold text-[clamp(1rem,4vw,1.25rem)] uppercase tracking-wider mb-2.5 break-words transition-transform ${
                                         isLight ? 'text-zinc-950' : 'text-white'
                                     }`}
                                 >
@@ -157,7 +157,7 @@ const About = () => {
                                 </h3>
                                 <p 
                                     style={{ transform: 'translateZ(12px)' }}
-                                    className={`text-sm leading-relaxed transition-transform ${isLight ? 'text-zinc-600' : 'text-zinc-400'}`}
+                                    className={`text-[clamp(0.8rem,2.8vw,0.875rem)] leading-relaxed transition-transform ${isLight ? 'text-zinc-600' : 'text-zinc-400'}`}
                                 >
                                     I'm a full-stack and mobile developer in Mumbai, working mainly with <strong className={isLight ? 'text-zinc-950 font-bold' : 'text-white font-semibold'}>React Native</strong>, <strong className={isLight ? 'text-zinc-950 font-bold' : 'text-white font-semibold'}>Next.js</strong>, and <strong className={isLight ? 'text-zinc-950 font-bold' : 'text-white font-semibold'}>Supabase</strong>. I take a product from the database to the interface, and I care about three things: it loads fast, it doesn't lose data, and the person using it never feels confused.
                                 </p>
@@ -180,7 +180,7 @@ const About = () => {
                             }`}>
                                 <h3 
                                     style={{ transform: 'translateZ(24px)' }}
-                                    className={`font-display font-bold text-lg sm:text-xl uppercase tracking-wider mb-2.5 leading-snug break-words transition-transform ${
+                                    className={`font-display font-bold text-[clamp(1rem,4vw,1.25rem)] uppercase tracking-wider mb-2.5 leading-snug break-words transition-transform ${
                                         isLight ? 'text-zinc-950' : 'text-white'
                                     }`}
                                 >
@@ -188,7 +188,7 @@ const About = () => {
                                 </h3>
                                 <p 
                                     style={{ transform: 'translateZ(12px)' }}
-                                    className={`text-sm leading-relaxed transition-transform ${isLight ? 'text-zinc-600' : 'text-zinc-400'}`}
+                                    className={`text-[clamp(0.8rem,2.8vw,0.875rem)] leading-relaxed transition-transform ${isLight ? 'text-zinc-600' : 'text-zinc-400'}`}
                                 >
                                     <strong className={isLight ? 'text-zinc-950 font-bold' : 'text-white font-semibold'}>Love Connect</strong> uses biometric login and a hybrid Firebase + SQLite layer that keeps working offline. For <strong className={isLight ? 'text-zinc-950 font-bold' : 'text-white font-semibold'}>NexaLink</strong>, I locked down a Supabase backend with Row Level Security on 17 tables and tamper-evident audit logs. <strong className={isLight ? 'text-zinc-950 font-bold' : 'text-white font-semibold'}>The Graveyard</strong> adds payments and GitHub-verified project listings.
                                 </p>
@@ -211,7 +211,7 @@ const About = () => {
                             }`}>
                                 <h3 
                                     style={{ transform: 'translateZ(24px)' }}
-                                    className={`font-display font-bold text-lg sm:text-xl uppercase tracking-wider mb-2.5 break-words transition-transform ${
+                                    className={`font-display font-bold text-[clamp(1rem,4vw,1.25rem)] uppercase tracking-wider mb-2.5 break-words transition-transform ${
                                         isLight ? 'text-zinc-950' : 'text-white'
                                     }`}
                                 >
@@ -219,7 +219,7 @@ const About = () => {
                                 </h3>
                                 <p 
                                     style={{ transform: 'translateZ(12px)' }}
-                                    className={`text-sm leading-relaxed transition-transform ${isLight ? 'text-zinc-600' : 'text-zinc-400'}`}
+                                    className={`text-[clamp(0.8rem,2.8vw,0.875rem)] leading-relaxed transition-transform ${isLight ? 'text-zinc-600' : 'text-zinc-400'}`}
                                 >
                                     Seven years of video and content editing taught me pacing, hierarchy, and cutting whatever doesn't earn its place. I bring that to interfaces: tight copy, clear layouts, and motion with a purpose.
                                 </p>

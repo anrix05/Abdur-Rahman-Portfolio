@@ -134,7 +134,7 @@ const Navbar = () => {
                         className="flex items-center gap-2 cursor-pointer group shrink-0" 
                         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                     >
-                        <span className={`font-display font-black text-lg sm:text-xl tracking-[0.12em] sm:tracking-[0.15em] uppercase group-hover:opacity-80 transition-opacity ${
+                        <span className={`font-display font-black text-[clamp(0.95rem,4vw,1.25rem)] tracking-[0.1em] sm:tracking-[0.15em] uppercase group-hover:opacity-80 transition-opacity ${
                             isLight ? 'text-zinc-950' : 'text-white'
                         }`}>
                             {SITE_CONFIG.shortName}

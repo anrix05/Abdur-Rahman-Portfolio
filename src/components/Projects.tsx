@@ -20,12 +20,11 @@ export default function Projects() {
   const { theme } = useTheme();
   const isLight = theme === 'light';
 
-  // Responsive default: Desktop starts in 3D Coverflow, mobile (<768px) or prefers-reduced-motion starts in Grid
+  // Default: starts in 3D Coverflow across all screen sizes (prefers-reduced-motion starts in Grid)
   const [is3DMode, setIs3DMode] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
-      const isMobile = window.innerWidth < 768;
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (isMobile || prefersReduced) return false;
+      if (prefersReduced) return false;
     }
     return true;
   });
@@ -97,14 +96,14 @@ export default function Projects() {
       >
         <div>
           <span
-            className={`text-xs font-mono tracking-[0.25em] uppercase font-semibold ${
+            className={`text-[clamp(10px,2.5vw,12px)] font-mono tracking-[0.25em] uppercase font-semibold ${
               isLight ? 'text-zinc-600' : 'text-zinc-400'
             }`}
           >
             04 / SELECTED WORKS
           </span>
           <h2
-            className={`font-display font-extrabold text-2xl sm:text-4xl lg:text-5xl tracking-[0.06em] sm:tracking-[0.1em] uppercase mt-1 ${
+            className={`font-display font-extrabold text-[clamp(1.5rem,6vw,3rem)] tracking-[0.04em] sm:tracking-[0.08em] uppercase mt-1 leading-tight break-words ${
               isLight ? 'text-zinc-950' : 'text-white'
             }`}
           >
@@ -234,10 +233,10 @@ export default function Projects() {
                 className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start"
               >
                 {/* Left Column: Category, Flagship, Single-line Title, 3-line Description */}
-                <div className="lg:col-span-7 flex flex-col gap-2.5 sm:gap-3">
+                <div className="lg:col-span-7 flex flex-col gap-2.5 sm:gap-3 min-w-0 max-w-full overflow-hidden">
                   <div className="flex items-center gap-2 flex-wrap">
                     <span
-                      className={`text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] font-bold ${
+                      className={`text-[clamp(10px,2.5vw,12px)] font-mono uppercase tracking-[0.2em] font-bold ${
                         isLight ? 'text-zinc-600' : 'text-zinc-400'
                       }`}
                     >
@@ -245,7 +244,7 @@ export default function Projects() {
                     </span>
                     {activeProject.featured && (
                       <span
-                        className={`text-[9px] font-mono px-2 py-0.5 rounded-full uppercase tracking-widest font-bold border ${
+                        className={`text-[clamp(8px,2.2vw,9px)] font-mono px-2 py-0.5 rounded-full uppercase tracking-widest font-bold border ${
                           isLight
                             ? 'bg-zinc-950 text-white border-zinc-950'
                             : 'bg-white text-black border-white'
@@ -256,25 +255,26 @@ export default function Projects() {
                     )}
                   </div>
 
-                  {/* Single-line fitted Syne title */}
+                  {/* Display-adaptive fitted Syne title */}
                   <h3
                     ref={titleRef}
                     onClick={() => setModalProject(activeProject)}
                     style={{
                       fontSize: titleFontSize,
                       wordBreak: 'normal',
-                      overflowWrap: 'normal',
+                      overflowWrap: 'break-word',
                       hyphens: 'none',
                       textWrap: 'balance',
+                      maxWidth: '100%',
                     }}
-                    className="font-display font-extrabold uppercase tracking-[0.03em] leading-[1.05] break-words cursor-pointer hover:opacity-80 transition-opacity"
+                    className="font-display font-extrabold uppercase tracking-[0.02em] leading-[1.05] cursor-pointer hover:opacity-80 transition-opacity min-w-0 max-w-full"
                   >
                     {activeProject.title}
                   </h3>
 
-                  {/* 3-line clamped description with ellipsis */}
+                  {/* 3-line clamped description with fluid sizing */}
                   <p
-                    className={`text-xs sm:text-sm font-sans leading-relaxed line-clamp-3 ${
+                    className={`text-[clamp(0.8rem,3vw,0.875rem)] font-sans leading-relaxed line-clamp-3 ${
                       isLight ? 'text-zinc-700' : 'text-zinc-300'
                     }`}
                   >

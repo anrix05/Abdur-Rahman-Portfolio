@@ -71,10 +71,10 @@ const Experience = () => {
                     isLight ? 'border-zinc-200' : 'border-zinc-800'
                 }`}
             >
-                <span className={`text-xs font-mono tracking-[0.2em] uppercase font-semibold ${
+                <span className={`text-[clamp(10px,2.5vw,12px)] font-mono tracking-[0.2em] uppercase font-semibold ${
                     isLight ? 'text-zinc-600' : 'text-zinc-400'
                 }`}>03 / BACKGROUND</span>
-                <h2 className={`font-display font-extrabold text-2xl sm:text-4xl lg:text-5xl tracking-[0.05em] uppercase mt-1 leading-tight break-words ${
+                <h2 className={`font-display font-extrabold text-[clamp(1.5rem,6vw,3rem)] tracking-[0.04em] sm:tracking-[0.08em] uppercase mt-1 leading-tight break-words ${
                     isLight ? 'text-zinc-950' : 'text-white'
                 }`}>
                     EXPERIENCE
@@ -145,7 +145,7 @@ const Experience = () => {
                                             ) : (
                                                 <GraduationCap size={16} className={isLight ? 'text-zinc-700' : 'text-zinc-400'} />
                                             )}
-                                            <h3 className={`font-display font-bold text-base sm:text-xl tracking-wider uppercase break-words ${
+                                            <h3 className={`font-display font-bold text-[clamp(0.95rem,3.8vw,1.25rem)] tracking-wider uppercase break-words ${
                                                 isLight ? 'text-zinc-950' : 'text-white'
                                             }`}>
                                                 {exp.role}
@@ -153,7 +153,7 @@ const Experience = () => {
                                         </div>
                                         <p 
                                             style={{ transform: 'translateZ(16px)' }}
-                                            className={`text-xs sm:text-sm font-mono mt-1 break-words transition-transform ${
+                                            className={`text-[clamp(11px,2.8vw,13px)] font-mono mt-1 break-words transition-transform ${
                                                 isLight ? 'text-zinc-600 font-medium' : 'text-zinc-400'
                                             }`}
                                         >
@@ -165,7 +165,7 @@ const Experience = () => {
                                     {Boolean(exp.period) && (
                                         <span 
                                             style={{ transform: 'translateZ(28px)' }}
-                                            className={`inline-flex font-mono text-[10px] sm:text-xs font-semibold px-3 py-1 rounded-full w-fit tracking-wider border shrink-0 transition-transform ${
+                                            className={`inline-flex font-mono text-[clamp(9px,2.4vw,11px)] font-semibold px-3 py-1 rounded-full w-fit tracking-wider border shrink-0 transition-transform ${
                                                 isLight 
                                                     ? 'bg-zinc-100 border-zinc-300 text-zinc-800' 
                                                     : 'bg-zinc-900 border-zinc-800 text-zinc-300'
@@ -178,7 +178,7 @@ const Experience = () => {
 
                                 <p 
                                     style={{ transform: 'translateZ(12px)' }}
-                                    className={`text-xs sm:text-sm leading-relaxed mb-5 transition-transform ${
+                                    className={`text-[clamp(0.8rem,2.8vw,0.875rem)] leading-relaxed mb-5 transition-transform ${
                                         isLight ? 'text-zinc-700 font-normal' : 'text-zinc-400'
                                     }`}
                                 >

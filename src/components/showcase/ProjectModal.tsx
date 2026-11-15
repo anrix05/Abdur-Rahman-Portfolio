@@ -156,7 +156,7 @@ export function ProjectModal({ project, onClose, isLight }: ProjectModalProps) {
                   style={{ backgroundColor: project.accentColor }}
                 />
                 <span
-                  className={`text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] font-bold ${
+                  className={`text-[clamp(9px,2.4vw,11px)] font-mono uppercase tracking-[0.2em] font-bold ${
                     isLight ? 'text-zinc-600' : 'text-zinc-400'
                   }`}
                 >
@@ -164,7 +164,7 @@ export function ProjectModal({ project, onClose, isLight }: ProjectModalProps) {
                 </span>
                 {project.featured && (
                   <span
-                    className={`text-[9px] font-mono px-2 py-0.5 rounded-full uppercase tracking-widest font-bold border ${
+                    className={`text-[clamp(8px,2.2vw,9px)] font-mono px-2 py-0.5 rounded-full uppercase tracking-widest font-bold border ${
                       isLight
                         ? 'bg-zinc-950 text-white border-zinc-950'
                         : 'bg-white text-black border-white'
@@ -176,7 +176,7 @@ export function ProjectModal({ project, onClose, isLight }: ProjectModalProps) {
               </div>
               <h2
                 id="modal-project-title"
-                className="font-display font-extrabold text-2xl sm:text-4xl uppercase tracking-wider leading-tight"
+                className="font-display font-extrabold text-[clamp(1.25rem,5.5vw,2.25rem)] uppercase tracking-wider leading-tight break-words"
               >
                 {project.title}
               </h2>

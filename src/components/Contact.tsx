@@ -96,10 +96,10 @@ const Contact = () => {
                     isLight ? 'border-zinc-200' : 'border-zinc-800'
                 }`}
             >
-                <span className={`text-xs font-mono tracking-[0.2em] uppercase font-semibold ${
+                <span className={`text-[clamp(10px,2.5vw,12px)] font-mono tracking-[0.2em] uppercase font-semibold ${
                     isLight ? 'text-zinc-600' : 'text-zinc-400'
                 }`}>05 / CONTACT</span>
-                <h2 className={`font-display font-extrabold text-2xl sm:text-4xl lg:text-5xl tracking-[0.05em] uppercase mt-1 leading-tight break-words ${
+                <h2 className={`font-display font-extrabold text-[clamp(1.5rem,6vw,3rem)] tracking-[0.04em] sm:tracking-[0.08em] uppercase mt-1 leading-tight break-words ${
                     isLight ? 'text-zinc-950' : 'text-white'
                 }`}>
                     GET IN TOUCH
