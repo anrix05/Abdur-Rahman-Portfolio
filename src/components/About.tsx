@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
+import { TiltCard } from './common/TiltCard';
 
 const WAVEFORM_HEIGHTS = [30, 65, 40, 85, 95, 50, 70, 90, 45, 80, 60, 30, 75, 90, 40, 60, 80, 50, 70, 40];
 
@@ -47,6 +48,7 @@ const About = () => {
                     transition={{ duration: 0.6 }}
                     className="lg:col-span-5 flex justify-center w-full"
                 >
+                    <TiltCard maxTilt={6} className="w-full">
                     <div className={`w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border ${
                         isLight 
                             ? 'bg-white border-zinc-200 text-zinc-900 shadow-zinc-200/50' 
@@ -147,6 +149,7 @@ const About = () => {
                         </div>
 
                     </div>
+                    </TiltCard>
                 </motion.div>
 
                 {/* Streamlined Editorial Content Cards */}

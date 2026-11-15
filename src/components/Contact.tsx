@@ -1,8 +1,10 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Linkedin, Github, Send, CheckCircle2, Download, AlertCircle, Loader2 } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { SITE_CONFIG } from '../config/site';
+
+const ContactGlobe = lazy(() => import('./common/ContactGlobe'));
 
 const Contact = () => {
     const { theme } = useTheme();
@@ -123,6 +125,13 @@ const Contact = () => {
                         I am currently open to full-time roles, internships, and freelance engineering contracts in Full-Stack and Mobile Development. 
                         Feel free to send a message or download my resume below.
                     </p>
+
+                    {/* Subtle 3D Wireframe Globe */}
+                    <div className="w-full pt-1 pb-1">
+                        <Suspense fallback={<div className="w-full h-44 rounded-2xl border border-dashed border-zinc-500/20" />}>
+                            <ContactGlobe />
+                        </Suspense>
+                    </div>
 
                     <div className="space-y-3 pt-2 w-full">
                         {/* Direct Email */}

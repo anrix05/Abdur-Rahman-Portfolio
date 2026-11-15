@@ -13,6 +13,7 @@ export default defineConfig({
           'vendor-motion': ['framer-motion'],
           'vendor-gsap': ['gsap'],
           'vendor-icons': ['lucide-react', 'react-icons'],
+          'vendor-three': ['three', '@react-three/fiber', '@react-three/drei'],
         }
       }
     }

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Layout, Server, Wrench, Users, Cpu } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import { TiltCard } from './common/TiltCard';
 
 const Skills = () => {
     const { theme } = useTheme();
@@ -96,12 +97,16 @@ const Skills = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.06, duration: 0.5 }}
-                            className={`${category.colSpan} border p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl transition-all duration-300 flex flex-col justify-between group shadow-lg ${
-                                isLight 
-                                    ? 'bg-white border-zinc-200 hover:border-zinc-400 shadow-zinc-200/50' 
-                                    : 'bg-zinc-950 border-zinc-800 hover:border-zinc-700'
-                            }`}
+                            className={`${category.colSpan} flex`}
                         >
+                            <TiltCard
+                                maxTilt={5}
+                                className={`w-full border p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl transition-all duration-300 flex flex-col justify-between group shadow-lg ${
+                                    isLight 
+                                        ? 'bg-white border-zinc-200 hover:border-zinc-400 shadow-zinc-200/50' 
+                                        : 'bg-zinc-950 border-zinc-800 hover:border-zinc-700'
+                                }`}
+                            >
                             <div>
                                 <div className="flex items-center gap-3 sm:gap-3.5 mb-4 sm:mb-6">
                                     <div className={`p-2.5 sm:p-3 rounded-2xl border transition-colors shrink-0 ${
@@ -133,6 +138,7 @@ const Skills = () => {
                                     ))}
                                 </div>
                             </div>
+                            </TiltCard>
                         </motion.div>
                     );
                 })}

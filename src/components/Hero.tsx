@@ -8,8 +8,8 @@ import { FEATURED_PROJECTS_COUNT, LIVE_DEPLOYMENTS_COUNT } from '../data/project
 import { SITE_CONFIG } from '../config/site';
 import { scrollToSection } from '../utils/scroll';
 
-// Lazy-load Three.js Hyperspeed background to split heavy 3D vendor bundle
-const Hyperspeed = lazy(() => import('./Hyperspeed'));
+// Lazy-load floating 3D geometry cluster
+const HeroCluster = lazy(() => import('./HeroCluster'));
 
 const Hero = () => {
     const { theme } = useTheme();
@@ -30,10 +30,10 @@ const Hero = () => {
                     : 'bg-white text-black'
             }`}>
                 
-                {/* Ambient Hyperspeed Warp Background */}
-                <div className="absolute inset-0 pointer-events-none opacity-15 dark:opacity-20 z-0 overflow-hidden" aria-hidden="true">
+                {/* Ambient 3D Floating Geometry Cluster Background */}
+                <div className="absolute inset-0 pointer-events-none opacity-25 sm:opacity-35 z-0 overflow-hidden" aria-hidden="true">
                     <Suspense fallback={null}>
-                        <Hyperspeed />
+                        <HeroCluster />
                     </Suspense>
                 </div>
 

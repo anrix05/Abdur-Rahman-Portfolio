@@ -81,10 +81,11 @@ const Experience = () => {
                 {experiences.map((exp, index) => (
                     <motion.div
                         key={index}
-                        initial={{ opacity: 0, x: -15 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.08, duration: 0.5 }}
+                        initial={{ opacity: 0, x: -24, rotateX: 10, z: -40, scale: 0.96 }}
+                        whileInView={{ opacity: 1, x: 0, rotateX: 0, z: 0, scale: 1 }}
+                        viewport={{ once: true, margin: '-40px' }}
+                        transition={{ delay: index * 0.06, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                        style={{ perspective: 1000, transformStyle: 'preserve-3d' }}
                         className="relative group w-full"
                     >
                         {/* Timeline Node - Perfectly Centered on the Border Rail */}
