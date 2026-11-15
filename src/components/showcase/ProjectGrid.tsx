@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Github, ExternalLink, FolderGit2, Cpu, Eye } from 'lucide-react';
 import type { Project } from '../../data/projects';
+import { TiltCard } from '../common/TiltCard';
 
 interface ProjectGridProps {
   projects: Project[];
@@ -10,7 +11,7 @@ interface ProjectGridProps {
 
 export function ProjectGrid({ projects, isLight, onOpenModal }: ProjectGridProps) {
   return (
-    <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6">
+    <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 [perspective:1400px]">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 items-stretch">
         {projects.map((project, idx) => {
           const thumbImage = project.assets.thumb || project.assets.hero;
@@ -18,15 +19,19 @@ export function ProjectGrid({ projects, isLight, onOpenModal }: ProjectGridProps
           return (
             <motion.div
               key={project.slug}
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.04, duration: 0.35 }}
-              className={`rounded-3xl border p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 shadow-xl group relative ${
-                isLight
-                  ? 'bg-white border-zinc-200 hover:border-zinc-950 shadow-zinc-200/50'
-                  : 'bg-zinc-950 border-zinc-800 hover:border-white'
-              }`}
+              initial={{ opacity: 0, rotateX: 10, y: 20 }}
+              animate={{ opacity: 1, rotateX: 0, y: 0 }}
+              transition={{ delay: idx * 0.04, duration: 0.4 }}
+              className="flex"
             >
+              <TiltCard
+                maxTilt={6}
+                className={`rounded-3xl border p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 shadow-xl group relative w-full [transform-style:preserve-3d] ${
+                  isLight
+                    ? 'bg-white border-zinc-200 hover:border-zinc-950 shadow-zinc-200/50'
+                    : 'bg-zinc-950 border-zinc-800 hover:border-white'
+                }`}
+              >
               <div className="flex flex-col flex-grow">
                 {/* 16:10 Thumbnail Image */}
                 <div
@@ -206,10 +211,12 @@ export function ProjectGrid({ projects, isLight, onOpenModal }: ProjectGridProps
                   )}
                 </div>
               </div>
-            </motion.div>
-          );
-        })}
+            </TiltCard>
+          </motion.div>
+        );
+      })}
       </div>
     </div>
   );
 }
+

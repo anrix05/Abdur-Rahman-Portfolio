@@ -111,7 +111,7 @@ export const projects: Project[] = [
         '/projects/attendai/screen-4.webp',
       ],
       thumb: '/projects/attendai/thumb.webp',
-      video: '/projects/attendai/demo.mp4',
+      video: undefined,
     },
     caseStudy: {
       problem: 'Manual entry of hundreds of handwritten daily attendance registers into institutional spreadsheets consumed hours of faculty time and created transcription errors.',
@@ -141,7 +141,7 @@ export const projects: Project[] = [
         '/projects/zeroblur/screen-4.webp',
       ],
       thumb: '/projects/zeroblur/thumb.webp',
-      video: '/projects/zeroblur/demo.mp4',
+      video: undefined,
     },
     caseStudy: {
       problem: 'Most developer asset marketplaces hide component fidelity behind static mockups, leading to buyer hesitation and code integration surprises.',
