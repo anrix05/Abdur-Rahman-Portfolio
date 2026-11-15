@@ -1,17 +1,25 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Briefcase, GraduationCap } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import { TiltCard } from './common/TiltCard';
 
 const Experience = () => {
     const { theme } = useTheme();
     const isLight = theme === 'light';
+    const timelineRef = useRef<HTMLDivElement>(null);
+
+    const { scrollYProgress } = useScroll({
+        target: timelineRef,
+        offset: ['start 85%', 'end 75%'],
+    });
+    const lineScaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
     const experiences = [
         {
             role: 'Full-Stack Developer',
             company: 'NexaLink - Smart India Hackathon (SIH25017), Vidyalankar Institute of Technology',
-            /* TODO: Fill in the verified date range for NexaLink (e.g. AUG 2024 – DEC 2024) */
-            period: 'TODO: DATE RANGE',
+            period: undefined,
             type: 'work',
             description: 'Built a centralized alumni data management and engagement platform with role-based access, verified mentorship matching, job and event workflows, real-time messaging, and a hardened Supabase backend (Row Level Security, hash-chained audit logs).',
             tech: ['React 19', 'TypeScript', 'Supabase', 'Tailwind CSS']
@@ -19,8 +27,7 @@ const Experience = () => {
         {
             role: 'Founder & Full-Stack Developer',
             company: 'The Graveyard (Independent)',
-            /* TODO: Fill in the verified date range for The Graveyard (e.g. OCT 2024 – JAN 2025) */
-            period: 'TODO: DATE RANGE',
+            period: undefined,
             type: 'work',
             description: 'Designed and built a marketplace where developers sell, hand over, or find co-founders for abandoned side projects, with tombstone-style project data, a zip-inspecting publish wizard, GitHub-verified commit history, and Razorpay payments.',
             tech: ['Next.js', 'Supabase', 'Razorpay', 'Framer Motion']
@@ -52,15 +59,15 @@ const Experience = () => {
     ];
 
     return (
-        <section className="relative w-full pt-0 pb-8 sm:pb-12">
+        <section className="relative w-full pt-0 pb-8 sm:pb-12 scroll-mt-28 [perspective:1400px]">
             
-            {/* Header */}
+            {/* Header with 3D Reveal */}
             <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className={`mb-10 sm:mb-12 border-b pb-5 sm:pb-6 w-full ${
+                initial={{ opacity: 0, rotateX: 12, y: 40, z: -80 }}
+                whileInView={{ opacity: 1, rotateX: 0, y: 0, z: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className={`mb-10 sm:mb-12 border-b pb-5 sm:pb-6 w-full will-change-transform ${
                     isLight ? 'border-zinc-200' : 'border-zinc-800'
                 }`}
             >
@@ -74,88 +81,129 @@ const Experience = () => {
                 </h2>
             </motion.div>
 
-            {/* Timeline: Compact left rail margins on phones to avoid text squeeze */}
-            <div className={`relative border-l ml-2 sm:ml-4 md:ml-6 pl-4 sm:pl-6 md:pl-10 space-y-8 sm:space-y-10 w-full ${
-                isLight ? 'border-zinc-300' : 'border-zinc-800'
-            }`}>
+            {/* Timeline with Scroll-filling Line */}
+            <div 
+                ref={timelineRef}
+                className="relative ml-2 sm:ml-4 md:ml-6 pl-5 sm:pl-7 md:pl-11 space-y-8 sm:space-y-10 w-full"
+            >
+                {/* Background Line */}
+                <div 
+                    className={`absolute left-0 top-2 bottom-4 w-[2px] ${
+                        isLight ? 'bg-zinc-200' : 'bg-zinc-800'
+                    }`}
+                />
+
+                {/* Animated Scroll Fill Line */}
+                <motion.div 
+                    style={{ scaleY: lineScaleY, transformOrigin: 'top center' }}
+                    className={`absolute left-0 top-2 bottom-4 w-[2px] will-change-transform ${
+                        isLight ? 'bg-zinc-950' : 'bg-white'
+                    }`}
+                />
+
                 {experiences.map((exp, index) => (
                     <motion.div
                         key={index}
-                        initial={{ opacity: 0, x: -15 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.08, duration: 0.5 }}
-                        className="relative group w-full"
+                        initial={{ opacity: 0, rotateX: 12, y: 40, z: -80 }}
+                        whileInView={{ opacity: 1, rotateX: 0, y: 0, z: 0 }}
+                        viewport={{ once: true, margin: '-40px' }}
+                        transition={{ delay: index * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                        className="relative group w-full will-change-transform"
                     >
-                        {/* Timeline Node - Perfectly Centered on the Border Rail */}
-                        <div className={`absolute -left-[23px] sm:-left-[31px] md:-left-[47px] top-1.5 w-3.5 h-3.5 rounded-full border-2 transition-all duration-300 flex items-center justify-center ${
-                            isLight 
-                                ? 'bg-white border-zinc-400 group-hover:border-zinc-950 group-hover:scale-125' 
-                                : 'bg-black border-zinc-500 group-hover:border-white group-hover:scale-125'
-                        }`}>
-                            <div className={`w-1 h-1 rounded-full ${
-                                isLight ? 'bg-zinc-600 group-hover:bg-zinc-950' : 'bg-zinc-400 group-hover:bg-white'
+                        {/* Flat Circular Timeline Node with entrance glow */}
+                        <motion.div 
+                            initial={{ scale: 0.8, opacity: 0.5 }}
+                            whileInView={{ scale: 1, opacity: 1 }}
+                            viewport={{ once: true, margin: '-40px' }}
+                            transition={{ duration: 0.4 }}
+                            className={`absolute -left-[26px] sm:-left-[34px] md:-left-[50px] top-6 w-3.5 h-3.5 rounded-full border-2 transition-all duration-300 flex items-center justify-center z-10 ${
+                                isLight 
+                                    ? 'bg-white border-zinc-400 group-hover:border-zinc-950 group-hover:scale-125' 
+                                    : 'bg-black border-zinc-600 group-hover:border-white group-hover:scale-125'
+                            }`}
+                        >
+                            <div className={`w-1.5 h-1.5 rounded-full ${
+                                isLight ? 'bg-zinc-700 group-hover:bg-zinc-950' : 'bg-zinc-400 group-hover:bg-white'
                             }`} />
-                        </div>
+                        </motion.div>
 
-                        {/* Content Card */}
-                        <div className={`border p-4 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl transition-all duration-300 shadow-xl w-full ${
-                            isLight 
-                                ? 'bg-white border-zinc-200 hover:border-zinc-400 shadow-zinc-200/50 text-zinc-900' 
-                                : 'bg-zinc-950 border-zinc-800 hover:border-zinc-700 text-white'
-                        }`}>
-                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-3">
-                                <div>
-                                    <div className="flex items-center gap-2 flex-wrap">
-                                        {exp.type === 'work' ? (
-                                            <Briefcase size={16} className={isLight ? 'text-zinc-700' : 'text-zinc-400'} />
-                                        ) : (
-                                            <GraduationCap size={16} className={isLight ? 'text-zinc-700' : 'text-zinc-400'} />
-                                        )}
-                                        <h3 className={`font-display font-bold text-base sm:text-xl tracking-wider uppercase break-words ${
-                                            isLight ? 'text-zinc-950' : 'text-white'
-                                        }`}>
-                                            {exp.role}
-                                        </h3>
-                                    </div>
-                                    <p className={`text-xs sm:text-sm font-mono mt-1 break-words ${
-                                        isLight ? 'text-zinc-600 font-medium' : 'text-zinc-400'
-                                    }`}>
-                                        {exp.company}
-                                    </p>
-                                </div>
-                                
-                                {/* Date Badge - moves under title cleanly on phones */}
-                                <span className={`inline-flex font-mono text-[10px] sm:text-xs font-semibold px-3 py-1 rounded-full w-fit tracking-wider border shrink-0 ${
-                                    isLight 
-                                        ? 'bg-zinc-100 border-zinc-300 text-zinc-800' 
-                                        : 'bg-zinc-900 border-zinc-800 text-zinc-300'
-                                }`}>
-                                    {exp.period}
-                                </span>
-                            </div>
-
-                            <p className={`text-xs sm:text-sm leading-relaxed mb-5 ${
-                                isLight ? 'text-zinc-700 font-normal' : 'text-zinc-400'
+                        {/* Content Card wrapped in TiltCard */}
+                        <TiltCard maxTilt={5} className="w-full">
+                            <div className={`border p-4 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl transition-all duration-300 shadow-xl w-full [transform-style:preserve-3d] ${
+                                isLight 
+                                    ? 'bg-white border-zinc-200 hover:border-zinc-400 shadow-zinc-200/50 text-zinc-900' 
+                                    : 'bg-zinc-950 border-zinc-800 hover:border-zinc-700 text-white'
                             }`}>
-                                {exp.description}
-                            </p>
+                                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-3 [transform-style:preserve-3d]">
+                                    <div>
+                                        <div 
+                                            style={{ transform: 'translateZ(24px)' }}
+                                            className="flex items-center gap-2 flex-wrap transition-transform"
+                                        >
+                                            {exp.type === 'work' ? (
+                                                <Briefcase size={16} className={isLight ? 'text-zinc-700' : 'text-zinc-400'} />
+                                            ) : (
+                                                <GraduationCap size={16} className={isLight ? 'text-zinc-700' : 'text-zinc-400'} />
+                                            )}
+                                            <h3 className={`font-display font-bold text-base sm:text-xl tracking-wider uppercase break-words ${
+                                                isLight ? 'text-zinc-950' : 'text-white'
+                                            }`}>
+                                                {exp.role}
+                                            </h3>
+                                        </div>
+                                        <p 
+                                            style={{ transform: 'translateZ(16px)' }}
+                                            className={`text-xs sm:text-sm font-mono mt-1 break-words transition-transform ${
+                                                isLight ? 'text-zinc-600 font-medium' : 'text-zinc-400'
+                                            }`}
+                                        >
+                                            {exp.company}
+                                        </p>
+                                    </div>
+                                    
+                                    {/* Date Badge */}
+                                    {Boolean(exp.period) && (
+                                        <span 
+                                            style={{ transform: 'translateZ(28px)' }}
+                                            className={`inline-flex font-mono text-[10px] sm:text-xs font-semibold px-3 py-1 rounded-full w-fit tracking-wider border shrink-0 transition-transform ${
+                                                isLight 
+                                                    ? 'bg-zinc-100 border-zinc-300 text-zinc-800' 
+                                                    : 'bg-zinc-900 border-zinc-800 text-zinc-300'
+                                            }`}
+                                        >
+                                            {exp.period}
+                                        </span>
+                                    )}
+                                </div>
 
-                            <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                                {exp.tech.map((t, i) => (
-                                    <span 
-                                        key={i} 
-                                        className={`text-[10px] sm:text-[11px] font-mono border px-2.5 sm:px-3 py-1 rounded-lg tracking-wider uppercase ${
-                                            isLight 
-                                                ? 'bg-zinc-100/90 border-zinc-300 text-zinc-900 font-medium' 
-                                                : 'bg-black border-zinc-800 text-zinc-300'
-                                        }`}
-                                    >
-                                        {t}
-                                    </span>
-                                ))}
+                                <p 
+                                    style={{ transform: 'translateZ(12px)' }}
+                                    className={`text-xs sm:text-sm leading-relaxed mb-5 transition-transform ${
+                                        isLight ? 'text-zinc-700 font-normal' : 'text-zinc-400'
+                                    }`}
+                                >
+                                    {exp.description}
+                                </p>
+
+                                <div 
+                                    style={{ transform: 'translateZ(18px)' }}
+                                    className="flex flex-wrap gap-1.5 sm:gap-2 transition-transform"
+                                >
+                                    {exp.tech.map((t, i) => (
+                                        <span 
+                                            key={i} 
+                                            className={`text-[10px] sm:text-[11px] font-mono border px-2.5 sm:px-3 py-1 rounded-lg tracking-wider uppercase ${
+                                                isLight 
+                                                    ? 'bg-zinc-100/90 border-zinc-300 text-zinc-900 font-medium' 
+                                                    : 'bg-black border-zinc-800 text-zinc-300'
+                                            }`}
+                                        >
+                                            {t}
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
+                        </TiltCard>
                     </motion.div>
                 ))}
             </div>
