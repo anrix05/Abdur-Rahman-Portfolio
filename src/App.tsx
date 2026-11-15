@@ -72,13 +72,13 @@ function MainContent() {
 
       <div className={`relative z-10 transition-opacity duration-700 ${loading ? 'opacity-0 h-[100dvh] overflow-hidden' : 'opacity-100'}`}>
         <Navbar />
-        <div id="hero"><Hero /></div>
+        <div id="hero" className="scroll-mt-24"><Hero /></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20 sm:space-y-28 lg:space-y-36 pb-20 sm:pb-28 lg:pb-32">
-          <div id="about"><About /></div>
-          <div id="skills"><Skills /></div>
-          <div id="experience"><Experience /></div>
-          <div id="projects"><Projects /></div>
-          <div id="contact"><Contact /></div>
+          <div id="about" className="scroll-mt-28"><About /></div>
+          <div id="skills" className="scroll-mt-28"><Skills /></div>
+          <div id="experience" className="scroll-mt-28"><Experience /></div>
+          <div id="projects" className="scroll-mt-28"><Projects /></div>
+          <div id="contact" className="scroll-mt-28"><Contact /></div>
         </div>
         <Footer />
       </div>
