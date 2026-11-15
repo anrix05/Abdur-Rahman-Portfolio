@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Test output & QA artifacts
+qa-screenshots/
+
